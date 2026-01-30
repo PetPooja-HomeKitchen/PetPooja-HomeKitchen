@@ -3,345 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pet Pooja Home Kitchen | Fresh Homemade Takeaway</title>
+  <title>Pet Pooja Home Kitchen | Premium Takeaway</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --brand: #e67e22; 
-      --brand-dark: #d35400;
-      --brand-light: #fff5eb;
-      --text-main: #2d3436;
-      --text-muted: #636e72;
+      --primary: #c27a3e;
+      --dark: #1e1e1e;
+      --light: #fdfaf7;
       --white: #ffffff;
-      --bg: #fafafa;
-      --radius: 16px;
-      --shadow: 0 10px 40px rgba(0,0,0,0.04);
+      --soft-border: rgba(0,0,0,0.06);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; }
+    body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
 
-    /* --- Navigation --- */
     nav {
       background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(10px);
-      padding: 18px 6%;
+      padding: 20px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--soft-border);
     }
-    .logo-container { display: flex; align-items: center; gap: 10px; }
-    .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--brand); font-weight: 700; }
-    .takeaway-badge { font-size: 0.7rem; background: #ffe8cc; color: #d9480f; padding: 4px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; }
+    .logo span { color: var(--primary); }
 
-    /* --- Hero Section --- */
-    header {
-      padding: 80px 6% 40px;
-      text-align: center;
-      background: radial-gradient(circle at top right, #fff5eb 0%, transparent 40%);
-    }
-    .badge-intro { display: inline-block; background: var(--white); padding: 8px 16px; border-radius: 50px; box-shadow: var(--shadow); font-size: 0.85rem; font-weight: 600; color: var(--brand); margin-bottom: 20px; }
-    header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.2; color: #1a1a1a; margin-bottom: 15px; }
-    header p { max-width: 600px; margin: 0 auto 30px; color: var(--text-muted); font-size: 1.1rem; }
+    header { padding: 80px 8% 40px; text-align: center; max-width: 900px; margin: 0 auto; }
+    header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 15px; font-style: italic; }
 
-    .kitchen-stats {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-    .stat { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
-    .stat i { color: var(--brand); }
+    .menu-section { padding: 40px 8% 100px; max-width: 1400px; margin: 0 auto; }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
-    /* --- Menu Section --- */
-    section { padding: 60px 6% 100px; max-width: 1300px; margin: auto; }
-    .section-header { text-align: center; margin-bottom: 50px; }
-    .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; }
+    .food-card { background: var(--white); border-radius: 24px; overflow: hidden; border: 1px solid var(--soft-border); transition: 0.3s; }
+    .food-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    .img-wrap { width: 100%; height: 250px; }
+    .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
+    .card-body { padding: 25px; }
+    .card-body h3 { font-family: 'Playfair Display', serif; margin-bottom: 10px; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+    .price { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
 
-    .food-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease;
-      border: 1px solid #f0f0f0;
-    }
-    .food-card:hover { transform: translateY(-8px); }
-    .img-box { position: relative; height: 230px; overflow: hidden; }
-    .food-card img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.5s ease; }
-    .food-card:hover img { scale: 1.05; }
-    
-    .card-content { padding: 24px; }
-    .card-content h3 { font-size: 1.3rem; margin-bottom: 8px; font-family: 'Playfair Display', serif; }
-    .food-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; display: block; height: 40px; overflow: hidden; }
-    .price-row { display: flex; justify-content: space-between; align-items: center; }
-    .price { font-size: 1.25rem; font-weight: 700; color: var(--brand); }
+    .add-btn { background: var(--dark); color: white; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-weight: 600; }
 
-    .add-to-cart-btn {
-      background: var(--brand);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 0.9rem;
-    }
-    .add-to-cart-btn:hover { background: var(--brand-dark); transform: scale(1.05); }
+    .order-grid { display: grid; grid-template-columns: 1fr 450px; gap: 40px; margin-top: 60px; }
+    @media (max-width: 1024px) { .order-grid { grid-template-columns: 1fr; } }
 
-    /* --- Cart Area --- */
-    .order-interface {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 40px;
-      margin-top: 80px;
-      align-items: start;
-    }
-    @media (max-width: 1000px) { .order-interface { grid-template-columns: 1fr; } }
+    .luxury-box { background: var(--white); padding: 35px; border-radius: 24px; border: 1px solid var(--soft-border); }
+    .history-box { margin-bottom: 30px; border: 1px solid var(--primary); background: #fffbf5; }
 
-    .cart-card {
-      background: var(--white);
-      padding: 35px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border: 1px solid #eee;
-    }
     .cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f5f5f5; }
-    .qty-controls { display: flex; align-items: center; gap: 12px; }
-    .qty-btn { width: 28px; height: 28px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-weight: 700; }
+    
+    input, textarea { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #eee; background: #f9f9f9; margin-bottom: 15px; outline: none; }
+    input:focus { border-color: var(--primary); }
 
-    /* --- Form Elements --- */
-    .input-group { margin-bottom: 18px; }
-    .input-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
-    .input-group input, .input-group textarea {
-      width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 12px; outline: none; transition: 0.3s; font-size: 0.95rem;
-    }
-    .input-group input:focus { border-color: var(--brand); background: var(--brand-light); }
-
-    .place-order-btn {
-      width: 100%; padding: 18px; background: #25D366; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;
+    .whatsapp-btn {
+      width: 100%; padding: 18px; background: #25D366; color: white; border: none;
+      border-radius: 14px; font-size: 1.1rem; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
     }
 
-    /* --- Footer --- */
-    footer { background: #1a1a1a; color: #fff; padding: 80px 6% 30px; text-align: center; }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--brand); margin-bottom: 15px; }
-
-    #successModal {
-      display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
-      background:rgba(0,0,0,0.7); z-index:2000; align-items:center; justify-content:center; backdrop-filter: blur(4px);
-    }
-    .modal-content { background:white; padding:45px; border-radius: 24px; text-align:center; max-width:480px; width:90%; border-top: 5px solid var(--brand); }
+    footer { background: var(--dark); color: #888; padding: 60px 8%; text-align: center; }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo-container">
-    <span class="logo-text">Pet Pooja</span>
-    <span class="takeaway-badge">Takeaway Only</span>
-  </div>
-  <div class="stat"><i class="fas fa-clock"></i> Accepting Orders</div>
+  <div class="logo">Pet <span>Pooja.</span></div>
+  <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary);"><i class="fas fa-home"></i> SANSKRITI APARTMENT</div>
 </nav>
 
 <header>
-  <span class="badge-intro">Homemade in Sanskriti Apartments</span>
   <h1>Pet Pooja Home Kitchen</h1>
-  <p>Freshly prepared, hygienic, and authentic flavors delivered through a simple takeaway experience. Taste the warmth of a home kitchen.</p>
-  
-  <div class="kitchen-stats">
-    <div class="stat"><i class="fas fa-utensils"></i> Fresh Ingredients</div>
-    <div class="stat"><i class="fas fa-leaf"></i> 100% Home Style</div>
-    <div class="stat"><i class="fas fa-walking"></i> Self Pickup Only</div>
-  </div>
+  <p>Authentic homemade flavors, prepared fresh for takeaway.</p>
 </header>
 
-<section id="menu">
-  <div class="section-header">
-    <h2>Today's Selection</h2>
-    <p>Hand-crafted meals prepared with love and care.</p>
+<section class="menu-section">
+  <div id="orderHistory" class="luxury-box history-box" style="display:none; margin-bottom: 50px;">
+    <h3 style="font-family: 'Playfair Display'; color: var(--primary); margin-bottom: 15px;">
+      <i class="fas fa-clock-rotate-left"></i> Your Recent Order (Active)
+    </h3>
+    <div id="historyContent"></div>
+    <p style="font-size: 0.75rem; color: #999; margin-top: 10px;">History is saved for 30 minutes for your reference.</p>
   </div>
-  
-  <div class="menu-grid" id="menuGrid">
-    </div>
 
-  <div class="order-interface">
-    <div class="cart-card">
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 25px;">Your Order Basket</h3>
-      <div id="cartItems">
-        <p style="text-align: center; color: var(--text-muted); padding: 40px 0;">Your basket is empty.</p>
-      </div>
-      <div style="margin-top: 30px; border-top: 2px solid #f9f9f9; padding-top: 25px;">
-        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.4rem;">
-          <span>Grand Total</span>
-          <span style="color: var(--brand);">₹<span id="grandTotal">0</span></span>
-        </div>
+  <div class="menu-grid" id="menuGrid"></div>
+
+  <div class="order-grid">
+    <div class="luxury-box">
+      <h2 style="font-family: 'Playfair Display'; margin-bottom: 25px;">Current Basket</h2>
+      <div id="cartItems"><p style="color: #aaa; text-align: center; padding: 20px;">Your basket is empty.</p></div>
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #f9f9f9; display: flex; justify-content: space-between;">
+        <span style="font-weight: 700;">Total</span>
+        <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">₹<span id="grandTotal">0</span></span>
       </div>
     </div>
 
-    <div class="cart-card">
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 25px;">Takeaway Details</h3>
-      <form onsubmit="placeOrder(event)">
-        <div class="input-group">
-          <label>Full Name</label>
-          <input type="text" id="custName" placeholder="Enter your name" required>
-        </div>
-        <div class="input-group">
-          <label>Mobile Number</label>
-          <input type="tel" id="custPhone" placeholder="10-digit mobile number" required>
-        </div>
-        <div class="input-group">
-          <label>Note to Kitchen</label>
-          <textarea id="custNote" rows="3" placeholder="Any special requests or spice preferences?"></textarea>
-        </div>
-        
-        <div style="background: #fff9f0; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--brand);">
-          <p style="font-size: 0.85rem; color: #a0522d; font-weight: 600;">
-            <i class="fas fa-info-circle"></i> This is a self-pickup order. After confirming on WhatsApp, we will provide the pickup flat number.
-          </p>
-        </div>
-
-        <button type="submit" class="place-order-btn">
-          <i class="fab fa-whatsapp"></i> Confirm via WhatsApp
-        </button>
+    <div class="luxury-box">
+      <h2 style="font-family: 'Playfair Display'; margin-bottom: 25px;">Takeaway Info</h2>
+      <form onsubmit="handleCheckout(event)">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="tel" id="phone" placeholder="Mobile Number" required>
+        <textarea id="notes" rows="2" placeholder="Special requests (spice level, etc.)"></textarea>
+        <button type="submit" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Confirm & Send</button>
       </form>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-logo">Pet Pooja Home Kitchen</div>
-  <p style="color: #888; margin-bottom: 40px;">Ghar Jaisa Khana, Rozana.</p>
-  <p><i class="fas fa-map-marker-alt" style="color: var(--brand);"></i> Sanskriti Apartment, India</p>
-  <p style="margin: 15px 0;"><i class="fas fa-phone" style="color: var(--brand);"></i> +91 9015489060</p>
-  <div style="margin-top: 60px; border-top: 1px solid #333; padding-top: 25px; font-size: 0.8rem; color: #555;">
-    © 2026 Pet Pooja Home Kitchen. All rights reserved.
-  </div>
+  <div class="logo" style="color: white; margin-bottom: 15px;">Pet <span>Pooja.</span></div>
+  <p>Sanskriti Apartment | +91 9015489060</p>
 </footer>
 
-<div id="successModal">
-  <div class="modal-content">
-    <div style="width: 80px; height: 80px; background: #ebfbee; color: #2f9e44; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 35px;">
-      <i class="fas fa-check"></i>
-    </div>
-    <h3 style="font-size: 1.6rem; margin-bottom: 15px;">Order Receipt Ready!</h3>
-    <p style="color: var(--text-muted); margin-bottom: 30px;">We've prepared your WhatsApp message. Please press <strong>Send</strong> in WhatsApp to finish. We will reply to confirm your pickup slot!</p>
-    <button onclick="closeModal()" class="add-to-cart-btn" style="width: 100%; padding: 15px;">Okay, Got it!</button>
-  </div>
-</div>
-
 <script>
-  // Restored Original Menu Items with High-Quality Indian Food Images
-  const dishes = [
-    { id: 1, name: "Paneer Dosa", price: 120, desc: "Crispy dosa filled with our special spiced paneer crumble.", img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=600&auto=format&fit=crop" },
-    { id: 2, name: "Masala Dosa", price: 100, desc: "The classic golden crepe with a flavorful potato masala filling.", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=600&auto=format&fit=crop" },
-    { id: 3, name: "Idli Sambhar", price: 60, desc: "Fluffy steamed rice cakes served with hot, aromatic vegetable sambhar.", img: "https://images.unsplash.com/photo-1589301773521-cf9063301702?q=80&w=600&auto=format&fit=crop" },
-    { id: 4, name: "Curry Rice", price: 50, desc: "Warm, comforting homestyle curry served with steamed basmati rice.", img: "https://images.unsplash.com/photo-1546833999-b9f581602b70?q=80&w=600&auto=format&fit=crop" }
+  // Precise Menu Data with Correct Images
+  const menuData = [
+    { id: 1, name: "Paneer Masala Dosa", price: 120, desc: "Crispy crepe with spiced paneer potato filling.", img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=500&q=80" },
+    { id: 2, name: "Butter Masala Dosa", price: 100, desc: "Golden dosa roasted in butter with classic masala.", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=500&q=80" },
+    { id: 3, name: "Soft Idli Sambhar", price: 60, desc: "Steamed rice cakes with aromatic vegetable sambhar.", img: "https://images.unsplash.com/photo-1589301773521-cf9063301702?auto=format&fit=crop&w=500&q=80" },
+    { id: 4, name: "Curry Rice Bowl", price: 80, desc: "Homestyle vegetable curry with steamed basmati rice.", img: "https://images.unsplash.com/photo-1546833999-b9f581602b70?auto=format&fit=crop&w=500&q=80" }
   ];
 
-  let basket = {};
+  let cart = {};
 
-  function loadDishes() {
+  function init() {
+    // 1. Render Menu
     const grid = document.getElementById('menuGrid');
-    grid.innerHTML = dishes.map(dish => `
+    grid.innerHTML = menuData.map(item => `
       <div class="food-card">
-        <div class="img-box"><img src="${dish.img}" alt="${dish.name}"></div>
-        <div class="card-content">
-          <h3>${dish.name}</h3>
-          <span class="food-desc">${dish.desc}</span>
+        <div class="img-wrap"><img src="${item.img}" alt="${item.name}"></div>
+        <div class="card-body">
+          <h3>${item.name}</h3>
+          <p style="font-size: 0.85rem; color: #777;">${item.desc}</p>
           <div class="price-row">
-            <span class="price">₹${dish.price}</span>
-            <button class="add-to-cart-btn" onclick="addToBasket(${dish.id})">Add to Order</button>
+            <span class="price">₹${item.price}</span>
+            <button class="add-btn" onclick="addToCart(${item.id})">Add</button>
           </div>
         </div>
       </div>
     `).join('');
+
+    // 2. Check Order History (30 min limit)
+    checkHistory();
   }
 
-  function addToBasket(id) {
-    if (basket[id]) basket[id].qty++;
-    else {
-      const dish = dishes.find(d => d.id === id);
-      basket[id] = { ...dish, qty: 1 };
-    }
-    renderBasket();
+  function addToCart(id) {
+    if (cart[id]) cart[id].qty++;
+    else cart[id] = { ...menuData.find(i => i.id === id), qty: 1 };
+    renderCart();
   }
 
-  function changeQty(id, delta) {
-    basket[id].qty += delta;
-    if (basket[id].qty <= 0) delete basket[id];
-    renderBasket();
-  }
-
-  function renderBasket() {
-    const container = document.getElementById('cartItems');
+  function renderCart() {
+    const itemsEl = document.getElementById('cartItems');
     const totalEl = document.getElementById('grandTotal');
     let total = 0, html = '';
 
-    const items = Object.values(basket);
-    if (items.length === 0) {
-      container.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 40px 0;">Your basket is empty.</p>';
-    } else {
-      items.forEach(item => {
-        total += item.price * item.qty;
-        html += `
-          <div class="cart-item">
-            <div>
-              <div style="font-weight: 600;">${item.name}</div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">₹${item.price} each</div>
-            </div>
-            <div class="qty-controls">
-              <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
-              <span style="font-weight: 700; min-width: 20px; text-align: center;">${item.qty}</span>
-              <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
-            </div>
-          </div>`;
-      });
-      container.innerHTML = html;
+    for (const id in cart) {
+      const item = cart[id];
+      total += item.price * item.qty;
+      html += `<div class="cart-item">
+        <span>${item.name} (x${item.qty})</span>
+        <span>₹${item.price * item.qty}</span>
+      </div>`;
     }
+    itemsEl.innerHTML = html || '<p style="color: #aaa; text-align: center; padding: 20px;">Your basket is empty.</p>';
     totalEl.innerText = total;
   }
 
-  function placeOrder(e) {
+  function handleCheckout(e) {
     e.preventDefault();
-    if (Object.keys(basket).length === 0) return alert("Please select some dishes first!");
+    if (Object.keys(cart).length === 0) return alert("Basket is empty!");
 
-    const name = document.getElementById('custName').value;
-    const note = document.getElementById('custNote').value;
-    
-    let text = `*TAKEAWAY ORDER - PET POOJA HOME KITCHEN*%0A%0A*Customer Name:* ${name}%0A`;
-    if(note) text += `*Notes:* ${note}%0A`;
-    text += `%0A*Order Items:*%0A`;
-    
-    let grandTotal = 0;
-    for (const id in basket) {
-      const item = basket[id];
-      text += `• ${item.name} x ${item.qty} - (₹${item.price * item.qty})%0A`;
-      grandTotal += item.price * item.qty;
+    const name = document.getElementById('name').value;
+    const notes = document.getElementById('notes').value;
+    let total = 0;
+    let itemsText = "";
+
+    for (const id in cart) {
+      itemsText += `• ${cart[id].name} x ${cart[id].qty}%0A`;
+      total += cart[id].price * cart[id].qty;
     }
-    text += `%0A*Total Bill: ₹${grandTotal}*%0A%0A_Please confirm when I can pick up the order from Sanskriti Apartments._`;
 
-    window.open(`https://wa.me/919015489060?text=${text}`, '_blank');
-    document.getElementById('successModal').style.display = 'flex';
+    // Save to History before refresh
+    const orderData = {
+      items: itemsText.replace(/%0A/g, "<br>"),
+      total: total,
+      time: new Date().getTime()
+    };
+    localStorage.setItem('recentOrder', JSON.stringify(orderData));
+
+    // Open WhatsApp
+    const msg = `*PET POOJA ORDER*%0A*Name:* ${name}%0A*Order:*%0A${itemsText}%0A*Total: ₹${total}*%0A*Notes:* ${notes}`;
+    window.open(`https://wa.me/919015489060?text=${msg}`, '_blank');
+
+    // Refresh page as requested
+    setTimeout(() => { location.reload(); }, 500);
   }
 
-  function closeModal() { document.getElementById('successModal').style.display = 'none'; }
+  function checkHistory() {
+    const saved = localStorage.getItem('recentOrder');
+    if (!saved) return;
 
-  loadDishes();
+    const order = JSON.parse(saved);
+    const now = new Date().getTime();
+    const expiry = 30 * 60 * 1000; // 30 minutes
+
+    if (now - order.time < expiry) {
+      document.getElementById('orderHistory').style.display = 'block';
+      document.getElementById('historyContent').innerHTML = `
+        <div style="font-size: 0.9rem; line-height: 1.8;">
+          ${order.items}
+          <hr style="margin: 10px 0; border: 0; border-top: 1px solid #ddd;">
+          <strong>Total Amount Paid/Due: ₹${order.total}</strong>
+        </div>
+      `;
+    } else {
+      localStorage.removeItem('recentOrder');
+    }
+  }
+
+  init();
 </script>
+
 </body>
 </html>
