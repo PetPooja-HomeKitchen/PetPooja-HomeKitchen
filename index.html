@@ -3,119 +3,211 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pet Pooja Home Kitchen | Takeaway</title>
+  <title>Pet Pooja | Home Kitchen</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    
-    body { background-color: #f4f4f4; color: #333; }
-
-    /* Header & Branding */
-    .top-nav { background: #fff; padding: 15px 5%; border-bottom: 3px solid #e67e22; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-    .brand-name { font-size: 1.5rem; font-weight: 800; color: #e67e22; text-transform: uppercase; }
-    .location-tag { font-size: 0.8rem; font-weight: 600; color: #666; }
-
-    header { background: #fff; padding: 40px 5%; text-align: center; margin-bottom: 20px; }
-    header h1 { font-size: 2.2rem; color: #222; margin-bottom: 10px; }
-    header p { color: #777; font-weight: 500; }
-
-    .container { max-width: 1100px; margin: auto; padding: 0 20px 80px; }
-
-    /* Order History Alert */
-    #historyBox { 
-      background: #fff3cd; border: 2px solid #ffeeba; padding: 20px; border-radius: 10px; 
-      margin-bottom: 30px; display: none; 
-    }
-    #historyBox h3 { color: #856404; font-size: 1rem; margin-bottom: 10px; text-transform: uppercase; }
-
-    /* Menu Styling */
-    .section-title { margin: 30px 0 20px; font-size: 1.5rem; border-left: 5px solid #e67e22; padding-left: 15px; }
-    
-    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .food-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #ddd; }
-    .food-img { width: 100%; height: 180px; object-fit: cover; }
-    .food-info { padding: 15px; text-align: center; }
-    .food-info h3 { font-size: 1.1rem; margin-bottom: 10px; }
-    .food-price { font-size: 1.2rem; font-weight: 800; color: #e67e22; margin-bottom: 15px; display: block; }
-    
-    .add-btn { 
-      background: #e67e22; color: white; border: none; width: 100%; padding: 10px; 
-      border-radius: 6px; font-weight: 700; cursor: pointer; text-transform: uppercase; 
-    }
-    .add-btn:hover { background: #d35400; }
-
-    /* Order Section */
-    .order-interface { display: grid; grid-template-columns: 1fr 380px; gap: 30px; margin-top: 40px; }
-    @media (max-width: 850px) { .order-interface { grid-template-columns: 1fr; } }
-
-    .white-box { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
-    .qty-controls button { width: 30px; height: 30px; border: 1px solid #ccc; background: #fff; font-weight: 800; cursor: pointer; }
-
-    /* Form Styling */
-    input, textarea { width: 100%; padding: 12px; margin: 10px 0 20px; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; }
-    input:focus { border-color: #e67e22; outline: none; }
-
-    .whatsapp-btn { 
-      background: #25D366; color: white; border: none; width: 100%; padding: 15px; 
-      border-radius: 8px; font-size: 1.1rem; font-weight: 800; cursor: pointer; 
-      display: flex; align-items: center; justify-content: center; gap: 10px;
+    :root {
+      --accent: #d35400;
+      --text: #2c3e50;
+      --bg: #fdfcfb;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.8);
     }
 
-    footer { background: #222; color: #fff; text-align: center; padding: 40px 20px; margin-top: 50px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: var(--bg); 
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Elegant Navigation --- */
+    nav {
+      padding: 25px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .logo { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 1.8rem; 
+      font-weight: 600; 
+      letter-spacing: -1px;
+    }
+    .logo span { color: var(--accent); font-style: italic; }
+
+    /* --- Hero Section --- */
+    header {
+      padding: 80px 8% 40px;
+      text-align: center;
+    }
+    header h1 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: clamp(2.5rem, 5vw, 4rem); 
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    header p { 
+      font-size: 1.1rem; 
+      color: #7f8c8d; 
+      max-width: 600px; 
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 8% 100px; }
+
+    /* --- History Notification --- */
+    #historyBox {
+      background: #fff;
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      margin-bottom: 40px;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      display: none;
+    }
+
+    /* --- Menu Cards --- */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+    }
+    .food-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+    .food-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+    .img-box { width: 100%; height: 240px; overflow: hidden; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .food-card:hover .img-box img { transform: scale(1.1); }
+    
+    .card-info { padding: 25px; text-align: center; }
+    .card-info h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .price-tag { 
+      display: block; 
+      font-size: 1.2rem; 
+      color: var(--accent); 
+      font-weight: 600; 
+      margin-bottom: 20px; 
+    }
+    
+    .add-btn {
+      background: var(--text);
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      letter-spacing: 1px;
+    }
+    .add-btn:hover { background: var(--accent); }
+
+    /* --- Checkout Section --- */
+    .order-section {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 60px;
+      margin-top: 100px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .order-section { grid-template-columns: 1fr; } }
+
+    .panel { background: #fff; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+    .panel h2 { font-family: 'Playfair Display', serif; margin-bottom: 30px; font-size: 1.8rem; }
+
+    .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f9f9f9; }
+    .qty-control { display: flex; align-items: center; gap: 12px; }
+    .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #eee; background: none; cursor: pointer; }
+
+    /* --- Inputs --- */
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #95a5a6; }
+    input, textarea {
+      width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #f0f0f0; background: #f9f9f9; font-size: 1rem; outline: none; transition: 0.3s;
+    }
+    input:focus { border-color: var(--accent); background: #fff; }
+
+    .whatsapp-btn {
+      width: 100%; padding: 20px; background: #25D366; color: #fff; border: none; border-radius: 15px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;
+    }
+
+    footer { padding: 60px 8%; text-align: center; border-top: 1px solid #eee; margin-top: 50px; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; }
   </style>
 </head>
 <body>
 
-<div class="top-nav">
-  <div class="brand-name">Pet Pooja</div>
-  <div class="location-tag"><i class="fas fa-map-marker-alt"></i> Sanskriti Apartment</div>
-</div>
+<nav>
+  <div class="logo">Pet <span>Pooja.</span></div>
+  <div style="font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; color: #95a5a6;">SANSKRITI APARTMENT</div>
+</nav>
 
 <header>
-  <h1>Pet Pooja Home Kitchen</h1>
-  <p>Authentic Homemade Food | Takeaway Only</p>
+  <h1>Made at home, <br> <span>just for you.</span></h1>
+  <p>Fresh ingredients, traditional recipes, and a dash of love. Your premium home kitchen takeaway in the heart of the city.</p>
 </header>
 
 <div class="container">
   
   <div id="historyBox">
-    <h3><i class="fas fa-history"></i> Your Recent Order (Last 30 Mins)</h3>
-    <div id="historyItems"></div>
+    <p style="text-transform: uppercase; font-size: 0.7rem; font-weight: 700; color: var(--accent); margin-bottom: 10px;">Your Active Order</p>
+    <div id="historyData" style="font-size: 1rem; line-height: 1.6;"></div>
   </div>
 
-  <h2 class="section-title">Today's Menu</h2>
-  <div class="menu-grid" id="menuArea"></div>
+  <div class="menu-grid" id="menuDisplay"></div>
 
-  <div class="order-interface">
-    <div class="white-box">
-      <h3 style="margin-bottom: 20px; border-bottom: 2px solid #f4f4f4;">Your Basket</h3>
-      <div id="cartItems">
-        <p style="text-align:center; color:#999; padding: 20px;">No items selected.</p>
+  <div class="order-section">
+    <div class="panel">
+      <h2>Your Basket</h2>
+      <div id="cartDisplay">
+        <p style="color: #bdc3c7; text-align: center; padding: 30px;">Choose something delicious to begin.</p>
       </div>
-      <div style="display:flex; justify-content:space-between; margin-top: 20px; font-size: 1.5rem; font-weight: 800;">
-        <span>Grand Total:</span>
-        <span style="color:#e67e22;">₹<span id="grandTotal">0</span></span>
+      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f9f9f9; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 600;">Total</span>
+        <span style="font-size: 1.8rem; font-weight: 600; color: var(--accent);">₹<span id="grandTotal">0</span></span>
       </div>
     </div>
 
-    <div class="white-box">
-      <h3 style="margin-bottom: 20px; border-bottom: 2px solid #f4f4f4;">Pickup Details</h3>
-      <form onsubmit="placeOrder(event)">
-        <label><b>Your Name</b></label>
-        <input type="text" id="custName" placeholder="Full Name" required>
-        
-        <label><b>Phone Number</b></label>
-        <input type="tel" id="custPhone" placeholder="10-digit Mobile" required>
-        
-        <label><b>Special Instructions</b></label>
-        <textarea id="custNote" rows="2" placeholder="Spice level, timing, etc."></textarea>
-
+    <div class="panel">
+      <h2>Pickup Details</h2>
+      <form onsubmit="checkout(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="custName" placeholder="Enter name" required>
+        </div>
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="tel" id="custPhone" placeholder="Enter number" required>
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea id="custNotes" rows="2" placeholder="Spice level, etc."></textarea>
+        </div>
         <button type="submit" class="whatsapp-btn">
-          <i class="fab fa-whatsapp"></i> SEND ORDER TO WHATSAPP
+          <i class="fab fa-whatsapp"></i> PLACE ORDER
         </button>
       </form>
     </div>
@@ -123,126 +215,116 @@
 </div>
 
 <footer>
-  <p><b>Pet Pooja Home Kitchen</b></p>
-  <p>Sanskriti Apartment, Delhi NCR</p>
-  <p>Contact: +91 9015489060</p>
+  <div class="footer-logo">Pet Pooja.</div>
+  <p style="font-size: 0.9rem; color: #95a5a6;">Sanskriti Apartment | +91 9015489060</p>
 </footer>
 
 <script>
-  // Strictly matched menu items and correct images
-  const menu = [
-    { id: 1, name: "Paneer Masala Dosa", price: 120, img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=500" },
-    { id: 2, name: "Butter Masala Dosa", price: 100, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=500" },
-    { id: 3, name: "Soft Idli Sambhar", price: 60, img: "https://images.unsplash.com/photo-1589301773521-cf9063301702?auto=format&fit=crop&w=500" },
-    { id: 4, name: "Curry Rice Bowl", price: 80, img: "https://images.unsplash.com/photo-1546833999-b9f581602b70?auto=format&fit=crop&w=500" }
+  const menuData = [
+    { id: 1, name: "Paneer Masala Dosa", price: 120, img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600" },
+    { id: 2, name: "Butter Masala Dosa", price: 100, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600" },
+    { id: 3, name: "Soft Idli Sambhar", price: 60, img: "https://images.unsplash.com/photo-1589301773521-cf9063301702?auto=format&fit=crop&w=600" },
+    { id: 4, name: "Curry Rice Bowl", price: 80, img: "https://images.unsplash.com/photo-1546833999-b9f581602b70?auto=format&fit=crop&w=600" }
   ];
 
-  let basket = {};
+  let cart = {};
 
-  function init() {
-    // Render Menu
-    const area = document.getElementById('menuArea');
-    area.innerHTML = menu.map(item => `
+  function start() {
+    const grid = document.getElementById('menuDisplay');
+    grid.innerHTML = menuData.map(item => `
       <div class="food-card">
-        <img src="${item.img}" class="food-img">
-        <div class="food-info">
+        <div class="img-box"><img src="${item.img}" alt="${item.name}"></div>
+        <div class="card-info">
           <h3>${item.name}</h3>
-          <span class="food-price">₹${item.price}</span>
-          <button class="add-btn" onclick="addToBasket(${item.id})">Add to Basket</button>
+          <span class="price-tag">₹${item.price}</span>
+          <button class="add-btn" onclick="addToCart(${item.id})">Add to Basket</button>
         </div>
       </div>
     `).join('');
-
-    renderHistory();
+    
+    checkHistory();
   }
 
-  function addToBasket(id) {
-    if (basket[id]) basket[id].qty++;
-    else basket[id] = { ...menu.find(i => i.id === id), qty: 1 };
-    renderBasket();
+  function addToCart(id) {
+    if (cart[id]) cart[id].qty++;
+    else cart[id] = { ...menuData.find(i => i.id === id), qty: 1 };
+    renderCart();
   }
 
-  function updateQty(id, amt) {
-    basket[id].qty += amt;
-    if (basket[id].qty <= 0) delete basket[id];
-    renderBasket();
+  function changeQty(id, delta) {
+    cart[id].qty += delta;
+    if (cart[id].qty <= 0) delete cart[id];
+    renderCart();
   }
 
-  function renderBasket() {
-    const box = document.getElementById('cartItems');
+  function renderCart() {
+    const box = document.getElementById('cartDisplay');
     const totalEl = document.getElementById('grandTotal');
     let total = 0, html = '';
 
-    for (const id in basket) {
-      const item = basket[id];
+    for (const id in cart) {
+      const item = cart[id];
       total += item.price * item.qty;
       html += `
         <div class="cart-row">
-          <div><b>${item.name}</b><br><small>₹${item.price} each</small></div>
-          <div class="qty-controls">
-            <button onclick="updateQty(${id}, -1)">-</button>
-            <span style="margin: 0 10px; font-weight:700;">${item.qty}</span>
-            <button onclick="updateQty(${id}, 1)">+</button>
+          <div><p style="font-weight:600;">${item.name}</p></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(${id}, -1)">-</button>
+            <span>${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${id}, 1)">+</button>
           </div>
         </div>`;
     }
-    box.innerHTML = html || '<p style="text-align:center; color:#999; padding: 20px;">No items selected.</p>';
+    box.innerHTML = html || '<p style="color: #bdc3c7; text-align: center; padding: 30px;">Choose something delicious to begin.</p>';
     totalEl.innerText = total;
   }
 
-  function placeOrder(e) {
+  function checkout(e) {
     e.preventDefault();
-    if (Object.keys(basket).length === 0) return alert("Please select items!");
+    if (Object.keys(cart).length === 0) return alert("Your basket is empty!");
 
     const name = document.getElementById('custName').value;
-    const note = document.getElementById('custNote').value;
-    let itemsText = "";
-    let total = 0;
+    const notes = document.getElementById('custNotes').value;
+    let textItems = "";
+    let grandTotal = 0;
 
-    for (const id in basket) {
-      itemsText += `• ${basket[id].name} x ${basket[id].qty} (₹${basket[id].price * basket[id].qty})%0A`;
-      total += basket[id].price * basket[id].qty;
+    for (const id in cart) {
+      textItems += `• ${cart[id].name} x ${cart[id].qty}%0A`;
+      grandTotal += cart[id].price * cart[id].qty;
     }
 
-    // Save to localStorage for 30 min history
-    const orderRecord = {
-      summary: itemsText.replace(/%0A/g, "<br>"),
-      total: total,
-      time: new Date().getTime()
+    // Save history for 30 min refresh
+    const orderData = {
+      summary: textItems.replace(/%0A/g, "<br>"),
+      total: grandTotal,
+      timestamp: new Date().getTime()
     };
-    localStorage.setItem('petPoojaHistory', JSON.stringify(orderRecord));
+    localStorage.setItem('petPoojaLastOrder', JSON.stringify(orderData));
 
-    // WhatsApp Message
-    const msg = `*PET POOJA HOME KITCHEN*%0A*Customer:* ${name}%0A*Order:*%0A${itemsText}%0A*Total:* ₹${total}%0A*Note:* ${note}`;
+    const msg = `*PET POOJA ORDER*%0A*Customer:* ${name}%0A*Items:*%0A${textItems}*Total: ₹${grandTotal}*%0A*Notes:* ${notes}`;
     window.open(`https://wa.me/919015489060?text=${msg}`, '_blank');
-
-    // Page Refresh to Clear Cart & Show History
+    
     setTimeout(() => { location.reload(); }, 1000);
   }
 
-  function renderHistory() {
-    const saved = localStorage.getItem('petPoojaHistory');
+  function checkHistory() {
+    const saved = localStorage.getItem('petPoojaLastOrder');
     if (!saved) return;
 
     const data = JSON.parse(saved);
     const now = new Date().getTime();
-    if (now - data.time < (30 * 60 * 1000)) { // 30 mins
+    if (now - data.timestamp < (30 * 60 * 1000)) {
       document.getElementById('historyBox').style.display = 'block';
-      document.getElementById('historyItems').innerHTML = `
-        <div style="font-size: 0.9rem;">
-          ${data.summary}
-          <div style="margin-top:10px; font-weight:800; border-top: 1px solid #ddd; padding-top:5px;">
-            Total: ₹${data.total}
-          </div>
-        </div>
+      document.getElementById('historyData').innerHTML = `
+        ${data.summary}
+        <strong style="display:block; margin-top:10px; color:var(--text);">Total: ₹${data.total}</strong>
       `;
     } else {
-      localStorage.removeItem('petPoojaHistory');
+      localStorage.removeItem('petPoojaLastOrder');
     }
   }
 
-  init();
+  start();
 </script>
-
 </body>
 </html>
