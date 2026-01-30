@@ -41,7 +41,7 @@
 
     /* --- Hero Section --- */
     header {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1350&q=80');
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
       background-size: cover;
       background-position: center;
       height: 50vh;
@@ -66,7 +66,7 @@
     
     .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
     .food-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); transition: 0.3s; }
-    .food-card img { width: 100%; height: 200px; object-fit: cover; }
+    .food-card img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
     .card-body { padding: 20px; text-align: center; }
     .price { color: var(--primary); font-size: 1.2rem; font-weight: 700; margin: 10px 0; }
     .add-btn { width: 100%; padding: 10px; background: var(--dark); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; }
@@ -147,7 +147,8 @@
 
       <div id="upiSection" style="display:none; background:#f0fdf4; padding:15px; border-radius:10px; text-align:center; margin-bottom:15px;">
         <p>Scan to Pay or Click Button Below</p>
-        <img src="qr.png" alt="QR Code" style="width:120px; margin:10px 0; border:1px solid #ddd;">
+        <p style="font-size: 0.8rem; color: #666;">(Replace qr.png with your own QR image)</p>
+        <img src="qr.png" alt="QR Code Placeholder" onerror="this.src='https://placehold.co/150x150?text=Scan+QR';" style="width:120px; margin:10px 0; border:1px solid #ddd;">
         <br>
         <a id="payBtn" href="#" class="add-btn" style="background:#25D366; text-decoration:none; display:inline-block; width:auto; padding:10px 20px;">
           <i class="fas fa-mobile-alt"></i> Open UPI App
@@ -180,11 +181,12 @@
 <a href="https://wa.me/919015489060" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
+  // Updated with more reliable stock images
   const menuData = [
-    { id: 1, name: "Paneer Dosa", price: 120, img: "https://images.unsplash.com/photo-1630384060421-4392645637aa?w=500" },
-    { id: 2, name: "Masala Dosa", price: 100, img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=500" },
-    { id: 3, name: "Idli Sambhar", price: 60, img: "https://images.unsplash.com/photo-1589301773521-cf9063301702?w=500" },
-    { id: 4, name: "Curry Rice", price: 50, img: "https://images.unsplash.com/photo-1596560548464-f010549b8416?w=500" }
+    { id: 1, name: "Paneer Dosa", price: 120, img: "https://images.pexels.com/photos/5560700/pexels-photo-5560700.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { id: 2, name: "Masala Dosa", price: 100, img: "https://images.pexels.com/photos/15233157/pexels-photo-15233157/free-photo-of-masala-dosa-served-on-a-plate.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { id: 3, name: "Idli Sambhar", price: 60, img: "https://images.pexels.com/photos/15233154/pexels-photo-15233154/free-photo-of-idli-with-sambhar-and-chutney.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { id: 4, name: "Curry Rice", price: 50, img: "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg?auto=compress&cs=tinysrgb&w=500" }
   ];
 
   let cart = {};
@@ -193,7 +195,7 @@
     const grid = document.getElementById('menuGrid');
     grid.innerHTML = menuData.map(item => `
       <div class="food-card" data-name="${item.name.toLowerCase()}">
-        <img src="${item.img}" alt="${item.name}">
+        <img src="${item.img}" alt="${item.name}" onerror="this.onerror=null; this.src='https://placehold.co/500x300?text=${item.name}';">
         <div class="card-body">
           <h3>${item.name}</h3>
           <p class="price">₹${item.price}</p>
