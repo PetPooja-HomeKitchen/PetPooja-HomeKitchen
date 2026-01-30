@@ -20,7 +20,6 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-    
     body { background: var(--light); color: var(--dark); line-height: 1.6; }
 
     /* --- Navbar --- */
@@ -42,10 +41,10 @@
 
     /* --- Hero Section --- */
     header {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1589302168068-964664d93dc0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1350&q=80');
       background-size: cover;
       background-position: center;
-      height: 60vh;
+      height: 50vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -55,9 +54,6 @@
       padding: 20px;
     }
     header h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-    header p { font-size: 1.2rem; margin-bottom: 20px; }
-    .btn { background: var(--primary); color: white; padding: 10px 25px; text-decoration: none; border-radius: 50px; font-weight: 600; transition: 0.3s; border: none; cursor: pointer; }
-    .btn:hover { background: #e06000; transform: scale(1.05); }
 
     /* --- Sections --- */
     section { padding: 60px 20px; max-width: 1200px; margin: auto; }
@@ -67,48 +63,34 @@
     /* --- Menu --- */
     .search-container { text-align: center; margin-bottom: 30px; }
     #searchInput { padding: 12px; width: 100%; max-width: 400px; border: 2px solid #ddd; border-radius: 50px; outline: none; transition: 0.3s; }
-    #searchInput:focus { border-color: var(--primary); }
-
-    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
     
-    .food-card {
-      background: var(--white);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: 0.3s;
-      position: relative;
-    }
-    .food-card:hover { transform: translateY(-5px); }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+    .food-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); transition: 0.3s; }
     .food-card img { width: 100%; height: 200px; object-fit: cover; }
     .card-body { padding: 20px; text-align: center; }
     .price { color: var(--primary); font-size: 1.2rem; font-weight: 700; margin: 10px 0; }
-    .add-btn { width: 100%; padding: 10px; background: var(--dark); color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .add-btn { width: 100%; padding: 10px; background: var(--dark); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; }
     .add-btn:hover { background: var(--primary); }
 
-    /* --- Cart / Order Form --- */
-    .order-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      background: var(--white);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-    }
+    /* --- Order Form & Cart --- */
+    .order-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
     @media(max-width: 768px) { .order-container { grid-template-columns: 1fr; } }
     
-    .cart-summary { background: #f9f9f9; padding: 20px; border-radius: 10px; }
-    .cart-item { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-    .total-price { font-size: 1.5rem; color: var(--primary); font-weight: bold; text-align: right; margin-top: 15px; }
+    .cart-summary { background: var(--white); padding: 25px; border-radius: 15px; box-shadow: var(--shadow); height: fit-content; }
+    .cart-item { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+    .total-price { font-size: 1.5rem; color: var(--primary); font-weight: bold; text-align: right; }
 
-    form input, form textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+    form { background: var(--white); padding: 25px; border-radius: 15px; box-shadow: var(--shadow); }
+    form input, form textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; }
     
-    /* --- Footer --- */
-    footer { background: var(--dark); color: white; text-align: center; padding: 30px 20px; margin-top: 50px; }
-    .social-links a { color: white; margin: 0 10px; font-size: 1.2rem; }
+    /* --- Modal Popup --- */
+    #orderModal {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+      background:rgba(0,0,0,0.8); z-index:2000; align-items:center; justify-content:center;
+    }
+    .modal-content { background:white; padding:30px; border-radius:15px; text-align:center; max-width:400px; width:90%; }
 
-    /* --- Floating WhatsApp --- */
+    /* --- Floating Buttons --- */
     .whatsapp-float {
       position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white;
       width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -129,212 +111,170 @@
 
 <header>
   <h1>Pet Pooja Home Kitchen</h1>
-  <p>Fresh, Hygienic & Homemade. Just like Mom's cooking!</p>
-  <a href="#menu" class="btn">View Menu</a>
+  <p>Fresh, Hygienic & Homemade. Ghar Jaisa Khana, Rozana!</p>
 </header>
 
-<section id="about">
-  <h2>Our Story</h2>
-  <p style="text-align: center; max-width: 700px; margin: auto;">
-    Located in Sanskriti Apartment, we are a cloud kitchen dedicated to serving pure, sattvic, and delicious homemade meals. We believe food should not just fill your stomach but feed your soul.
-  </p>
-</section>
-
 <section id="menu">
-  <h2>Our Menu</h2>
-  
+  <h2>Our Delicious Menu</h2>
   <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search for dishes (e.g., Dosa, Idli)..." onkeyup="searchFood()">
+    <input type="text" id="searchInput" placeholder="Search dishes..." onkeyup="searchFood()">
   </div>
-
-  <div class="menu-grid" id="menuGrid">
-    </div>
+  <div class="menu-grid" id="menuGrid"></div>
 </section>
 
 <section id="order">
-  <h2>Your Basket</h2>
-  
+  <h2>Review & Order</h2>
   <div class="order-container">
-    
     <div class="cart-summary">
-      <h3>Items</h3>
-      <div id="cartItems">
-        <p style="color:#777;">Your cart is empty.</p>
-      </div>
+      <h3>Your Items</h3>
+      <hr style="margin: 15px 0; opacity: 0.2;">
+      <div id="cartItems"><p style="color:#888;">Your cart is empty.</p></div>
       <div class="total-price">Total: ₹<span id="grandTotal">0</span></div>
     </div>
 
     <form id="orderForm" onsubmit="sendToWhatsapp(event)">
       <h3>Delivery Details</h3>
-      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="text" id="name" placeholder="Full Name" required>
       <input type="tel" id="phone" placeholder="Phone Number" required>
-      <input type="text" id="address" placeholder="Delivery Address / Flat No." required>
-      <textarea id="note" rows="2" placeholder="Any special cooking instructions?"></textarea>
-      
-      <p style="font-size: 0.9rem; margin-bottom: 10px;"><strong>Payment:</strong> UPI / COD available.</p>
-      
-      <button type="submit" class="btn" style="width: 100%;">
-        <i class="fab fa-whatsapp"></i> Place Order on WhatsApp
+      <input type="text" id="address" placeholder="Flat No / Apartment Address" required>
+      <textarea id="note" rows="2" placeholder="Instructions (e.g. Make it spicy)"></textarea>
+
+      <div style="margin: 15px 0;">
+        <strong>Payment Method:</strong><br>
+        <label><input type="radio" name="payMethod" value="COD" checked onclick="togglePayment('cod')"> Cash on Delivery</label><br>
+        <label><input type="radio" name="payMethod" value="UPI" onclick="togglePayment('upi')"> Pay Online (UPI)</label>
+      </div>
+
+      <div id="upiSection" style="display:none; background:#f0fdf4; padding:15px; border-radius:10px; text-align:center; margin-bottom:15px;">
+        <p>Scan to Pay or Click Button Below</p>
+        <img src="qr.png" alt="QR Code" style="width:120px; margin:10px 0; border:1px solid #ddd;">
+        <br>
+        <a id="payBtn" href="#" class="add-btn" style="background:#25D366; text-decoration:none; display:inline-block; width:auto; padding:10px 20px;">
+          <i class="fas fa-mobile-alt"></i> Open UPI App
+        </a>
+      </div>
+
+      <button type="submit" class="add-btn" style="background:var(--primary); font-size:1.1rem; padding:15px;">
+        <i class="fab fa-whatsapp"></i> Place Order via WhatsApp
       </button>
     </form>
   </div>
 </section>
 
-<section id="contact">
+<section id="contact" style="text-align:center;">
   <h2>Contact Us</h2>
-  <div style="text-align: center; margin-bottom: 20px;">
-    <p><i class="fas fa-map-marker-alt"></i> Sanskriti Apartment, Delhi, India</p>
-    <p><i class="fas fa-phone-alt"></i> +91 9015489060</p>
-  </div>
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83923192776!2d77.06889754721313!3d28.52728034389636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x52c2b7494e204dce!2sNew%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1675150000000!5m2!1sen!2sin" 
-    width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy">
-  </iframe>
+  <p><i class="fas fa-map-marker-alt"></i> Sanskriti Apartment, India</p>
+  <p><i class="fas fa-phone"></i> +91 9015489060</p>
+  <p><i class="fas fa-truck"></i> Self Pickup / Swiggy Genie / Zomato Legend</p>
 </section>
 
-<footer>
-  <p>© 2026 Pet Pooja Home Kitchen. All Rights Reserved.</p>
-  <div class="social-links" style="margin-top:10px;">
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
+<div id="orderModal">
+  <div class="modal-content">
+    <i class="fas fa-check-circle" style="font-size:50px; color:#25D366; margin-bottom:15px;"></i>
+    <h3>Order Sent!</h3>
+    <p>Please click <strong>'SEND'</strong> in WhatsApp to finish.<br><br>We will reply on WhatsApp to confirm your order and delivery time.</p>
+    <button onclick="closeModal()" class="add-btn" style="margin-top:20px; background:var(--primary);">Got it!</button>
   </div>
-</footer>
+</div>
 
-<a href="https://wa.me/919015489060" class="whatsapp-float" target="_blank">
-  <i class="fab fa-whatsapp"></i>
-</a>
+<a href="https://wa.me/919015489060" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
-  // Menu Data (Easy to edit)
-  const menuItems = [
+  const menuData = [
     { id: 1, name: "Paneer Dosa", price: 120, img: "https://images.unsplash.com/photo-1630384060421-4392645637aa?w=500" },
     { id: 2, name: "Masala Dosa", price: 100, img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=500" },
     { id: 3, name: "Idli Sambhar", price: 60, img: "https://images.unsplash.com/photo-1589301773521-cf9063301702?w=500" },
-    { id: 4, name: "Curry Rice", price: 80, img: "https://images.unsplash.com/photo-1596560548464-f010549b8416?w=500" },
-    { id: 5, name: "Veg Thali", price: 150, img: "https://images.unsplash.com/photo-1546833999-b9f581602b70?w=500" },
-    { id: 6, name: "Poha", price: 50, img: "https://images.unsplash.com/photo-1595960417240-a1789c629f64?w=500" }
+    { id: 4, name: "Curry Rice", price: 50, img: "https://images.unsplash.com/photo-1596560548464-f010549b8416?w=500" }
   ];
 
   let cart = {};
 
-  // Initialize Menu
   function loadMenu() {
     const grid = document.getElementById('menuGrid');
-    grid.innerHTML = '';
-    menuItems.forEach(item => {
-      grid.innerHTML += `
-        <div class="food-card" data-name="${item.name.toLowerCase()}">
-          <img src="${item.img}" alt="${item.name}">
-          <div class="card-body">
-            <h3>${item.name}</h3>
-            <div class="price">₹${item.price}</div>
-            <button class="add-btn" onclick="addToCart(${item.id})">Add to Cart</button>
-          </div>
+    grid.innerHTML = menuData.map(item => `
+      <div class="food-card" data-name="${item.name.toLowerCase()}">
+        <img src="${item.img}" alt="${item.name}">
+        <div class="card-body">
+          <h3>${item.name}</h3>
+          <p class="price">₹${item.price}</p>
+          <button class="add-btn" onclick="addToCart(${item.id})">Add to Cart</button>
         </div>
-      `;
-    });
+      </div>
+    `).join('');
   }
 
-  // Add to Cart
   function addToCart(id) {
-    if (cart[id]) {
-      cart[id].qty++;
-    } else {
-      const item = menuItems.find(i => i.id === id);
+    if (cart[id]) cart[id].qty++;
+    else {
+      const item = menuData.find(i => i.id === id);
       cart[id] = { ...item, qty: 1 };
     }
     updateCart();
   }
 
-  // Remove from Cart
   function removeFromCart(id) {
-    if(cart[id]) {
-      cart[id].qty--;
-      if(cart[id].qty === 0) delete cart[id];
-    }
+    delete cart[id];
     updateCart();
   }
 
-  // Update Cart Display
   function updateCart() {
     const cartDiv = document.getElementById('cartItems');
     const totalSpan = document.getElementById('grandTotal');
     const countSpan = document.getElementById('cartCount');
-    
-    let total = 0;
-    let count = 0;
-    let html = '';
+    let total = 0, count = 0, html = '';
 
-    if (Object.keys(cart).length === 0) {
-      cartDiv.innerHTML = '<p style="color:#777;">Your cart is empty.</p>';
-    } else {
-      for (const id in cart) {
-        const item = cart[id];
-        const itemTotal = item.price * item.qty;
-        total += itemTotal;
-        count += item.qty;
-        html += `
-          <div class="cart-item">
-            <span>${item.name} (x${item.qty})</span>
-            <div>
-              <span>₹${itemTotal}</span>
-              <button onclick="removeFromCart(${id})" style="margin-left:5px; color:red; border:none; background:none; cursor:pointer;">x</button>
-            </div>
-          </div>
-        `;
-      }
-      cartDiv.innerHTML = html;
-    }
-
-    totalSpan.innerText = total;
-    countSpan.innerText = count;
-  }
-
-  // Search Function
-  function searchFood() {
-    let input = document.getElementById('searchInput').value.toLowerCase();
-    let cards = document.getElementsByClassName('food-card');
-    
-    for (let card of cards) {
-      let name = card.getAttribute('data-name');
-      card.style.display = name.includes(input) ? "block" : "none";
-    }
-  }
-
-  // WhatsApp Sender
-  function sendToWhatsapp(e) {
-    e.preventDefault();
-
-    if (Object.keys(cart).length === 0) {
-      alert("Please add items to your cart first!");
-      return;
-    }
-
-    let name = document.getElementById('name').value;
-    let address = document.getElementById('address').value;
-    let note = document.getElementById('note').value;
-    
-    let message = `*New Order from Website*%0A%0A*Name:* ${name}%0A*Address:* ${address}%0A`;
-    if(note) message += `*Note:* ${note}%0A`;
-    
-    message += `%0A*Order Details:*%0A`;
-    
-    let total = 0;
     for (const id in cart) {
       const item = cart[id];
-      message += `- ${item.name} x ${item.qty} (₹${item.price * item.qty})%0A`;
       total += item.price * item.qty;
+      count += item.qty;
+      html += `<div class="cart-item"><span>${item.name} x${item.qty}</span> <span>₹${item.price * item.qty} <i class="fas fa-trash" onclick="removeFromCart(${id})" style="color:red; cursor:pointer; margin-left:10px;"></i></span></div>`;
     }
-    
-    message += `%0A*Total Bill: ₹${total}*`;
 
-    // Opens WhatsApp Web or App
-    window.open(`https://wa.me/919015489060?text=${message}`, '_blank');
+    cartDiv.innerHTML = html || '<p style="color:#888;">Your cart is empty.</p>';
+    totalSpan.innerText = total;
+    countSpan.innerText = count;
+    updatePaymentLink(total);
   }
 
-  // Load menu on start
-  loadMenu();
+  function togglePayment(method) {
+    document.getElementById('upiSection').style.display = (method === 'upi') ? 'block' : 'none';
+  }
 
+  function updatePaymentLink(total) {
+    const upiID = "9015489060@paytm";
+    document.getElementById('payBtn').href = `upi://pay?pa=${upiID}&pn=PetPooja&am=${total}&cu=INR`;
+  }
+
+  function searchFood() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    document.querySelectorAll('.food-card').forEach(card => {
+      card.style.display = card.getAttribute('data-name').includes(input) ? "block" : "none";
+    });
+  }
+
+  function sendToWhatsapp(e) {
+    e.preventDefault();
+    if (Object.keys(cart).length === 0) return alert("Add items first!");
+
+    let name = document.getElementById('name').value;
+    let addr = document.getElementById('address').value;
+    let pay = document.querySelector('input[name="payMethod"]:checked').value;
+    
+    let msg = `*New Order - Pet Pooja*%0A--------------------------%0A*Name:* ${name}%0A*Address:* ${addr}%0A*Payment:* ${pay}%0A%0A*Items:*%0A`;
+    let total = 0;
+    for (const id in cart) {
+      msg += `- ${cart[id].name} x ${cart[id].qty} (₹${cart[id].price * cart[id].qty})%0A`;
+      total += cart[id].price * cart[id].qty;
+    }
+    msg += `%0A*Total: ₹${total}*%0A--------------------------%0A_Please confirm my order acceptance!_`;
+
+    window.open(`https://wa.me/919015489060?text=${msg}`, '_blank');
+    document.getElementById('orderModal').style.display = 'flex';
+  }
+
+  function closeModal() { document.getElementById('orderModal').style.display = 'none'; }
+
+  loadMenu();
 </script>
 
 </body>
