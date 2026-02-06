@@ -1,331 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pet Pooja | Home Kitchen</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root {
-      --accent: #d35400;
-      --text: #2c3e50;
-      --bg: #fdfcfb;
-      --white: #ffffff;
-      --glass: rgba(255, 255, 255, 0.8);
-    }
+<title>Pet Pooja Home Kitchen | Ghar Jaisa Khana</title>
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background-color: var(--bg); 
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-    }
+<meta name="description" content="Pet Pooja Home Kitchen – Homemade South Indian food in Sanskriti Apartment. Order via WhatsApp.">
 
-    /* --- Elegant Navigation --- */
-    nav {
-      padding: 25px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-    .logo { 
-      font-family: 'Playfair Display', serif; 
-      font-size: 1.8rem; 
-      font-weight: 600; 
-      letter-spacing: -1px;
-    }
-    .logo span { color: var(--accent); font-style: italic; }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    /* --- Hero Section --- */
-    header {
-      padding: 80px 8% 40px;
-      text-align: center;
-    }
-    header h1 { 
-      font-family: 'Playfair Display', serif; 
-      font-size: clamp(2.5rem, 5vw, 4rem); 
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-    header p { 
-      font-size: 1.1rem; 
-      color: #7f8c8d; 
-      max-width: 600px; 
-      margin: 0 auto;
-      font-weight: 300;
-    }
+<style>
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 8% 100px; }
+:root{
+  --accent:#d35400;
+  --bg:#fff8f2;
+  --text:#2c3e50;
+  --card:#ffffff;
+}
 
-    /* --- History Notification --- */
-    #historyBox {
-      background: #fff;
-      border-left: 4px solid var(--accent);
-      padding: 20px;
-      margin-bottom: 40px;
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      display: none;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    /* --- Menu Cards --- */
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 40px;
-      margin-top: 50px;
-    }
-    .food-card {
-      background: var(--white);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      border: 1px solid rgba(0,0,0,0.03);
-    }
-    .food-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    }
-    .img-box { width: 100%; height: 240px; overflow: hidden; }
-    .img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-    .food-card:hover .img-box img { transform: scale(1.1); }
-    
-    .card-info { padding: 25px; text-align: center; }
-    .card-info h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 8px; }
-    .price-tag { 
-      display: block; 
-      font-size: 1.2rem; 
-      color: var(--accent); 
-      font-weight: 600; 
-      margin-bottom: 20px; 
-    }
-    
-    .add-btn {
-      background: var(--text);
-      color: #fff;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      letter-spacing: 1px;
-    }
-    .add-btn:hover { background: var(--accent); }
+body{
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
 
-    /* --- Checkout Section --- */
-    .order-section {
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 60px;
-      margin-top: 100px;
-      align-items: start;
-    }
-    @media (max-width: 900px) { .order-section { grid-template-columns: 1fr; } }
+/* Navbar */
 
-    .panel { background: #fff; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
-    .panel h2 { font-family: 'Playfair Display', serif; margin-bottom: 30px; font-size: 1.8rem; }
+nav{
+  padding:20px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#fff;
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-    .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f9f9f9; }
-    .qty-control { display: flex; align-items: center; gap: 12px; }
-    .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #eee; background: none; cursor: pointer; }
+.logo{
+  font-family:Playfair Display,serif;
+  font-size:1.7rem;
+}
 
-    /* --- Inputs --- */
-    .form-group { margin-bottom: 20px; }
-    label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #95a5a6; }
-    input, textarea {
-      width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #f0f0f0; background: #f9f9f9; font-size: 1rem; outline: none; transition: 0.3s;
-    }
-    input:focus { border-color: var(--accent); background: #fff; }
+.logo span{
+  color:var(--accent);
+}
 
-    .whatsapp-btn {
-      width: 100%; padding: 20px; background: #25D366; color: #fff; border: none; border-radius: 15px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;
-    }
+/* Hero */
 
-    footer { padding: 60px 8%; text-align: center; border-top: 1px solid #eee; margin-top: 50px; }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; }
-  </style>
+header{
+  text-align:center;
+  padding:60px 8% 40px;
+}
+
+header h1{
+  font-family:Playfair Display,serif;
+  font-size:clamp(2rem,5vw,3.5rem);
+  margin-bottom:15px;
+}
+
+header p{
+  max-width:600px;
+  margin:auto;
+  color:#666;
+}
+
+.badges{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.badge{
+  background:#fff;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:0.8rem;
+  border:1px solid #eee;
+}
+
+/* Container */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 8% 80px;
+}
+
+/* Menu */
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+
+.food-card{
+  background:var(--card);
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  transition:0.3s;
+}
+
+.food-card:hover{
+  transform:translateY(-6px);
+}
+
+.food-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card-info{
+  padding:20px;
+  text-align:center;
+}
+
+.card-info h3{
+  font-family:Playfair Display,serif;
+  margin-bottom:5px;
+}
+
+.price{
+  color:var(--accent);
+  font-weight:600;
+  margin:8px 0;
+}
+
+.add-btn{
+  background:var(--text);
+  color:#fff;
+  border:none;
+  padding:8px 22px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.add-btn:hover{
+  background:var(--accent);
+}
+
+/* Order Section */
+
+.order-section{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:40px;
+  margin-top:80px;
+}
+
+@media(max-width:900px){
+  .order-section{grid-template-columns:1fr;}
+}
+
+.panel{
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.panel h2{
+  font-family:Playfair Display,serif;
+  margin-bottom:20px;
+}
+
+/* Cart */
+
+.cart-row{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #f5f5f5;
+}
+
+.qty{
+  display:flex;
+  gap:8px;
+}
+
+.qty button{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  border:1px solid #ddd;
+  background:none;
+}
+
+/* Form */
+
+input,textarea{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  margin-bottom:15px;
+}
+
+.whatsapp-btn{
+  width:100%;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  padding:14px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* Footer */
+
+footer{
+  text-align:center;
+  padding:40px 8%;
+  border-top:1px solid #eee;
+  color:#777;
+}
+
+</style>
 </head>
+
 <body>
 
+<!-- Navbar -->
 <nav>
-  <div class="logo">Pet <span>Pooja.</span></div>
-  <div style="font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; color: #95a5a6;">SANSKRITI APARTMENT</div>
+  <div class="logo">Pet <span>Pooja</span></div>
+  <div style="font-size:0.8rem;">Sanskriti Apartment</div>
 </nav>
 
+<!-- Hero -->
 <header>
-  <h1>Made at home, <br> <span>just for you.</span></h1>
-  <p>Fresh ingredients, traditional recipes, and a dash of love. Your premium home kitchen takeaway in the heart of the city.</p>
+
+<h1>Ghar Jaisa Khana,<br> Har Din Fresh.</h1>
+
+<p>Homemade South Indian food prepared daily with hygiene, love, and fresh ingredients.</p>
+
+<div class="badges">
+  <div class="badge">Since 2024</div>
+  <div class="badge">Home Cooked</div>
+  <div class="badge">No Preservatives</div>
+  <div class="badge">Fresh Daily</div>
+</div>
+
 </header>
 
 <div class="container">
-  
-  <div id="historyBox">
-    <p style="text-transform: uppercase; font-size: 0.7rem; font-weight: 700; color: var(--accent); margin-bottom: 10px;">Your Active Order</p>
-    <div id="historyData" style="font-size: 1rem; line-height: 1.6;"></div>
-  </div>
 
-  <div class="menu-grid" id="menuDisplay"></div>
+<h2 style="text-align:center;color:var(--accent);">Today's Menu</h2>
 
-  <div class="order-section">
-    <div class="panel">
-      <h2>Your Basket</h2>
-      <div id="cartDisplay">
-        <p style="color: #bdc3c7; text-align: center; padding: 30px;">Choose something delicious to begin.</p>
-      </div>
-      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f9f9f9; display: flex; justify-content: space-between; align-items: center;">
-        <span style="font-weight: 600;">Total</span>
-        <span style="font-size: 1.8rem; font-weight: 600; color: var(--accent);">₹<span id="grandTotal">0</span></span>
-      </div>
-    </div>
+<div class="menu-grid" id="menuBox"></div>
 
-    <div class="panel">
-      <h2>Pickup Details</h2>
-      <form onsubmit="checkout(event)">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="custName" placeholder="Enter name" required>
-        </div>
-        <div class="form-group">
-          <label>Mobile Number</label>
-          <input type="tel" id="custPhone" placeholder="Enter number" required>
-        </div>
-        <div class="form-group">
-          <label>Notes</label>
-          <textarea id="custNotes" rows="2" placeholder="Spice level, etc."></textarea>
-        </div>
-        <button type="submit" class="whatsapp-btn">
-          <i class="fab fa-whatsapp"></i> PLACE ORDER
-        </button>
-      </form>
-    </div>
-  </div>
+<div class="order-section">
+
+<!-- Cart -->
+<div class="panel">
+
+<h2>Your Order</h2>
+
+<div id="cartBox">
+<p style="text-align:center;color:#aaa;">Add items to start</p>
 </div>
 
+<div style="margin-top:15px;font-weight:600;">
+Total: ₹ <span id="totalAmt">0</span>
+</div>
+
+</div>
+
+<!-- Form -->
+<div class="panel">
+
+<h2>Pickup Details</h2>
+
+<form onsubmit="placeOrder(event)">
+
+<input type="text" id="name" placeholder="Your Name" required>
+
+<input type="tel" id="phone" placeholder="Mobile Number" required>
+
+<textarea id="note" placeholder="Any special request"></textarea>
+
+<button class="whatsapp-btn">
+<i class="fab fa-whatsapp"></i> Order on WhatsApp
+</button>
+
+<p style="font-size:0.8rem;color:#888;margin-top:10px;">
+Pickup Time: 11 AM – 9 PM
+</p>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Footer -->
 <footer>
-  <div class="footer-logo">Pet Pooja.</div>
-  <p style="font-size: 0.9rem; color: #95a5a6;">Sanskriti Apartment | +91 9971499087</p>
+
+<h3>Pet Pooja Home Kitchen</h3>
+
+<p>Sanskriti Apartment</p>
+
+<p>📞 +91 9971499087</p>
+
+<p>© 2026 All Rights Reserved</p>
+
 </footer>
 
+<!-- Script -->
 <script>
-  const menuData = [
-    { id: 1, name: "Paneer Masala Dosa", price: 120, img: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600" },
-    { id: 2, name: "Butter Masala Dosa", price: 100, img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600" },
-    { id: 3, name: "Soft Idli Sambhar", price: 60, img: "https://images.unsplash.com/photo-1589301773521-cf9063301702?auto=format&fit=crop&w=600" },
-    { id: 4, name: "Curry Rice Bowl", price: 80, img: "https://images.unsplash.com/photo-1546833999-b9f581602b70?auto=format&fit=crop&w=600" }
-  ];
 
-  let cart = {};
+const menu = [
+ {id:1,name:"Paneer Dosa",price:120,img:"dosa.jpg"},
+ {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.jpg"},
+ {id:3,name:"Idli Sambhar",price:60,img:"idli-sambar.jpg"},
+ {id:4,name:"Curry Rice",price:80,img:"curry-rice.jpg"}
+];
 
-  function start() {
-    const grid = document.getElementById('menuDisplay');
-    grid.innerHTML = menuData.map(item => `
-      <div class="food-card">
-        <div class="img-box"><img src="${item.img}" alt="${item.name}"></div>
-        <div class="card-info">
-          <h3>${item.name}</h3>
-          <span class="price-tag">₹${item.price}</span>
-          <button class="add-btn" onclick="addToCart(${item.id})">Add to Basket</button>
-        </div>
-      </div>
-    `).join('');
-    
-    checkHistory();
-  }
+let cart={};
 
-  function addToCart(id) {
-    if (cart[id]) cart[id].qty++;
-    else cart[id] = { ...menuData.find(i => i.id === id), qty: 1 };
-    renderCart();
-  }
+function loadMenu(){
 
-  function changeQty(id, delta) {
-    cart[id].qty += delta;
-    if (cart[id].qty <= 0) delete cart[id];
-    renderCart();
-  }
+ const box=document.getElementById("menuBox");
 
-  function renderCart() {
-    const box = document.getElementById('cartDisplay');
-    const totalEl = document.getElementById('grandTotal');
-    let total = 0, html = '';
+ box.innerHTML=menu.map(i=>`
+  <div class="food-card">
 
-    for (const id in cart) {
-      const item = cart[id];
-      total += item.price * item.qty;
-      html += `
-        <div class="cart-row">
-          <div><p style="font-weight:600;">${item.name}</p></div>
-          <div class="qty-control">
-            <button class="qty-btn" onclick="changeQty(${id}, -1)">-</button>
-            <span>${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${id}, 1)">+</button>
-          </div>
-        </div>`;
-    }
-    box.innerHTML = html || '<p style="color: #bdc3c7; text-align: center; padding: 30px;">Choose something delicious to begin.</p>';
-    totalEl.innerText = total;
-  }
+   <img src="${i.img}" alt="${i.name}">
 
-  function checkout(e) {
-    e.preventDefault();
-    if (Object.keys(cart).length === 0) return alert("Your basket is empty!");
+   <div class="card-info">
 
-    const name = document.getElementById('custName').value;
-    const notes = document.getElementById('custNotes').value;
-    let textItems = "";
-    let grandTotal = 0;
+    <h3>${i.name}</h3>
 
-    for (const id in cart) {
-      textItems += `• ${cart[id].name} x ${cart[id].qty}%0A`;
-      grandTotal += cart[id].price * cart[id].qty;
-    }
+    <div class="price">₹${i.price}</div>
 
-    // Save history for 30 min refresh
-    const orderData = {
-      summary: textItems.replace(/%0A/g, "<br>"),
-      total: grandTotal,
-      timestamp: new Date().getTime()
-    };
-    localStorage.setItem('petPoojaLastOrder', JSON.stringify(orderData));
+    <button class="add-btn" onclick="add(${i.id})">Add</button>
 
-    const msg = `*PET POOJA ORDER*%0A*Customer:* ${name}%0A*Items:*%0A${textItems}*Total: ₹${grandTotal}*%0A*Notes:* ${notes}`;
-    window.open(`https://wa.me/919971499087?text=${msg}`, '_blank');
-    
-    setTimeout(() => { location.reload(); }, 1000);
-  }
+   </div>
 
-  function checkHistory() {
-    const saved = localStorage.getItem('petPoojaLastOrder');
-    if (!saved) return;
+  </div>
+ `).join("");
 
-    const data = JSON.parse(saved);
-    const now = new Date().getTime();
-    if (now - data.timestamp < (30 * 60 * 1000)) {
-      document.getElementById('historyBox').style.display = 'block';
-      document.getElementById('historyData').innerHTML = `
-        ${data.summary}
-        <strong style="display:block; margin-top:10px; color:var(--text);">Total: ₹${data.total}</strong>
-      `;
-    } else {
-      localStorage.removeItem('petPoojaLastOrder');
-    }
-  }
+}
 
-  start();
+function add(id){
+
+ if(cart[id]) cart[id].q++;
+ else cart[id]={...menu.find(i=>i.id===id),q:1};
+
+ render();
+
+}
+
+function change(id,d){
+
+ cart[id].q+=d;
+
+ if(cart[id].q<=0) delete cart[id];
+
+ render();
+
+}
+
+function render(){
+
+ let box=document.getElementById("cartBox");
+
+ let t=0,html="";
+
+ for(let id in cart){
+
+  let i=cart[id];
+
+  t+=i.price*i.q;
+
+  html+=`
+   <div class="cart-row">
+
+    <div>${i.name}</div>
+
+    <div class="qty">
+
+     <button onclick="change(${id},-1)">-</button>
+
+     <span>${i.q}</span>
+
+     <button onclick="change(${id},1)">+</button>
+
+    </div>
+
+   </div>
+  `;
+
+ }
+
+ box.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
+
+ document.getElementById("totalAmt").innerText=t;
+
+}
+
+function placeOrder(e){
+
+ e.preventDefault();
+
+ if(Object.keys(cart).length===0){
+   alert("Please add items first!");
+   return;
+ }
+
+ let name=document.getElementById("name").value;
+ let phone=document.getElementById("phone").value;
+ let note=document.getElementById("note").value || "No special request";
+
+ let txt="",sum=0;
+
+ for(let id in cart){
+
+  let i=cart[id];
+
+  txt+=`• ${i.name} x ${i.q}%0A`;
+
+  sum+=i.price*i.q;
+
+ }
+
+ let msg =
+`🌼 *Pet Pooja Home Kitchen* 🌼%0A
+------------------------%0A
+👤 Customer: ${name}%0A
+📞 Mobile: ${phone}%0A
+📍 Pickup: Sanskriti Apartment%0A
+⏰ Time: ${new Date().toLocaleTimeString()}%0A
+------------------------%0A
+🍽 Order Details:%0A
+${txt}
+------------------------%0A
+💰 Total: ₹${sum}%0A
+📝 Note: ${note}%0A
+------------------------%0A
+🙏 Please confirm my order.%0A
+Thank you!`;
+
+ window.open(`https://wa.me/919971499087?text=${msg}`);
+
+}
+
+loadMenu();
+
 </script>
+
 </body>
 </html>
-
