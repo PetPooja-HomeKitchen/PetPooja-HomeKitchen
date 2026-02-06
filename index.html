@@ -33,7 +33,6 @@ body{
 }
 
 /* Navbar */
-
 nav{
   padding:20px 8%;
   display:flex;
@@ -56,7 +55,6 @@ nav{
 }
 
 /* Hero */
-
 header{
   text-align:center;
   padding:60px 8% 40px;
@@ -91,7 +89,6 @@ header p{
 }
 
 /* Container */
-
 .container{
   max-width:1200px;
   margin:auto;
@@ -99,7 +96,6 @@ header p{
 }
 
 /* Menu */
-
 .menu-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -155,7 +151,6 @@ header p{
 }
 
 /* Order Section */
-
 .order-section{
   display:grid;
   grid-template-columns:1fr 380px;
@@ -180,7 +175,6 @@ header p{
 }
 
 /* Cart */
-
 .cart-row{
   display:flex;
   justify-content:space-between;
@@ -202,7 +196,6 @@ header p{
 }
 
 /* Form */
-
 input,textarea{
   width:100%;
   padding:12px;
@@ -223,7 +216,6 @@ input,textarea{
 }
 
 /* Footer */
-
 footer{
   text-align:center;
   padding:40px 8%;
@@ -250,7 +242,7 @@ footer{
 <p>Homemade South Indian food prepared daily with hygiene, love, and fresh ingredients.</p>
 
 <div class="badges">
-  <div class="badge">Since 2024</div>
+  <div class="badge">Since 2025</div>
   <div class="badge">Home Cooked</div>
   <div class="badge">No Preservatives</div>
   <div class="badge">Fresh Daily</div>
@@ -327,10 +319,14 @@ Pickup Time: 11 AM – 9 PM
 <script>
 
 const menu = [
- {id:1,name:"Paneer Dosa",price:120,img:"dosa.jpg"},
- {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.jpg"},
- {id:3,name:"Idli Sambhar",price:60,img:"idli-sambar.jpg"},
- {id:4,name:"Curry Rice",price:80,img:"curry-rice.jpg"}
+ {id:1,name:"Paneer Dosa",price:120,img:"dosa.png"},
+ {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png"},
+ {id:3,name:"Idli Sambhar",price:60,img:"idli-sambar.png"},
+ {id:4,name:"Curry Rice",price:70,img:"curry-rice.png"},
+  {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png"},
+  {id:6,name:"Pyaj Paratha",price:80,img:"onion-paratha.png"},
+   {id:7,name:"Mix Veg",price:70,img:"mix-veg.png"},
+   {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png"}
 ];
 
 let cart={};
@@ -359,15 +355,19 @@ function loadMenu(){
 
 }
 
+/* Add Item Instantly */
 function add(id){
 
- if(cart[id]) cart[id].q++;
- else cart[id]={...menu.find(i=>i.id===id),q:1};
+ if(cart[id]){
+   cart[id].q++;
+ }else{
+   cart[id]={...menu.find(i=>i.id===id),q:1};
+ }
 
  render();
-
 }
 
+/* Change Quantity */
 function change(id,d){
 
  cart[id].q+=d;
@@ -375,47 +375,57 @@ function change(id,d){
  if(cart[id].q<=0) delete cart[id];
 
  render();
-
 }
 
+/* Render Cart Live */
 function render(){
 
- let box=document.getElementById("cartBox");
+ const box=document.getElementById("cartBox");
+ const totalBox=document.getElementById("totalAmt");
 
- let t=0,html="";
+ let total=0;
+ let html="";
+
+ if(Object.keys(cart).length===0){
+
+   box.innerHTML='<p style="text-align:center;color:#aaa;">Add items to start</p>';
+   totalBox.innerText=0;
+   return;
+ }
 
  for(let id in cart){
 
-  let i=cart[id];
+   const i=cart[id];
+   total+=i.price*i.q;
 
-  t+=i.price*i.q;
+   html+=`
+    <div class="cart-row">
 
-  html+=`
-   <div class="cart-row">
+     <div>
+       <strong>${i.name}</strong><br>
+       <small>₹${i.price} × ${i.q}</small>
+     </div>
 
-    <div>${i.name}</div>
+     <div class="qty">
 
-    <div class="qty">
+      <button onclick="change(${id},-1)">−</button>
 
-     <button onclick="change(${id},-1)">-</button>
+      <span>${i.q}</span>
 
-     <span>${i.q}</span>
+      <button onclick="change(${id},1)">+</button>
 
-     <button onclick="change(${id},1)">+</button>
+     </div>
 
     </div>
-
-   </div>
-  `;
-
+   `;
  }
 
- box.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
-
- document.getElementById("totalAmt").innerText=t;
+ box.innerHTML=html;
+ totalBox.innerText=total;
 
 }
 
+/* WhatsApp Order */
 function placeOrder(e){
 
  e.preventDefault();
@@ -429,7 +439,8 @@ function placeOrder(e){
  let phone=document.getElementById("phone").value;
  let note=document.getElementById("note").value || "No special request";
 
- let txt="",sum=0;
+ let txt="";
+ let sum=0;
 
  for(let id in cart){
 
@@ -438,10 +449,9 @@ function placeOrder(e){
   txt+=`• ${i.name} x ${i.q}%0A`;
 
   sum+=i.price*i.q;
-
  }
 
- let msg =
+ let msg=
 `🌼 *Pet Pooja Home Kitchen* 🌼%0A
 ------------------------%0A
 👤 Customer: ${name}%0A
