@@ -6,10 +6,9 @@
 
 <title>Pet Pooja Home Kitchen | Ghar Jaisa Khana</title>
 
-<meta name="description" content="Pet Pooja Home Kitchen – Homemade South Indian food in Sanskriti Apartment. Order via WhatsApp.">
+<meta name="description" content="Pet Pooja Home Kitchen – Homemade food in Sanskriti Apartment. Order on WhatsApp.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 
@@ -42,7 +41,6 @@ nav{
   border-bottom:1px solid #eee;
   position:sticky;
   top:0;
-  z-index:1000;
 }
 
 .logo{
@@ -112,7 +110,7 @@ header p{
 }
 
 .food-card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-5px);
 }
 
 .food-card img{
@@ -128,7 +126,6 @@ header p{
 
 .card-info h3{
   font-family:Playfair Display,serif;
-  margin-bottom:5px;
 }
 
 .price{
@@ -148,6 +145,24 @@ header p{
 
 .add-btn:hover{
   background:var(--accent);
+}
+
+/* Quantity */
+.qty{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+
+.qty button{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  border:1px solid #ddd;
+  background:none;
+  cursor:pointer;
+  font-weight:bold;
 }
 
 /* Order Section */
@@ -180,19 +195,6 @@ header p{
   justify-content:space-between;
   padding:12px 0;
   border-bottom:1px solid #f5f5f5;
-}
-
-.qty{
-  display:flex;
-  gap:8px;
-}
-
-.qty button{
-  width:24px;
-  height:24px;
-  border-radius:50%;
-  border:1px solid #ddd;
-  background:none;
 }
 
 /* Form */
@@ -239,12 +241,11 @@ footer{
 
 <h1>Ghar Jaisa Khana,<br> Har Din Fresh.</h1>
 
-<p>Homemade South Indian food prepared daily with hygiene, love, and fresh ingredients.</p>
+<p>Homemade food prepared daily with hygiene and love.</p>
 
 <div class="badges">
   <div class="badge">Since 2025</div>
   <div class="badge">Home Cooked</div>
-  <div class="badge">No Preservatives</div>
   <div class="badge">Fresh Daily</div>
 </div>
 
@@ -287,10 +288,10 @@ Total: ₹ <span id="totalAmt">0</span>
 <textarea id="note" placeholder="Any special request"></textarea>
 
 <button class="whatsapp-btn">
-<i class="fab fa-whatsapp"></i> Order on WhatsApp
+Order on WhatsApp
 </button>
 
-<p style="font-size:0.8rem;color:#888;margin-top:10px;">
+<p style="font-size:0.8rem;color:#888;">
 Pickup Time: 11 AM – 9 PM
 </p>
 
@@ -307,8 +308,6 @@ Pickup Time: 11 AM – 9 PM
 
 <h3>Pet Pooja Home Kitchen</h3>
 
-<p>Sanskriti Apartment</p>
-
 <p>📞 +91 9971499087</p>
 
 <p>© 2026 All Rights Reserved</p>
@@ -322,46 +321,63 @@ const menu = [
  {id:1,name:"Paneer Dosa",price:120,img:"dosa.png"},
  {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png"},
  {id:3,name:"Idli Sambhar",price:60,img:"idli-sambar.png"},
- {id:4,name:"Curry Rice",price:70,img:"curry-rice.png"},
-  {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png"},
-  {id:6,name:"Pyaj Paratha",price:80,img:"onion-paratha.png"},
-   {id:7,name:"Mix Veg",price:70,img:"mix-veg.png"},
-   {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png"}
+ {id:4,name:"Kadhi Chawal",price:70,img:"kadhi-chawal.png"},
+ {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png"},
+ {id:6,name:"Pyaj Paratha",price:80,img:"onion-paratha.png"},
+ {id:7,name:"Mix Veg",price:70,img:"mix-veg.png"},
+ {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png"}
 ];
 
-let cart={};
+let cart = {};
 
+/* Load Menu */
 function loadMenu(){
 
- const box=document.getElementById("menuBox");
+ const box = document.getElementById("menuBox");
 
- box.innerHTML=menu.map(i=>`
-  <div class="food-card">
+ box.innerHTML = menu.map(i => {
 
-   <img src="${i.img}" alt="${i.name}">
+  const qty = cart[i.id] ? cart[i.id].q : 0;
 
-   <div class="card-info">
+  return `
+   <div class="food-card">
 
-    <h3>${i.name}</h3>
+    <img src="${i.img}" alt="${i.name}">
 
-    <div class="price">₹${i.price}</div>
+    <div class="card-info">
 
-    <button class="add-btn" onclick="add(${i.id})">Add</button>
+     <h3>${i.name}</h3>
+
+     <div class="price">₹${i.price}</div>
+
+     ${
+       qty === 0
+       ? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
+       : `
+         <div class="qty">
+           <button onclick="change(${i.id},-1)">−</button>
+           <span>${qty}</span>
+           <button onclick="change(${i.id},1)">+</button>
+         </div>
+       `
+     }
+
+    </div>
 
    </div>
+  `;
 
-  </div>
- `).join("");
+ }).join("");
 
 }
 
-/* Add Item Instantly */
+/* Add Item */
 function add(id){
 
  if(cart[id]){
    cart[id].q++;
  }else{
-   cart[id]={...menu.find(i=>i.id===id),q:1};
+   cart[id] = {...menu.find(i=>i.id===id),q:1};
  }
 
  render();
@@ -370,59 +386,62 @@ function add(id){
 /* Change Quantity */
 function change(id,d){
 
- cart[id].q+=d;
+ cart[id].q += d;
 
- if(cart[id].q<=0) delete cart[id];
+ if(cart[id].q <= 0){
+   delete cart[id];
+ }
 
  render();
 }
 
-/* Render Cart Live */
+/* Render Cart */
 function render(){
 
- const box=document.getElementById("cartBox");
- const totalBox=document.getElementById("totalAmt");
+ const box = document.getElementById("cartBox");
+ const totalBox = document.getElementById("totalAmt");
 
- let total=0;
- let html="";
+ let total = 0;
+ let html = "";
 
- if(Object.keys(cart).length===0){
+ if(Object.keys(cart).length === 0){
 
    box.innerHTML='<p style="text-align:center;color:#aaa;">Add items to start</p>';
-   totalBox.innerText=0;
+   totalBox.innerText = 0;
+   loadMenu();
    return;
  }
 
  for(let id in cart){
 
-   const i=cart[id];
-   total+=i.price*i.q;
+  const i = cart[id];
 
-   html+=`
-    <div class="cart-row">
+  total += i.price * i.q;
 
-     <div>
-       <strong>${i.name}</strong><br>
-       <small>₹${i.price} × ${i.q}</small>
-     </div>
+  html += `
+   <div class="cart-row">
 
-     <div class="qty">
+    <div>
+     <strong>${i.name}</strong><br>
+     <small>₹${i.price} × ${i.q}</small>
+    </div>
 
-      <button onclick="change(${id},-1)">−</button>
+    <div class="qty">
 
-      <span>${i.q}</span>
-
-      <button onclick="change(${id},1)">+</button>
-
-     </div>
+     <button onclick="change(${id},-1)">−</button>
+     <span>${i.q}</span>
+     <button onclick="change(${id},1)">+</button>
 
     </div>
-   `;
+
+   </div>
+  `;
  }
 
- box.innerHTML=html;
- totalBox.innerText=total;
+ box.innerHTML = html;
+ totalBox.innerText = total;
 
+ loadMenu();
 }
 
 /* WhatsApp Order */
@@ -430,48 +449,46 @@ function placeOrder(e){
 
  e.preventDefault();
 
- if(Object.keys(cart).length===0){
+ if(Object.keys(cart).length === 0){
    alert("Please add items first!");
    return;
  }
 
- let name=document.getElementById("name").value;
- let phone=document.getElementById("phone").value;
- let note=document.getElementById("note").value || "No special request";
+ let name = document.getElementById("name").value;
+ let phone = document.getElementById("phone").value;
+ let note = document.getElementById("note").value || "No special request";
 
- let txt="";
- let sum=0;
+ let txt = "";
+ let sum = 0;
 
  for(let id in cart){
 
-  let i=cart[id];
+  let i = cart[id];
 
-  txt+=`• ${i.name} x ${i.q}%0A`;
+  txt += `• ${i.name} x ${i.q}%0A`;
 
-  sum+=i.price*i.q;
+  sum += i.price * i.q;
  }
 
- let msg=
-`🌼 *Pet Pooja Home Kitchen* 🌼%0A
-------------------------%0A
-👤 Customer: ${name}%0A
-📞 Mobile: ${phone}%0A
-📍 Pickup: Sanskriti Apartment%0A
-⏰ Time: ${new Date().toLocaleTimeString()}%0A
-------------------------%0A
-🍽 Order Details:%0A
+ let msg =
+`🌼 Pet Pooja Home Kitchen 🌼%0A
+--------------------%0A
+Customer: ${name}%0A
+Mobile: ${phone}%0A
+Pickup: Sanskriti Apartment%0A
+--------------------%0A
+Order:%0A
 ${txt}
-------------------------%0A
-💰 Total: ₹${sum}%0A
-📝 Note: ${note}%0A
-------------------------%0A
-🙏 Please confirm my order.%0A
-Thank you!`;
+--------------------%0A
+Total: ₹${sum}%0A
+Note: ${note}%0A
+--------------------%0A
+Please confirm my order 🙏`;
 
  window.open(`https://wa.me/919971499087?text=${msg}`);
-
 }
 
+/* Init */
 loadMenu();
 
 </script>
