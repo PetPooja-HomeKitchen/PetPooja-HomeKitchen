@@ -93,8 +93,15 @@ header p{max-width:600px;margin:auto;color:#666;}
 .cart-row{
   display:flex;
   justify-content:space-between;
-  padding:10px 0;
+  padding:8px 0;
   border-bottom:1px solid #f5f5f5;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  font-weight:600;
 }
 
 input,select,textarea{
@@ -148,12 +155,28 @@ footer{
 <!-- CART -->
 <div class="panel">
 <h2>Your Order</h2>
+
 <div id="cartBox">
 <p style="text-align:center;color:#aaa;">Add items to start</p>
 </div>
-<p style="margin-top:10px;font-weight:600;">
-Total: ₹ <span id="totalAmt">0</span>
-</p>
+
+<div class="summary-row">
+  <span>Items Total</span>
+  <span>₹ <span id="itemsTotal">0</span></span>
+</div>
+
+<div class="summary-row">
+  <span>Delivery Charges</span>
+  <span>₹ <span id="deliveryCharge">0</span></span>
+</div>
+
+<hr style="margin:10px 0;">
+
+<div class="summary-row">
+  <span>Grand Total</span>
+  <span>₹ <span id="grandTotal">0</span></span>
+</div>
+
 </div>
 
 <!-- FORM -->
@@ -173,12 +196,12 @@ Total: ₹ <span id="totalAmt">0</span>
   required
 >
 
-<select id="societySelect" onchange="showAddress()" required>
+<select id="societySelect" onchange="updateDelivery()" required>
   <option value="">Select Society</option>
-  <option value="Sanskriti Apartment">Sanskriti Apartment (Min ₹99)</option>
-  <option value="Unity Society">Unity Society (Min ₹199)</option>
-  <option value="Bhagwan Society">Bhagwan Society (Min ₹199)</option>
-  <option value="Sainath Society">Sainath Society (Min ₹199)</option>
+  <option value="Sanskriti Apartment">Sanskriti Apartment (₹0 delivery)</option>
+  <option value="Unity Society">Unity Society (+₹10 delivery)</option>
+  <option value="Bhagwan Society">Bhagwan Society (+₹10 delivery)</option>
+  <option value="Sainath Society">Sainath Society (+₹10 delivery)</option>
 </select>
 
 <textarea id="addressBox" placeholder="Flat / Floor / Block" style="display:none;"></textarea>
@@ -212,7 +235,9 @@ const menu = [
 ];
 
 let cart = {};
+let delivery = 0;
 
+/* MENU */
 function loadMenu(){
   menuBox.innerHTML = menu.map(i=>{
     const q = cart[i.id]?.q || 0;
@@ -246,60 +271,76 @@ function change(id,d){
   render();
 }
 
+/* DELIVERY LOGIC */
+function updateDelivery(){
+  addressBox.style.display="block";
+  const society = societySelect.value;
+  delivery = (society === "Sanskriti Apartment") ? 0 : 10;
+  render();
+}
+
+/* RENDER CART */
 function render(){
-  let total=0, html="";
+  let itemsTotal = 0;
+  let html = "";
+
   for(let id in cart){
-    const i=cart[id];
-    total+=i.price*i.q;
-    html+=`
+    const i = cart[id];
+    itemsTotal += i.price * i.q;
+    html += `
       <div class="cart-row">
         <div>${i.name} × ${i.q}</div>
-        <div>₹${i.price*i.q}</div>
+        <div>₹${i.price * i.q}</div>
       </div>`;
   }
+
   cartBox.innerHTML = html || '<p style="text-align:center;color:#aaa;">Add items to start</p>';
-  totalAmt.innerText = total;
+  itemsTotalEl = document.getElementById("itemsTotal");
+  deliveryEl = document.getElementById("deliveryCharge");
+  grandEl = document.getElementById("grandTotal");
+
+  itemsTotalEl.innerText = itemsTotal;
+  deliveryEl.innerText = delivery;
+  grandEl.innerText = itemsTotal + delivery;
+
   loadMenu();
 }
 
-function showAddress(){
-  addressBox.style.display="block";
-}
-
+/* PLACE ORDER */
 function placeOrder(e){
   e.preventDefault();
 
   const phone = custPhone.value.trim();
-
   if(!/^[6-9]\d{9}$/.test(phone)){
-    alert("Please enter a valid 10-digit Indian mobile number");
+    alert("Please enter a valid 10-digit mobile number");
     return;
   }
 
   const society = societySelect.value;
-  const total = Number(totalAmt.innerText);
-  const note = noteBox.value.trim() || "No special request";
-
   if(!society){
     alert("Please select your society");
     return;
   }
 
-  const min = society==="Sanskriti Apartment" ? 99 : 199;
-  if(total < min){
+  const itemsTotal = Number(document.getElementById("itemsTotal").innerText);
+  const min = (society === "Sanskriti Apartment") ? 99 : 199;
+
+  if(itemsTotal < min){
     alert(`Minimum order for ${society} is ₹${min}`);
     return;
   }
 
-  if(Object.keys(cart).length===0){
+  if(Object.keys(cart).length === 0){
     alert("Please add items to your cart");
     return;
   }
 
+  const note = noteBox.value.trim() || "No special request";
+
   let items="";
   for(let id in cart){
-    const i=cart[id];
-    items+=`• ${i.name} x ${i.q}%0A`;
+    const i = cart[id];
+    items += `• ${i.name} x ${i.q}%0A`;
   }
 
   const msg =
@@ -312,11 +353,13 @@ function placeOrder(e){
 ------------------------%0A
 🧾 Order:%0A${items}
 ------------------------%0A
-💰 Total: ₹${total}%0A
+Items Total: ₹${itemsTotal}%0A
+Delivery: ₹${delivery}%0A
+Grand Total: ₹${itemsTotal + delivery}%0A
 📝 Note: ${note}%0A
-💳 UPI ID: 9015489060@paytm%0A
+💳 UPI: 9015489060@paytm%0A
 ------------------------%0A
-⚠️ Order will be confirmed on receipt of payment only.%0A
+⚠️ Order confirmed after payment only.%0A
 Thank you!`;
 
   window.open(`https://wa.me/919971499087?text=${msg}`,"_blank");
