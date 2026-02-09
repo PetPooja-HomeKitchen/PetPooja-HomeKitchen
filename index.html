@@ -175,13 +175,13 @@ Total: ₹ <span id="totalAmt">0</span>
 
 <textarea id="addressBox" placeholder="Flat / Floor / Block" style="display:none;"></textarea>
 
-<textarea id="noteBox" placeholder="Any special request"></textarea>
+<textarea id="noteBox" placeholder="Any special request (optional)"></textarea>
 
 <button class="whatsapp-btn">Order on WhatsApp</button>
 
 <p style="font-size:0.8rem;color:#666;margin-top:10px;">
-💳 UPI only — Order will be confirmed after payment  
-<br>UPI ID: <strong>9015489060@paytm</strong>
+💳 UPI only — Order confirmed after payment<br>
+UPI ID: <strong>9015489060@paytm</strong>
 </p>
 
 </form>
@@ -255,7 +255,7 @@ function render(){
 }
 
 function showAddress(){
-  addressBox.style.display = "block";
+  addressBox.style.display="block";
 }
 
 function placeOrder(e){
@@ -263,19 +263,20 @@ function placeOrder(e){
 
   const society = societySelect.value;
   const total = Number(totalAmt.innerText);
+  const note = noteBox.value.trim() || "No special request";
 
   if(!society){
     alert("Please select your society");
     return;
   }
 
-  const min = society === "Sanskriti Apartment" ? 99 : 199;
+  const min = society==="Sanskriti Apartment" ? 99 : 199;
   if(total < min){
     alert(`Minimum order for ${society} is ₹${min}`);
     return;
   }
 
-  if(Object.keys(cart).length === 0){
+  if(Object.keys(cart).length===0){
     alert("Please add items to your cart");
     return;
   }
@@ -297,6 +298,7 @@ function placeOrder(e){
 🧾 Order:%0A${items}
 ------------------------%0A
 💰 Total: ₹${total}%0A
+📝 Note: ${note}%0A
 💳 UPI ID: 9015489060@paytm%0A
 ------------------------%0A
 ⚠️ Order will be confirmed on receipt of payment only.%0A
