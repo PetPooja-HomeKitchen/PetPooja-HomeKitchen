@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pet Pooja Home Kitchen | Ghar Jaisa Khana</title>
+<title>Pet Pooja Home Kitchen</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
@@ -17,83 +17,45 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);}
 
-nav{
-  padding:20px 8%;
-  display:flex;
-  justify-content:space-between;
-  background:#fff;
-  border-bottom:1px solid #eee;
-  position:sticky;
-  top:0;
-}
+nav{padding:20px 8%;display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid #eee;}
 .logo{font-family:Playfair Display,serif;font-size:1.7rem;}
 .logo span{color:var(--accent);}
 
-header{text-align:center;padding:60px 8% 40px;}
-header h1{font-family:Playfair Display,serif;font-size:clamp(2rem,5vw,3.5rem);}
-header p{max-width:600px;margin:auto;color:#666;}
+header{text-align:center;padding:50px 8%;}
+header h1{font-family:Playfair Display,serif;font-size:clamp(2rem,5vw,3rem);}
+header p{color:#666;margin-top:10px;}
 
 .container{max-width:1200px;margin:auto;padding:0 8% 80px;}
 
-.menu-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:30px;
-  margin-top:40px;
-}
-.food-card{
-  background:#fff;border-radius:15px;overflow:hidden;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-}
-.food-card img{width:100%;height:200px;object-fit:cover;}
-.card-info{text-align:center;padding:20px;}
-.price{color:var(--accent);font-weight:600;margin:8px 0;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;margin-top:30px;}
+.food-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.05);}
+.food-card img{width:100%;height:180px;object-fit:cover;}
+.card-info{text-align:center;padding:15px;}
+.price{color:var(--accent);font-weight:600;}
 
-.add-btn{
-  background:#2c3e50;color:#fff;border:none;
-  padding:8px 22px;border-radius:20px;cursor:pointer;
-}
-.qty{display:flex;justify-content:center;gap:10px;}
-.qty button{
-  width:26px;height:26px;border-radius:50%;
-  border:1px solid #ddd;background:none;font-weight:bold;
-}
+.add-btn{background:#2c3e50;color:#fff;border:none;padding:6px 18px;border-radius:20px;cursor:pointer;}
+.qty{display:flex;justify-content:center;gap:10px;margin-top:8px;}
+.qty button{width:26px;height:26px;border-radius:50%;border:1px solid #ccc;background:none;}
 
-.order-section{
-  display:grid;
-  grid-template-columns:1fr 380px;
-  gap:40px;
-  margin-top:80px;
-}
+.order-section{display:grid;grid-template-columns:1fr 380px;gap:30px;margin-top:60px;}
 @media(max-width:900px){.order-section{grid-template-columns:1fr;}}
 
-.panel{
-  background:#fff;padding:30px;border-radius:18px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+.panel{background:#fff;padding:25px;border-radius:18px;box-shadow:0 4px 12px rgba(0,0,0,.05);}
+.cart-row{display:flex;justify-content:space-between;margin-bottom:8px;}
+
+input,select,textarea{
+  width:100%;padding:10px;margin-bottom:12px;
+  border-radius:8px;border:1px solid #ccc;
 }
 
-.cart-row{display:flex;justify-content:space-between;padding:10px 0;}
-
-input,textarea,select{
-  width:100%;padding:12px;margin-bottom:15px;
-  border-radius:10px;border:1px solid #ddd;
-}
+button[disabled]{opacity:.5;cursor:not-allowed;}
 
 .whatsapp-btn{
-  width:100%;background:#25D366;color:#fff;
-  border:none;padding:14px;border-radius:12px;
-  font-weight:600;cursor:pointer;
+  width:100%;background:#25D366;color:#fff;border:none;
+  padding:14px;border-radius:10px;font-weight:600;
 }
 
-#paymentBox{
-  display:none;
-  margin-top:20px;
-  text-align:center;
-  border-top:1px dashed #ddd;
-  padding-top:20px;
-}
-
-footer{text-align:center;padding:40px;border-top:1px solid #eee;color:#777;}
+footer{text-align:center;padding:30px;border-top:1px solid #eee;color:#777;}
 </style>
 </head>
 
@@ -101,77 +63,58 @@ footer{text-align:center;padding:40px;border-top:1px solid #eee;color:#777;}
 
 <nav>
   <div class="logo">Pet <span>Pooja</span></div>
-  <div style="font-size:0.8rem;">Sanskriti Apartment</div>
+  <div>Sanskriti Apartment</div>
 </nav>
 
 <header>
-<h1>Ghar Jaisa Khana,<br>Har Din Fresh.</h1>
-<p>Homemade food prepared daily with hygiene and love.</p>
+<h1>Ghar Jaisa Khana</h1>
+<p>Order. Pay. Enjoy.</p>
 </header>
 
 <div class="container">
 
-<h2 style="text-align:center;color:#d35400;">Today's Menu</h2>
 <div class="menu-grid" id="menuBox"></div>
 
 <div class="order-section">
 
 <div class="panel">
-<h2>Your Order</h2>
-<div id="cartBox"><p style="text-align:center;color:#aaa;">Add items to start</p></div>
-<p style="margin-top:10px;font-weight:600;">
-Total: ₹ <span id="totalAmt">0</span>
-</p>
+<h3>Your Order</h3>
+<div id="cartBox">Add items to start</div>
+<hr>
+<p>Subtotal: ₹<span id="subTotal">0</span></p>
+<p>Delivery: ₹<span id="deliveryCharge">0</span></p>
+<p><strong>Total: ₹<span id="totalAmt">0</span></strong></p>
 </div>
 
 <div class="panel">
-<h2>Delivery Details</h2>
+<h3>Delivery Details</h3>
 
-<form onsubmit="placeOrder(event)">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Mobile">
 
-<input type="text" id="name" placeholder="Your Name" required>
-<input type="tel" id="phone" placeholder="Mobile Number" required>
-
-<select id="society" onchange="showAddress()" required>
-  <option value="">Select Society</option>
-  <option value="Sanskriti Apartment">Sanskriti Apartment (Min ₹99 | Free)</option>
-  <option value="Unity Society">Unity Society (Min ₹199)</option>
-  <option value="Bhagwan Society">Bhagwan Society (Min ₹199)</option>
-  <option value="Sainath Society">Sainath Society (Min ₹199)</option>
+<select id="society" onchange="recalculate()">
+<option value="">Select Society</option>
+<option value="Sanskriti Apartment">Sanskriti Apartment (Min ₹99, Free)</option>
+<option value="Unity Society">Unity Society (Min ₹199 + ₹30)</option>
+<option value="Bhagwan Society">Bhagwan Society (Min ₹199 + ₹30)</option>
+<option value="Sainath Society">Sainath Society (Min ₹199 + ₹30)</option>
 </select>
 
-<textarea id="address" placeholder="Flat / Floor / Block" style="display:none;"></textarea>
+<textarea id="address" placeholder="Flat / Floor"></textarea>
 
-<textarea id="note" placeholder="Any special request"></textarea>
+<p style="font-size:13px;">
+💳 <strong>UPI:</strong> 9015489060@paytm  
+<br>Order confirmed after payment only
+</p>
 
-<button class="whatsapp-btn">Order on WhatsApp</button>
+<button id="orderBtn" class="whatsapp-btn" disabled onclick="placeOrder()">Order on WhatsApp</button>
 
-<div id="paymentBox">
-  <p style="font-weight:600;">💳 Complete Payment to Confirm Order</p>
-  <p>UPI ID: <strong id="upiId">9015489060@paytm</strong></p>
-
-  <button type="button"
-    onclick="copyUPI()"
-    style="padding:8px 16px;border:none;border-radius:8px;
-    background:#2c3e50;color:#fff;cursor:pointer;">
-    Copy UPI ID
-  </button>
-
-  <p style="font-size:0.8rem;color:#666;margin-top:10px;">
-    ✅ After successful receipt of payment, order will be confirmed.
-  </p>
-</div>
-
-</form>
 </div>
 
 </div>
 </div>
 
-<footer>
-<p>📞 +91 9971499087</p>
-<p>© 2026 Pet Pooja Home Kitchen</p>
-</footer>
+<footer>© 2026 Pet Pooja Home Kitchen</footer>
 
 <script>
 const menu=[
@@ -180,25 +123,18 @@ const menu=[
 {id:3,name:"Idli Sambhar",price:60,img:"idli-sambar.png"},
 {id:4,name:"Kadhi Chawal",price:70,img:"kadhi-chawal.png"}
 ];
-
 let cart={};
 
 function loadMenu(){
-document.getElementById("menuBox").innerHTML=menu.map(i=>{
+menuBox.innerHTML=menu.map(i=>{
 let q=cart[i.id]?.q||0;
-return `
-<div class="food-card">
+return `<div class="food-card">
 <img src="${i.img}">
 <div class="card-info">
-<h3>${i.name}</h3>
-<div class="price">₹${i.price}</div>
-${q===0?
-`<button class="add-btn" onclick="add(${i.id})">Add</button>`:
-`<div class="qty">
-<button onclick="change(${i.id},-1)">−</button>
-<span>${q}</span>
-<button onclick="change(${i.id},1)">+</button>
-</div>`}
+<h4>${i.name}</h4>
+<p class="price">₹${i.price}</p>
+${q===0?`<button class="add-btn" onclick="add(${i.id})">Add</button>`:
+`<div class="qty"><button onclick="change(${i.id},-1)">−</button>${q}<button onclick="change(${i.id},1)">+</button></div>`}
 </div></div>`;
 }).join("");
 }
@@ -207,47 +143,45 @@ function add(id){cart[id]?cart[id].q++:cart[id]={...menu.find(i=>i.id===id),q:1}
 function change(id,d){cart[id].q+=d;if(cart[id].q<=0)delete cart[id];render();}
 
 function render(){
-let total=0,html="";
+let subtotal=0,html="";
 for(let id in cart){
-let i=cart[id];total+=i.price*i.q;
-html+=`<div class="cart-row"><div>${i.name} × ${i.q}</div><div>₹${i.price*i.q}</div></div>`;
+let i=cart[id];subtotal+=i.price*i.q;
+html+=`<div class="cart-row"><span>${i.name} × ${i.q}</span><span>₹${i.price*i.q}</span></div>`;
 }
-cartBox.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
-totalAmt.innerText=total;
+cartBox.innerHTML=html||"Add items to start";
+subTotal.innerText=subtotal;
+recalculate();
 loadMenu();
 }
 
-function showAddress(){
-document.getElementById("address").style.display="block";
+function recalculate(){
+const society=society.value;
+let subtotal=Number(subTotal.innerText);
+let min= society==="Sanskriti Apartment"?99:199;
+let delivery= society==="Sanskriti Apartment"?0:(society?30:0);
+
+deliveryCharge.innerText=delivery;
+totalAmt.innerText=subtotal+delivery;
+
+orderBtn.disabled= !(society && subtotal>=min);
 }
 
-function copyUPI(){
-navigator.clipboard.writeText("9015489060@paytm");
-alert("UPI ID copied");
+function generateOrderId(){
+return "PPHK-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+Math.floor(1000+Math.random()*9000);
 }
 
-function placeOrder(e){
-e.preventDefault();
-
-let society=societySelect.value||document.getElementById("society").value;
-let total=+totalAmt.innerText;
-let min = society==="Sanskriti Apartment"?99:199;
-
-if(total<min){
-alert(`Minimum order for ${society} is ₹${min}`);
-return;
-}
-
-let msg=`🌼 Pet Pooja Home Kitchen 🌼%0A
+function placeOrder(){
+const orderId=generateOrderId();
+let msg=`🧾 *Order ID:* ${orderId}%0A
 Name: ${name.value}%0A
 Phone: ${phone.value}%0A
-Society: ${society}%0A
+Society: ${society.value}%0A
 Address: ${address.value}%0A
-Total: ₹${total}%0A
-Please confirm order`;
+Total: ₹${totalAmt.innerText}%0A
+UPI: 9015489060@paytm%0A
+Order confirmed after payment.`;
 
-window.open(`https://wa.me/919971499087?text=${msg}`);
-document.getElementById("paymentBox").style.display="block";
+window.open(`https://wa.me/919971499087?text=${msg}`,"_blank");
 }
 
 loadMenu();
