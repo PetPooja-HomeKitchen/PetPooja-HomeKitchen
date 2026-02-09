@@ -162,10 +162,10 @@ Total: ₹ <span id="totalAmt">0</span>
 
 <form onsubmit="placeOrder(event)">
 
-<input type="text" id="name" placeholder="Your Name" required>
-<input type="tel" id="phone" placeholder="Mobile Number" required>
+<input type="text" id="custName" placeholder="Your Name" required>
+<input type="tel" id="custPhone" placeholder="Mobile Number" required>
 
-<select id="society" onchange="showAddress()" required>
+<select id="societySelect" onchange="showAddress()" required>
   <option value="">Select Society</option>
   <option value="Sanskriti Apartment">Sanskriti Apartment (Min ₹99)</option>
   <option value="Unity Society">Unity Society (Min ₹199)</option>
@@ -173,14 +173,15 @@ Total: ₹ <span id="totalAmt">0</span>
   <option value="Sainath Society">Sainath Society (Min ₹199)</option>
 </select>
 
-<textarea id="address" placeholder="Flat / Floor / Block" style="display:none;"></textarea>
+<textarea id="addressBox" placeholder="Flat / Floor / Block" style="display:none;"></textarea>
 
-<textarea id="note" placeholder="Any special request"></textarea>
+<textarea id="noteBox" placeholder="Any special request"></textarea>
 
 <button class="whatsapp-btn">Order on WhatsApp</button>
 
 <p style="font-size:0.8rem;color:#666;margin-top:10px;">
-💳 Payment via UPI only. Order confirmed after payment.
+💳 UPI only — Order will be confirmed after payment  
+<br>UPI ID: <strong>9015489060@paytm</strong>
 </p>
 
 </form>
@@ -254,18 +255,28 @@ function render(){
 }
 
 function showAddress(){
-  address.style.display="block";
+  addressBox.style.display = "block";
 }
 
 function placeOrder(e){
   e.preventDefault();
 
-  const society = society.value;
+  const society = societySelect.value;
   const total = Number(totalAmt.innerText);
 
-  const min = society==="Sanskriti Apartment" ? 99 : 199;
+  if(!society){
+    alert("Please select your society");
+    return;
+  }
+
+  const min = society === "Sanskriti Apartment" ? 99 : 199;
   if(total < min){
     alert(`Minimum order for ${society} is ₹${min}`);
+    return;
+  }
+
+  if(Object.keys(cart).length === 0){
+    alert("Please add items to your cart");
     return;
   }
 
@@ -278,15 +289,15 @@ function placeOrder(e){
   const msg =
 `🍽️ *Pet Pooja Home Kitchen* 🍽️%0A
 ------------------------%0A
-Name: ${name.value}%0A
-Phone: ${phone.value}%0A
-Society: ${society}%0A
-Address: ${address.value}%0A
+👤 Name: ${custName.value}%0A
+📞 Phone: ${custPhone.value}%0A
+🏠 Society: ${society}%0A
+📍 Address: ${addressBox.value}%0A
 ------------------------%0A
-Order:%0A${items}
+🧾 Order:%0A${items}
 ------------------------%0A
-Total: ₹${total}%0A
-UPI ID: 9015489060@paytm%0A
+💰 Total: ₹${total}%0A
+💳 UPI ID: 9015489060@paytm%0A
 ------------------------%0A
 ⚠️ Order will be confirmed on receipt of payment only.%0A
 Thank you!`;
