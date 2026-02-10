@@ -349,7 +349,7 @@ function toggleOrderButton(){
 }
 
 function copyUPI(){
-  navigator.clipboard.writeText("9015489060@paytm").then(()=>{
+  navigator.clipboard.writeText("9015489060@pthdfc").then(()=>{
     copyMsg.style.display="block";
     setTimeout(()=>copyMsg.style.display="none",2000);
   });
@@ -386,7 +386,7 @@ Items Total: ₹${itemsTotalVal}%0A
 Delivery: ₹${delivery}%0A
 Grand Total: ₹${itemsTotalVal+delivery}%0A
 📝 Note: ${noteBox.value||"No special request"}%0A
-💳 UPI: 9015489060@paytm%0A
+💳 UPI: 9015489060@pthdfc%0A
 ------------------------%0A
 ⚠️ Order confirmed after payment only.%0A
 Thank you!`;
