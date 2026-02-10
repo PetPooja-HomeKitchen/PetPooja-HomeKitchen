@@ -209,25 +209,49 @@ footer{
 
 <textarea id="noteBox" placeholder="Any special request (optional)"></textarea>
 
-<label style="font-size:0.85rem;">
-  <input type="checkbox" id="agreeTerms"> I agree to 
-  <a href="terms.html" target="_blank">Terms & Policies</a>
-</label>
+<!-- TERMS -->
+<div style="display:flex;align-items:flex-start;gap:8px;margin:12px 0;">
+  <input 
+    type="checkbox" 
+    id="agreeTerms"
+    onchange="toggleOrderButton()"
+    style="margin-top:3px;"
+  >
+  <label for="agreeTerms" style="font-size:0.85rem;line-height:1.4;">
+    I agree to 
+    <a href="terms.html" target="_blank">Terms & Policies</a>
+    <span style="color:red;font-weight:600;">*</span>
+  </label>
+</div>
 
-<button class="whatsapp-btn">Order on WhatsApp</button>
+<p style="font-size:0.75rem;color:#999;margin-top:-6px;">
+  * Required to place order
+</p>
 
+<button 
+  class="whatsapp-btn" 
+  id="orderBtn"
+  disabled
+  style="opacity:0.6;cursor:not-allowed;"
+>
+  Order on WhatsApp
+</button>
+
+<!-- UPI PAYMENT -->
 <div style="text-align:center;margin-top:15px;">
-  <p style="font-size:0.85rem;color:#555;">
-    💳 Pay via UPI (Order confirmed after payment)
+  <p style="font-size:0.8rem;color:#555;">
+    💳 Pay via UPI (Order confirmed after payment only)
   </p>
 
-  <img src="upi-qr.png" alt="UPI QR" style="width:160px;border:1px solid #ddd;border-radius:10px;">
+  <img 
+    src="upiqr.png"
+    alt="UPI QR Code"
+    style="width:160px;margin:8px auto;border:1px solid #ddd;border-radius:10px;display:block;"
+  >
 
   <p style="font-size:0.85rem;">
     UPI ID: <strong>9015489060@paytm</strong>
   </p>
-
-  <button type="button" onclick="copyUPI()">Copy UPI ID</button>
 </div>
 
 </form>
@@ -252,6 +276,7 @@ const menu=[
  {id:7,name:"Mix Veg",price:70,img:"mix-veg.png"},
  {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png"}
 ];
+
 let cart={},delivery=0;
 
 function loadMenu(){
@@ -263,12 +288,13 @@ function loadMenu(){
       <div class="card-info">
         <h3>${i.name}</h3>
         <div class="price">₹${i.price}</div>
-        ${q===0?`<button class="add-btn" onclick="add(${i.id})">Add</button>`:
-        `<div class="qty">
-          <button onclick="change(${i.id},-1)">−</button>
-          <span>${q}</span>
-          <button onclick="change(${i.id},1)">+</button>
-        </div>`}
+        ${q===0
+          ? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
+          : `<div class="qty">
+              <button onclick="change(${i.id},-1)">−</button>
+              <span>${q}</span>
+              <button onclick="change(${i.id},1)">+</button>
+            </div>`}
       </div>
     </div>`;
   }).join("");
@@ -296,20 +322,34 @@ function render(){
   loadMenu();
 }
 
-function copyUPI(){
-  navigator.clipboard.writeText("9015489060@paytm");
-  alert("UPI ID copied");
+function toggleOrderButton(){
+  orderBtn.disabled=!agreeTerms.checked;
+  orderBtn.style.opacity=agreeTerms.checked?"1":"0.6";
+  orderBtn.style.cursor=agreeTerms.checked?"pointer":"not-allowed";
 }
 
 function placeOrder(e){
   e.preventDefault();
   if(!agreeTerms.checked){alert("Please agree to Terms & Policies");return;}
-  const itemsTotalVal=+itemsTotal.innerText;
+
   const min=(societySelect.value==="Sanskriti Apartment")?99:199;
-  if(itemsTotalVal<min){alert(`Minimum order is ₹${min}`);return;}
+  if(itemsTotal.innerText<min){
+    alert(`Minimum order is ₹${min}`);
+    return;
+  }
+
   let items="";
-  for(let id in cart){items+=`• ${cart[id].name} x ${cart[id].q}%0A`;}
-  const msg=`🍽️ Pet Pooja Home Kitchen 🍽️%0A${items}%0AGrand Total: ₹${itemsTotalVal+delivery}%0AUPI: 9015489060@paytm%0AOrder confirmed after payment only`;
+  for(let id in cart){
+    items+=`• ${cart[id].name} x ${cart[id].q}%0A`;
+  }
+
+  const msg=
+`🍽️ Pet Pooja Home Kitchen 🍽️%0A
+${items}
+Grand Total: ₹${grandTotal.innerText}%0A
+💳 UPI: 9015489060@paytm%0A
+⚠️ Order confirmed after payment only`;
+
   window.open(`https://wa.me/919971499087?text=${msg}`,"_blank");
 }
 
