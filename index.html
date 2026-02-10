@@ -127,12 +127,52 @@ input,select,textarea{
   cursor:not-allowed;
 }
 
+/* TERMS */
+.terms-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:12px 0;
+}
+.terms-row input{width:16px;height:16px;}
+.terms-row label{font-size:0.85rem;line-height:1.4;}
+.req{color:red;font-weight:600;}
+
+/* UPI */
+.upi-box{text-align:center;margin-top:15px;}
+.copy-btn{
+  margin-top:6px;
+  padding:6px 12px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  background:#f5f5f5;
+  cursor:pointer;
+}
+.copy-msg{display:none;font-size:0.75rem;color:green;margin-top:4px;}
+.upiqr{
+  width:160px;
+  margin:12px auto 0;
+  display:block;
+  border:1px solid #ddd;
+  border-radius:10px;
+}
+
 footer{
   text-align:center;
   padding:40px;
   border-top:1px solid #eee;
   color:#777;
 }
+.footer-links{
+  margin-top:10px;
+  font-size:0.8rem;
+}
+.footer-links a{
+  color:#555;
+  text-decoration:none;
+  margin:0 8px;
+}
+.footer-links a:hover{text-decoration:underline;}
 </style>
 </head>
 
@@ -189,14 +229,8 @@ footer{
 
 <input type="text" id="custName" placeholder="Your Name" required>
 
-<input
-  type="tel"
-  id="custPhone"
-  placeholder="10-digit Mobile Number"
-  maxlength="10"
-  pattern="[6-9][0-9]{9}"
-  required
->
+<input type="tel" id="custPhone" placeholder="10-digit Mobile Number"
+maxlength="10" pattern="[6-9][0-9]{9}" required>
 
 <select id="societySelect" onchange="updateDelivery()" required>
   <option value="">Select Society</option>
@@ -208,15 +242,14 @@ footer{
 </select>
 
 <textarea id="addressBox" placeholder="Flat / Floor / Block" style="display:none;"></textarea>
-
 <textarea id="noteBox" placeholder="Any special request (optional)"></textarea>
 
-<!-- TERMS -->
-<div style="display:flex;align-items:flex-start;gap:8px;margin:12px 0;">
-  <input type="checkbox" id="agreeTerms" onchange="toggleOrderButton()" style="margin-top:4px;">
-  <label for="agreeTerms" style="font-size:0.85rem;line-height:1.45;">
-    I agree to <a href="terms.html" target="_blank">Terms & Policies</a>
-    <span style="color:red;font-weight:600;">*</span>
+<div class="terms-row">
+  <input type="checkbox" id="agreeTerms" onchange="toggleOrderButton()" required>
+  <label for="agreeTerms">
+    I agree to <a href="terms.html" target="_blank">Terms & Policies</a> and
+    <a href="privacy.html" target="_blank">Privacy Policy</a>
+    <span class="req">*</span>
   </label>
 </div>
 
@@ -224,18 +257,18 @@ footer{
 Order on WhatsApp
 </button>
 
-<p style="font-size:0.8rem;color:#666;margin-top:10px;">
-💳 UPI only — Order confirmed after payment only<br>
-UPI ID: <strong id="upiText">9015489060@paytm</strong>
-</p>
+<div class="upi-box">
+  <p style="font-size:0.8rem;color:#666;">
+    💳 UPI only — Order confirmed after payment
+  </p>
 
-<button type="button" onclick="copyUPI()" style="margin-top:6px;padding:6px 12px;border-radius:6px;border:1px solid #ccc;">
-Copy UPI ID
-</button>
+  <strong>9015489060@paytm</strong><br>
 
-<p id="copyMsg" style="font-size:0.75rem;color:green;display:none;">✔ UPI ID copied</p>
+  <button type="button" class="copy-btn" onclick="copyUPI()">Copy UPI ID</button>
+  <p id="copyMsg" class="copy-msg">UPI ID copied</p>
 
-<img src="upi-qr.png" alt="UPI QR" style="width:160px;margin:12px auto;display:block;">
+  <img src="upi-qr.png" alt="UPI QR Code" class="upi-qr">
+</div>
 
 </form>
 </div>
@@ -245,11 +278,15 @@ Copy UPI ID
 
 <footer>
 <p>📞 +91 9971499087</p>
+<div class="footer-links">
+  <a href="terms.html" target="_blank">Terms & Policies</a> |
+  <a href="privacy.html" target="_blank">Privacy Policy</a>
+</div>
 <p>© 2026 Pet Pooja Home Kitchen</p>
 </footer>
 
 <script>
-const menu = [
+const menu=[
  {id:1,name:"Paneer Dosa",price:120,img:"dosa.png"},
  {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png"},
  {id:3,name:"Idli Sambhar",price:60,img:"idli-sambar.png"},
@@ -260,11 +297,11 @@ const menu = [
  {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png"}
 ];
 
-let cart={}, delivery=0;
+let cart={},delivery=0;
 
 function loadMenu(){
-  menuBox.innerHTML = menu.map(i=>{
-    const q = cart[i.id]?.q || 0;
+  menuBox.innerHTML=menu.map(i=>{
+    const q=cart[i.id]?.q||0;
     return `
     <div class="food-card">
       <img src="${i.img}">
@@ -284,39 +321,31 @@ function loadMenu(){
   }).join("");
 }
 
-function add(id){
-  cart[id] ? cart[id].q++ : cart[id]={...menu.find(i=>i.id===id),q:1};
-  render();
-}
-
-function change(id,d){
-  cart[id].q += d;
-  if(cart[id].q<=0) delete cart[id];
-  render();
-}
+function add(id){cart[id]?cart[id].q++:cart[id]={...menu.find(i=>i.id===id),q:1};render();}
+function change(id,d){cart[id].q+=d;if(cart[id].q<=0)delete cart[id];render();}
 
 function updateDelivery(){
   addressBox.style.display="block";
-  delivery = societySelect.value==="Sanskriti Apartment" ? 0 : 10;
+  delivery=(societySelect.value==="Sanskriti Apartment")?0:10;
   render();
 }
 
 function render(){
-  let total=0, html="";
+  let total=0,html="";
   for(let id in cart){
     const i=cart[id];
     total+=i.price*i.q;
     html+=`<div class="cart-row"><div>${i.name} × ${i.q}</div><div>₹${i.price*i.q}</div></div>`;
   }
-  cartBox.innerHTML = html || '<p style="text-align:center;color:#aaa;">Add items to start</p>';
-  itemsTotal.innerText = total;
-  deliveryCharge.innerText = delivery;
-  grandTotal.innerText = total + delivery;
+  cartBox.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
+  itemsTotal.innerText=total;
+  deliveryCharge.innerText=delivery;
+  grandTotal.innerText=total+delivery;
   loadMenu();
 }
 
 function toggleOrderButton(){
-  orderBtn.disabled = !agreeTerms.checked;
+  orderBtn.disabled=!agreeTerms.checked;
 }
 
 function copyUPI(){
@@ -328,12 +357,11 @@ function copyUPI(){
 
 function placeOrder(e){
   e.preventDefault();
+  const society=societySelect.value;
+  const itemsTotalVal=Number(itemsTotal.innerText);
+  const min=(society==="Sanskriti Apartment")?99:199;
 
-  const society = societySelect.value;
-  const itemsTotalVal = Number(itemsTotal.innerText);
-  const min = society==="Sanskriti Apartment" ? 99 : 199;
-
-  if(itemsTotalVal < min){
+  if(itemsTotalVal<min){
     alert(`Minimum order for ${society} is ₹${min}`);
     return;
   }
@@ -344,7 +372,7 @@ function placeOrder(e){
     items+=`• ${i.name} x ${i.q}%0A`;
   }
 
-  const msg =
+  const msg=
 `🍽️ *Pet Pooja Home Kitchen* 🍽️%0A
 ------------------------%0A
 👤 Name: ${custName.value}%0A
@@ -356,8 +384,8 @@ function placeOrder(e){
 ------------------------%0A
 Items Total: ₹${itemsTotalVal}%0A
 Delivery: ₹${delivery}%0A
-Grand Total: ₹${itemsTotalVal + delivery}%0A
-📝 Note: ${noteBox.value || "No special request"}%0A
+Grand Total: ₹${itemsTotalVal+delivery}%0A
+📝 Note: ${noteBox.value||"No special request"}%0A
 💳 UPI: 9015489060@paytm%0A
 ------------------------%0A
 ⚠️ Order confirmed after payment only.%0A
