@@ -3,132 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Pet Pooja Home Kitchen | Ghar Jaisa Khana</title>
+<title>Pet Pooja Home Kitchen</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --accent:#d35400;
-  --bg:#fff8f2;
-  --text:#2c3e50;
-}
+:root{--accent:#d35400;--bg:#fff8f2;--text:#2c3e50;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);}
 
-nav{
-  padding:20px 8%;
-  display:flex;
-  justify-content:space-between;
-  background:#fff;
-  border-bottom:1px solid #eee;
-  position:sticky;
-  top:0;
-}
+nav{padding:20px 8%;display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid #eee;}
 .logo{font-family:Playfair Display,serif;font-size:1.7rem;}
 .logo span{color:var(--accent);}
 
 header{text-align:center;padding:60px 8% 40px;}
-header h1{font-family:Playfair Display,serif;font-size:clamp(2rem,5vw,3.5rem);}
-header p{max-width:600px;margin:auto;color:#666;}
-
 .container{max-width:1200px;margin:auto;padding:0 8% 80px;}
 
-.menu-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:30px;
-  margin-top:40px;
-}
-.food-card{
-  background:#fff;
-  border-radius:15px;
-  overflow:hidden;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px;}
+.food-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.05);}
 .food-card img{width:100%;height:200px;object-fit:cover;}
 .card-info{text-align:center;padding:20px;}
-.price{color:var(--accent);font-weight:600;margin:8px 0;}
+.price{color:var(--accent);font-weight:600;}
+.add-btn{background:var(--text);color:#fff;border:none;padding:8px 22px;border-radius:20px;}
 
-.add-btn{
-  background:#2c3e50;
-  color:#fff;
-  border:none;
-  padding:8px 22px;
-  border-radius:20px;
-  cursor:pointer;
-}
+.qty{display:flex;justify-content:center;gap:10px;}
+.qty button{width:26px;height:26px;border-radius:50%;border:1px solid #ccc;background:none;}
 
-.qty{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-}
-.qty button{
-  width:26px;height:26px;
-  border-radius:50%;
-  border:1px solid #ccc;
-  background:none;
-  font-weight:bold;
-}
+.panel{background:#fff;padding:30px;border-radius:18px;box-shadow:0 5px 15px rgba(0,0,0,0.05);}
+.order-section{display:grid;grid-template-columns:1fr 380px;gap:40px;margin-top:80px;}
+@media(max-width:900px){.order-section{grid-template-columns:1fr;}}
 
-.order-section{
-  display:grid;
-  grid-template-columns:1fr 380px;
-  gap:40px;
-  margin-top:80px;
-}
-@media(max-width:900px){
-  .order-section{grid-template-columns:1fr;}
-}
+.cart-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f5f5f5;}
+input,select,textarea{width:100%;padding:12px;margin-bottom:15px;border-radius:10px;border:1px solid #ddd;}
+.whatsapp-btn{width:100%;background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:600;}
 
-.panel{
-  background:#fff;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+.admin{
+  background:#111;color:#fff;padding:20px;margin:20px 0;border-radius:10px;
 }
+.admin h3{margin-bottom:10px;}
+.admin label{display:block;margin:6px 0;}
+.admin button{margin-top:10px;padding:6px 12px;border:none;border-radius:6px;cursor:pointer;}
 
-.cart-row{
-  display:flex;
-  justify-content:space-between;
-  padding:8px 0;
-  border-bottom:1px solid #f5f5f5;
-}
-
-.summary-row{
-  display:flex;
-  justify-content:space-between;
-  margin-top:8px;
-  font-weight:600;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin-bottom:15px;
-  border-radius:10px;
-  border:1px solid #ddd;
-}
-
-.whatsapp-btn{
-  width:100%;
-  background:#25D366;
-  color:#fff;
-  border:none;
-  padding:14px;
-  border-radius:12px;
-  font-weight:600;
-  cursor:pointer;
-}
-
-footer{
-  text-align:center;
-  padding:40px;
-  border-top:1px solid #eee;
-  color:#777;
-}
+footer{text-align:center;padding:40px;border-top:1px solid #eee;color:#777;}
 </style>
 </head>
 
@@ -136,85 +52,61 @@ footer{
 
 <nav>
   <div class="logo">Pet <span>Pooja</span></div>
-  <div style="font-size:0.8rem;">Home Kitchen</div>
+  <div>Home Kitchen</div>
 </nav>
 
 <header>
-<h1>Ghar Jaisa Khana,<br>Har Din Fresh.</h1>
-<p>Homemade food prepared daily with hygiene and love.</p>
+<h1>Ghar Jaisa Khana,<br>Har Din Fresh</h1>
 </header>
 
 <div class="container">
 
-<h2 style="text-align:center;color:#d35400;">Today's Menu</h2>
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="admin" style="display:none;">
+  <h3>🔐 Admin Panel</h3>
 
+  <label>
+    <input type="checkbox" id="kitchenToggle"> Kitchen Open
+  </label>
+
+  <h4>Today's Menu</h4>
+  <div id="menuToggles"></div>
+
+  <h4>📊 Today's Sales</h4>
+  <p>Orders: <strong><span id="todayOrders">0</span></strong></p>
+  <p>Revenue: ₹ <strong><span id="todayRevenue">0</span></strong></p>
+
+  <h4>🔑 Change Admin PIN</h4>
+  <input id="newPin" placeholder="New PIN">
+  <button onclick="changePin()">Change PIN</button>
+
+  <button onclick="logoutAdmin()" style="background:#d35400;color:#fff;">Logout Admin</button>
+</div>
+
+<h2 style="text-align:center;color:var(--accent);">Today's Menu</h2>
 <div class="menu-grid" id="menuBox"></div>
 
 <div class="order-section">
 
-<!-- CART -->
 <div class="panel">
-<h2>Your Order</h2>
-
-<div id="cartBox">
-<p style="text-align:center;color:#aaa;">Add items to start</p>
+<h3>Your Order</h3>
+<div id="cartBox">Add items to start</div>
+<p>Total: ₹ <span id="grandTotal">0</span></p>
 </div>
 
-<div class="summary-row">
-  <span>Items Total</span>
-  <span>₹ <span id="itemsTotal">0</span></span>
-</div>
-
-<div class="summary-row">
-  <span>Delivery Charges</span>
-  <span>₹ <span id="deliveryCharge">0</span></span>
-</div>
-
-<hr style="margin:10px 0;">
-
-<div class="summary-row">
-  <span>Grand Total</span>
-  <span>₹ <span id="grandTotal">0</span></span>
-</div>
-
-</div>
-
-<!-- FORM -->
 <div class="panel">
-<h2>Delivery Details</h2>
-
+<h3>Details</h3>
 <form onsubmit="placeOrder(event)">
-
-<input type="text" id="custName" placeholder="Your Name" required>
-
-<input 
-  type="tel" 
-  id="custPhone" 
-  placeholder="10-digit Mobile Number" 
-  maxlength="10"
-  pattern="[6-9][0-9]{9}"
-  required
->
-
-<select id="societySelect" onchange="updateDelivery()" required>
-  <option value="">Select Society</option>
-  <option value="Sanskriti Apartment">Sanskriti Apartment (₹0 delivery)</option>
-  <option value="Unity Society">Unity Society (+₹10 delivery)</option>
-  <option value="Bhagwan Society">Bhagwan Society (+₹10 delivery)</option>
-  <option value="Sainath Society">Sainath Society (+₹10 delivery)</option>
+<input id="name" placeholder="Name" required>
+<input id="phone" placeholder="10-digit mobile" pattern="[6-9][0-9]{9}" required>
+<select id="society" required>
+<option value="">Select Society</option>
+<option value="Sanskriti">Sanskriti Apartment</option>
+<option value="Other">Other Society</option>
 </select>
-
-<textarea id="addressBox" placeholder="Flat / Floor / Block" style="display:none;"></textarea>
-
-<textarea id="noteBox" placeholder="Any special request (optional)"></textarea>
-
+<textarea id="address" placeholder="Address"></textarea>
+<textarea id="note" placeholder="Notes"></textarea>
 <button class="whatsapp-btn">Order on WhatsApp</button>
-
-<p style="font-size:0.8rem;color:#666;margin-top:10px;">
-💳 UPI only — Order confirmed after payment<br>
-UPI ID: <strong>9015489060@paytm</strong>
-</p>
-
 </form>
 </div>
 
@@ -222,30 +114,107 @@ UPI ID: <strong>9015489060@paytm</strong>
 </div>
 
 <footer>
-<p>📞 +91 9971499087</p>
+<a href="terms.html" target="_blank">Terms</a> |
+<a href="privacy.html" target="_blank">Privacy</a>
 <p>© 2026 Pet Pooja Home Kitchen</p>
 </footer>
 
 <script>
-const menu = [
- {id:1,name:"Paneer Dosa",price:120,img:"dosa.png"},
- {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png"},
- {id:3,name:"Idli Sambhar",price:60,img:"idli-sambar.png"},
- {id:4,name:"Kadhi Chawal",price:70,img:"kadhi-chawal.png"}
+/* ===== ADMIN PIN SYSTEM ===== */
+let ADMIN_PIN = localStorage.getItem("ADMIN_PIN") || "2580";
+let adminUnlocked = false;
+
+/* ===== KITCHEN CONFIG ===== */
+let kitchenOpen = JSON.parse(localStorage.getItem("kitchenOpen")) ?? true;
+
+/* ===== MENU ===== */
+let menu = JSON.parse(localStorage.getItem("menu")) || [
+   {id:1,name:"Paneer Dosa",price:120,img:"dosa.png",enabled:true},
+ {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png",enabled:true},
+ {id:3,name:"Idli Sambhar",price:60,img:"idli-sambar.png",enabled:true},
+ {id:4,name:"Kadhi Chawal",price:70,img:"kadhi-chawal.png",enabled:true},
+ {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png",enabled:true},
+ {id:6,name:"Pyaj Paratha",price:80,img:"onion-paratha.png",enabled:true},
+ {id:7,name:"Mix Veg",price:70,img:"mix-veg.png",enabled:true},
+ {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png",enabled:true}
 ];
 
 let cart = {};
-let delivery = 0;
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-/* MENU */
+/* ===== ADMIN ACCESS ===== */
+function verifyAdmin(){
+  const pin = prompt("Enter Admin PIN:");
+  if(pin !== ADMIN_PIN){
+    alert("Incorrect PIN");
+    location.hash="";
+    return false;
+  }
+  adminUnlocked = true;
+  return true;
+}
+
+if(location.hash==="#admin"){
+  if(verifyAdmin()){
+    adminPanel.style.display="block";
+    kitchenToggle.checked = kitchenOpen;
+    renderAdmin();
+  }
+}
+
+function logoutAdmin(){
+  adminUnlocked=false;
+  adminPanel.style.display="none";
+  location.hash="";
+}
+
+/* ===== ADMIN FUNCTIONS ===== */
+kitchenToggle.onchange = ()=>{
+  kitchenOpen = kitchenToggle.checked;
+  localStorage.setItem("kitchenOpen",JSON.stringify(kitchenOpen));
+};
+
+function toggleMenu(id){
+  menu = menu.map(m=>m.id===id?{...m,enabled:!m.enabled}:m);
+  localStorage.setItem("menu",JSON.stringify(menu));
+  loadMenu();
+}
+
+function changePin(){
+  const p = newPin.value.trim();
+  if(p.length<4){alert("PIN must be at least 4 digits");return;}
+  ADMIN_PIN = p;
+  localStorage.setItem("ADMIN_PIN",p);
+  alert("Admin PIN updated successfully");
+  newPin.value="";
+}
+
+function renderAdmin(){
+  menuToggles.innerHTML = menu.map(m=>`
+    <label>
+      <input type="checkbox" ${m.enabled?"checked":""} onchange="toggleMenu(${m.id})">
+      ${m.name}
+    </label>
+  `).join("");
+
+  const today = new Date().toDateString();
+  let count=0,sum=0;
+  orders.filter(o=>o.date===today).forEach(o=>{
+    count++; sum+=o.total;
+  });
+  todayOrders.innerText=count;
+  todayRevenue.innerText=sum;
+}
+
+/* ===== MENU UI ===== */
 function loadMenu(){
-  menuBox.innerHTML = menu.map(i=>{
+  menuBox.innerHTML = menu.filter(m=>m.enabled).map(i=>{
     const q = cart[i.id]?.q || 0;
     return `
     <div class="food-card">
       <img src="${i.img}">
       <div class="card-info">
-        <h3>${i.name}</h3>
+        <h4>${i.name}</h4>
         <div class="price">₹${i.price}</div>
         ${q===0
           ? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
@@ -253,116 +222,59 @@ function loadMenu(){
               <button onclick="change(${i.id},-1)">−</button>
               <span>${q}</span>
               <button onclick="change(${i.id},1)">+</button>
-            </div>`
-        }
+            </div>`}
       </div>
     </div>`;
   }).join("");
 }
 
+/* ===== CART ===== */
 function add(id){
-  cart[id] ? cart[id].q++ : cart[id]={...menu.find(i=>i.id===id),q:1};
+  cart[id]?cart[id].q++:cart[id]={...menu.find(m=>m.id===id),q:1};
   render();
 }
-
 function change(id,d){
-  cart[id].q += d;
+  cart[id].q+=d;
   if(cart[id].q<=0) delete cart[id];
   render();
 }
-
-/* DELIVERY LOGIC */
-function updateDelivery(){
-  addressBox.style.display="block";
-  const society = societySelect.value;
-  delivery = (society === "Sanskriti Apartment") ? 0 : 10;
-  render();
-}
-
-/* RENDER CART */
 function render(){
-  let itemsTotal = 0;
-  let html = "";
-
+  let total=0, html="";
   for(let id in cart){
-    const i = cart[id];
-    itemsTotal += i.price * i.q;
-    html += `
-      <div class="cart-row">
-        <div>${i.name} × ${i.q}</div>
-        <div>₹${i.price * i.q}</div>
-      </div>`;
+    total+=cart[id].price*cart[id].q;
+    html+=`<div class="cart-row">${cart[id].name} × ${cart[id].q}</div>`;
   }
-
-  cartBox.innerHTML = html || '<p style="text-align:center;color:#aaa;">Add items to start</p>';
-  itemsTotalEl = document.getElementById("itemsTotal");
-  deliveryEl = document.getElementById("deliveryCharge");
-  grandEl = document.getElementById("grandTotal");
-
-  itemsTotalEl.innerText = itemsTotal;
-  deliveryEl.innerText = delivery;
-  grandEl.innerText = itemsTotal + delivery;
-
+  cartBox.innerHTML = html || "Add items to start";
+  grandTotal.innerText = total;
   loadMenu();
 }
 
-/* PLACE ORDER */
+/* ===== ORDER ===== */
 function placeOrder(e){
   e.preventDefault();
+  if(!kitchenOpen){alert("Kitchen closed");return;}
+  if(Object.keys(cart).length===0){alert("Cart empty");return;}
 
-  const phone = custPhone.value.trim();
-  if(!/^[6-9]\d{9}$/.test(phone)){
-    alert("Please enter a valid 10-digit mobile number");
-    return;
-  }
-
-  const society = societySelect.value;
-  if(!society){
-    alert("Please select your society");
-    return;
-  }
-
-  const itemsTotal = Number(document.getElementById("itemsTotal").innerText);
-  const min = (society === "Sanskriti Apartment") ? 99 : 199;
-
-  if(itemsTotal < min){
-    alert(`Minimum order for ${society} is ₹${min}`);
-    return;
-  }
-
-  if(Object.keys(cart).length === 0){
-    alert("Please add items to your cart");
-    return;
-  }
-
-  const note = noteBox.value.trim() || "No special request";
+  const total = Number(grandTotal.innerText);
+  orders.push({
+    id:"PPK-"+Date.now(),
+    total,
+    date:new Date().toDateString()
+  });
+  localStorage.setItem("orders",JSON.stringify(orders));
 
   let items="";
-  for(let id in cart){
-    const i = cart[id];
-    items += `• ${i.name} x ${i.q}%0A`;
-  }
+  for(let i in cart){items+=`• ${cart[i].name} x ${cart[i].q}%0A`;}
 
   const msg =
-`🍽️ *Pet Pooja Home Kitchen* 🍽️%0A
-------------------------%0A
-👤 Name: ${custName.value}%0A
-📞 Phone: ${phone}%0A
-🏠 Society: ${society}%0A
-📍 Address: ${addressBox.value}%0A
-------------------------%0A
-🧾 Order:%0A${items}
-------------------------%0A
-Items Total: ₹${itemsTotal}%0A
-Delivery: ₹${delivery}%0A
-Grand Total: ₹${itemsTotal + delivery}%0A
-📝 Note: ${note}%0A
-💳 UPI: 9015489060@paytm%0A
-------------------------%0A
-⚠️ Order confirmed after payment only.%0A
-Thank you!`;
+`Pet Pooja Home Kitchen%0A
+Order ID: PPK-${Date.now()}%0A
+${items}
+Total: ₹${total}%0A
+UPI: 9015489060@paytm%0A
+Order confirmed after payment`;
 
-  window.open(`https://wa.me/919971499087?text=${msg}`,"_blank");
+  window.open(`https://wa.me/919971499087?text=${msg}`);
 }
 
 loadMenu();
