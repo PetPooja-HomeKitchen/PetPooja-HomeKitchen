@@ -209,15 +209,15 @@ footer{
 
 <textarea id="noteBox" placeholder="Any special request (optional)"></textarea>
 
-<!-- TERMS -->
+<!-- TERMS (ALIGNED) -->
 <div style="display:flex;align-items:flex-start;gap:8px;margin:12px 0;">
-  <input 
-    type="checkbox" 
+  <input
+    type="checkbox"
     id="agreeTerms"
     onchange="toggleOrderButton()"
-    style="margin-top:3px;"
+    style="margin-top:4px;width:16px;height:16px;flex-shrink:0;"
   >
-  <label for="agreeTerms" style="font-size:0.85rem;line-height:1.4;">
+  <label for="agreeTerms" style="font-size:0.85rem;line-height:1.45;cursor:pointer;">
     I agree to 
     <a href="terms.html" target="_blank">Terms & Policies</a>
     <span style="color:red;font-weight:600;">*</span>
@@ -250,7 +250,19 @@ footer{
   >
 
   <p style="font-size:0.85rem;">
-    UPI ID: <strong>9015489060@paytm</strong>
+    UPI ID: <strong id="upiText">9015489060@paytm</strong>
+  </p>
+
+  <button 
+    type="button"
+    onclick="copyUPI()"
+    style="background:#f1f1f1;border:1px solid #ccc;padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer;"
+  >
+    Copy UPI ID
+  </button>
+
+  <p id="copyMsg" style="font-size:0.75rem;color:green;margin-top:6px;display:none;">
+    ✔ UPI ID copied
   </p>
 </div>
 
@@ -326,6 +338,13 @@ function toggleOrderButton(){
   orderBtn.disabled=!agreeTerms.checked;
   orderBtn.style.opacity=agreeTerms.checked?"1":"0.6";
   orderBtn.style.cursor=agreeTerms.checked?"pointer":"not-allowed";
+}
+
+function copyUPI(){
+  navigator.clipboard.writeText("9015489060@paytm").then(()=>{
+    copyMsg.style.display="block";
+    setTimeout(()=>copyMsg.style.display="none",2000);
+  });
 }
 
 function placeOrder(e){
