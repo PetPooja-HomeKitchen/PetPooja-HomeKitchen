@@ -315,15 +315,10 @@ const menu=[
   desc:"Single-serve bowl (~400 g) — serves 1"},
 
  {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png",
-  desc:"1 piece — medium size"}
+  desc:"1 piece — medium size"},
 
-  {
-  id: 9,
-  name: "Tawa Roti (Butter)",
-  price: 10,
-  img: "tawa-roti.png",
-  desc: "1 piece — medium size, topped with butter"
-}
+  {id: 9,name: "Tawa Roti (Butter)",price: 10,img: "tawa-roti.png",
+  desc: "1 piece — medium size, topped with butter"}
 ];
 
 let cart={},delivery=0;
@@ -395,7 +390,7 @@ function placeOrder(e){
 
   const society=societySelect.value;
   const itemsTotalVal=Number(itemsTotal.innerText);
-  const min=(society==="Sanskriti Apartment")?99:199;
+  const min=(society==="Sanskriti Apartment")?149:299;
 
   if(itemsTotalVal<min){
     alert(`Minimum order for ${society} is ₹${min}`);
@@ -435,5 +430,6 @@ loadMenu();
 
 </body>
 </html>
+
 
 
