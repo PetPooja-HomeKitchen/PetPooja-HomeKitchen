@@ -191,6 +191,11 @@ footer{
 <div class="container">
 
 <h2 style="text-align:center;color:#d35400;">Today's Menu</h2>
+
+<p style="text-align:center;color:#666;margin-top:8px;">
+📌 All items are single-serve unless specified
+</p>
+
 <div class="menu-grid" id="menuBox"></div>
 
 <div class="order-section">
@@ -286,18 +291,19 @@ Order on WhatsApp
 </footer>
 
 <script>
+
 const menu=[
  {id:1,name:"Paneer Dosa",price:120,img:"dosa.png",
   desc:"1 dosa with sambhar & chutney — serves 1"},
 
- {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png",
+ {id:2,name:"Masala Dosa",price:90,img:"masala-dosa.png",
   desc:"1 dosa with sambhar & chutney — serves 1"},
 
- {id:3,name:"Idli Sambhar",price:90,img:"idli-sambar.png",
-  desc:"3 idlis + sambhar + chutney — serves 1"},
+ {id:3,name:"Idli Sambhar",price:70,img:"idli-sambar.png",
+  desc:"2 idlis + sambhar + chutney — serves 1"},
 
- {id:4,name:"Kadhi Chawal",price:90,img:"kadhi-chawal.png",
-  desc:"Single-serve bowl (~400g) — serves 1"},
+ {id:4,name:"Kadhi Chawal",price:70,img:"kadhi-chawal.png",
+  desc:"Single-serve bowl (~300 g) — serves 1"},
 
  {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png",
   desc:"1 large stuffed paratha — serves 1"},
@@ -305,12 +311,11 @@ const menu=[
  {id:6,name:"Pyaj Paratha",price:70,img:"onion-paratha.png",
   desc:"1 large stuffed paratha — serves 1"},
 
- {id:7,name:"Mix Veg",price:120,img:"mix-veg.png",
-  desc:"Single-serve bowl (~400g) — serves 1"},
+ {id:7,name:"Mix Veg",price:110,img:"mix-veg.png",
+  desc:"Single-serve bowl (~250 g) — serves 1"},
 
  {id:8,name:"Tawa Roti",price:7,img:"tawa-roti.png",
   desc:"1 piece — medium size"}
-
 ];
 
 let cart={},delivery=0;
@@ -323,7 +328,13 @@ function loadMenu(){
       <img src="${i.img}">
       <div class="card-info">
         <h3>${i.name}</h3>
+
+        <p style="font-size:0.8rem;color:#666;margin-top:4px;">
+          ${i.desc}
+        </p>
+
         <div class="price">₹${i.price}</div>
+
         ${q===0
           ? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
           : `<div class="qty">
@@ -365,7 +376,7 @@ function toggleOrderButton(){
 }
 
 function copyUPI(){
-  navigator.clipboard.writeText("9015489060@pthdfc").then(()=>{
+  navigator.clipboard.writeText("9015489060@paytm").then(()=>{
     copyMsg.style.display="block";
     setTimeout(()=>copyMsg.style.display="none",2000);
   });
@@ -373,6 +384,7 @@ function copyUPI(){
 
 function placeOrder(e){
   e.preventDefault();
+
   const society=societySelect.value;
   const itemsTotalVal=Number(itemsTotal.innerText);
   const min=(society==="Sanskriti Apartment")?99:199;
@@ -402,7 +414,7 @@ Items Total: ₹${itemsTotalVal}%0A
 Delivery: ₹${delivery}%0A
 Grand Total: ₹${itemsTotalVal+delivery}%0A
 📝 Note: ${noteBox.value||"No special request"}%0A
-💳 UPI: 9015489060@pthdfc%0A
+💳 UPI: 9015489060@paytm%0A
 ------------------------%0A
 ⚠️ Order confirmed after payment only.%0A
 Thank you!`;
@@ -415,4 +427,3 @@ loadMenu();
 
 </body>
 </html>
-
