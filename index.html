@@ -1,407 +1,642 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pet Pooja Home Kitchen | Ghar Jaisa Khana</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-
-<style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pet Pooja Home Kitchen | Ghar Jaisa Khana</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet"><style>
+  
 :root{
+  
   --accent:#d35400;
+  
   --bg:#fff8f2;
+  
   --text:#2c3e50;
+  
 }
+  
 *{margin:0;padding:0;box-sizing:border-box;}
+  
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);}
+  
 
+  
 nav{
+  
   padding:20px 8%;
+  
   display:flex;
+  
   justify-content:space-between;
+  
   background:#fff;
+  
   border-bottom:1px solid #eee;
+  
   position:sticky;
+  
   top:0;
-  z-index:1000;
+  
 }
+  
 .logo{font-family:Playfair Display,serif;font-size:1.7rem;}
+  
 .logo span{color:var(--accent);}
+  
 
+  
 header{text-align:center;padding:60px 8% 40px;}
+  
 header h1{font-family:Playfair Display,serif;font-size:clamp(2rem,5vw,3.5rem);}
+  
 header p{max-width:600px;margin:auto;color:#666;}
+  
 
+  
 .container{max-width:1200px;margin:auto;padding:0 8% 80px;}
+  
 
+  
 .menu-grid{
+  
   display:grid;
+  
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  
   gap:30px;
+  
   margin-top:40px;
+  
 }
+  
 .food-card{
+  
   background:#fff;
+  
   border-radius:15px;
+  
   overflow:hidden;
+  
   box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  
 }
+  
 .food-card img{width:100%;height:200px;object-fit:cover;}
+  
 .card-info{text-align:center;padding:20px;}
+  
 .price{color:var(--accent);font-weight:600;margin:8px 0;}
+  
 
+  
 .add-btn{
+  
   background:#2c3e50;
+  
   color:#fff;
+  
   border:none;
+  
   padding:8px 22px;
+  
   border-radius:20px;
+  
   cursor:pointer;
+  
 }
+  
 
+  
 .qty{
+  
   display:flex;
+  
   justify-content:center;
+  
   gap:10px;
+  
 }
+  
 .qty button{
+  
   width:26px;height:26px;
+  
   border-radius:50%;
+  
   border:1px solid #ccc;
+  
   background:none;
+  
   font-weight:bold;
+  
 }
+  
 
-/* ORDER SECTION */
+  
 .order-section{
+  
   display:grid;
+  
   grid-template-columns:1fr 380px;
+  
   gap:40px;
+  
   margin-top:80px;
-  align-items:start;
+  
 }
-
-/* ⭐ STICKY PANELS */
-.order-section .panel{
-  position:sticky;
-  top:110px;
-  height:max-content;
-}
-
-/* MOBILE */
+  
 @media(max-width:900px){
+  
   .order-section{grid-template-columns:1fr;}
-  .order-section .panel{position:static;}
+  
 }
+  
 
+  
 .panel{
+  
   background:#fff;
+  
   padding:30px;
+  
   border-radius:18px;
+  
   box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  
 }
+  
 
+  
 .cart-row{
+  
   display:flex;
+  
   justify-content:space-between;
+  
   padding:8px 0;
+  
   border-bottom:1px solid #f5f5f5;
+  
 }
+  
 
+  
 .summary-row{
+  
   display:flex;
+  
   justify-content:space-between;
+  
   margin-top:8px;
+  
   font-weight:600;
+  
 }
+  
 
+  
 input,select,textarea{
+  
   width:100%;
+  
   padding:12px;
+  
   margin-bottom:15px;
+  
   border-radius:10px;
+  
   border:1px solid #ddd;
+  
 }
+  
 
+  
 .whatsapp-btn{
+  
   width:100%;
+  
   background:#25D366;
+  
   color:#fff;
+  
   border:none;
+  
   padding:14px;
+  
   border-radius:12px;
+  
   font-weight:600;
+  
   cursor:pointer;
+  
 }
+  
 .whatsapp-btn:disabled{
+  
   background:#9adbb0;
+  
   cursor:not-allowed;
+  
 }
+  
 
+  
 /* TERMS */
+  
 .terms-row{
+  
   display:flex;
+  
   align-items:center;
+  
   gap:8px;
+  
   margin:12px 0;
+  
 }
+  
+.terms-row input{width:16px;height:16px;}
+  
+.terms-row label{font-size:0.85rem;line-height:1.4;}
+  
 .req{color:red;font-weight:600;}
+  
 
+  
 /* UPI */
+  
 .upi-box{text-align:center;margin-top:15px;}
+  
 .copy-btn{
+  
   margin-top:6px;
+  
   padding:6px 12px;
+  
   border:1px solid #ccc;
+  
   border-radius:6px;
+  
   background:#f5f5f5;
+  
   cursor:pointer;
+  
 }
+  
 .copy-msg{display:none;font-size:0.75rem;color:green;margin-top:4px;}
+  
 .upiqr{
+  
   width:160px;
+  
   margin:12px auto 0;
+  
   display:block;
+  
   border:1px solid #ddd;
+  
   border-radius:10px;
+  
 }
+  
 
-/* HIGHLIGHT */
+  
+/* HIGHLIGHT BOX */
+  
 .highlight-box{
+  
   background:#fff3e8;
+  
   border:1px solid #ffd2b3;
-  padding:12px;
+  
+  padding:12px 16px;
+  
   border-radius:12px;
+  
   margin:12px auto 20px;
+  
   max-width:600px;
+  
   text-align:center;
+  
+  font-size:0.95rem;
+  
 }
+  
 
+  
 footer{
+  
   text-align:center;
+  
   padding:40px;
+  
   border-top:1px solid #eee;
+  
   color:#777;
+  
 }
-</style>
-</head>
+  
+.footer-links{
+  
+  margin-top:10px;
+  
+  font-size:0.8rem;
+  
+}
+  
+.footer-links a{
+  
+  color:#555;
+  
+  text-decoration:none;
+  
+  margin:0 8px;
+  
+}
+  
+.footer-links a:hover{text-decoration:underline;}
+  
+</style></head><body><nav>  <div class="logo">Pet <span>Pooja</span></div>  <div style="font-size:0.8rem;">Home Kitchen</div></nav><header><h1>Ghar Jaisa Khana,<br>Har Din Fresh.</h1><p>Homemade food prepared daily with hygiene and love.</p></header><div class="container"><h2 style="text-align:center;color:#d35400;">Today's Menu</h2><div class="highlight-box">📌 <strong>Minimum Order:</strong><br>
 
-<body>
-
-<nav>
-  <div class="logo">Pet <span>Pooja</span></div>
-  <div>Home Kitchen</div>
-</nav>
-
-<header>
-<h1>Ghar Jaisa Khana,<br>Har Din Fresh.</h1>
-<p>Homemade food prepared daily with hygiene and love.</p>
-</header>
-
-<div class="container">
-
-<h2 style="text-align:center;color:#d35400;">Today's Menu</h2>
-
-<div class="highlight-box">
-📌 <b>Minimum Order:</b><br>
 Sanskriti Apartment — ₹149 | Other Societies — ₹299
-</div>
 
-<div class="menu-grid" id="menuBox"></div>
+</div><p style="text-align:center;color:#666;">All items are single-serve unless specified
 
-<div class="order-section">
+</p><div class="menu-grid" id="menuBox"></div><div class="order-section"><!-- CART --><div class="panel"><h2>Your Order</h2><div id="cartBox"><p style="text-align:center;color:#aaa;">Add items to start</p></div><div class="summary-row"><span>Items Total</span>
 
-<!-- CART -->
-<div class="panel">
-<h2>Your Order</h2>
+<span>₹ <span id="itemsTotal">0</span></span>
 
-<div id="cartBox">
-<p style="text-align:center;color:#aaa;">Add items to start</p>
-</div>
+</div><div class="summary-row"><span>Delivery Charges</span>
 
-<div class="summary-row">
-  <span>Items Total</span>
-  <span>₹ <span id="itemsTotal">0</span></span>
-</div>
+<span>₹ <span id="deliveryCharge">0</span></span>
 
-<div class="summary-row">
-  <span>Delivery Charges</span>
-  <span>₹ <span id="deliveryCharge">0</span></span>
-</div>
+</div><hr style="margin:10px 0;"><div class="summary-row"><span>Grand Total</span>
 
-<hr>
+<span>₹ <span id="grandTotal">0</span></span>
 
-<div class="summary-row">
-  <span>Grand Total</span>
-  <span>₹ <span id="grandTotal">0</span></span>
-</div>
-</div>
+</div></div><!-- FORM --><div class="panel"><h2>Delivery Details</h2><form onsubmit="placeOrder(event)"><input type="text" id="custName" placeholder="Your Name" required><input type="tel" id="custPhone" placeholder="10-digit Mobile Number"
 
-<!-- FORM -->
-<div class="panel">
-<h2>Delivery Details</h2>
-
-<form onsubmit="placeOrder(event)">
-
-<input id="custName" placeholder="Your Name" required>
-
-<input id="custPhone" placeholder="10-digit Mobile Number"
 maxlength="10" pattern="[6-9][0-9]{9}" required>
 
-<select id="societySelect" onchange="updateDelivery()" required>
-<option value="">Select Society</option>
-<option>Sanskriti Apartment</option>
-<option>Unity Enclave</option>
-<option>Baghban Apartment</option>
-<option>SaiNath Apartment</option>
-<option>Upvan Apartment</option>
-</select>
+<select id="societySelect" onchange="updateDelivery()" required>  <option value="">Select Society</option>  <option value="Sanskriti Apartment">Sanskriti Apartment (₹0 delivery)</option>  <option value="Unity Enclave">Unity Enclave (+₹10 delivery)</option>  <option value="Baghban Apartment">Baghban Apartment (+₹10 delivery)</option>  <option value="SaiNath Apartment">SaiNath Apartment (+₹10 delivery)</option>  <option value="Upvan Apartment">Upvan Apartment (+₹10 delivery)</option></select><textarea id="addressBox" placeholder="Flat / Floor / Block" style="display:none;"></textarea><textarea id="noteBox" placeholder="Any special request (optional)"></textarea><div class="terms-row">  <input type="checkbox" id="agreeTerms" onchange="toggleOrderButton()" required>  <label for="agreeTerms">I agree to <a href="terms.html" target="_blank">Terms & Policies</a> and
 
-<textarea id="addressBox" placeholder="Flat / Floor / Block" style="display:none;"></textarea>
+<a href="privacy.html" target="_blank">Privacy Policy</a>
 
-<textarea id="noteBox" placeholder="Any special request"></textarea>
+<span class="req">*</span>
 
-<div class="terms-row">
-<input type="checkbox" id="agreeTerms" onchange="toggleOrderButton()" required>
-<label for="agreeTerms">
-I agree to Terms & Policies <span class="req">*</span>
-</label>
-</div>
+  </label></div><button id="orderBtn" class="whatsapp-btn" disabled>Order on WhatsApp
 
-<button id="orderBtn" class="whatsapp-btn" disabled>
-Order on WhatsApp
-</button>
+</button><div class="upi-box">💳 UPI only — Order confirmed after payment<br>
 
-<div class="upi-box">
-💳 UPI only — Order confirmed after payment<br>
 <strong>9015489060@pthdfc</strong><br>
 
 <button type="button" class="copy-btn" onclick="copyUPI()">Copy UPI ID</button>
-<p id="copyMsg" class="copy-msg">UPI ID copied</p>
 
-<img src="upiqr.png" class="upiqr">
-</div>
+  <p id="copyMsg" class="copy-msg">UPI ID copied</p>  <img src="upiqr.png" alt="UPI QR Code" class="upiqr"></div></form></div></div></div><footer><p>📞 +91 9217515551</p><div class="footer-links"><a href="terms.html" target="_blank">Terms & Policies</a> |
 
-</form>
-</div>
+<a href="privacy.html" target="_blank">Privacy Policy</a>
 
-</div>
-</div>
-
-<footer>
-<p>📞 +91 9217515551</p>
-<p>© 2026 Pet Pooja Home Kitchen</p>
-</footer>
-
-<script>
+</div><p>© 2026 Pet Pooja Home Kitchen</p></footer><script>
+  
 const menu=[
-{id:1,name:"Paneer Dosa",price:120,img:"dosa.png",desc:"Serves 1"},
-{id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png",desc:"Serves 1"},
-{id:3,name:"Idli Sambhar",price:90,img:"idli-sambar.png",desc:"3 Idlis"},
-{id:4,name:"Kadhi Chawal",price:80,img:"kadhi-chawal.png",desc:"Single bowl"},
-{id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png",desc:"1 piece"},
-{id:6,name:"Pyaj Paratha",price:70,img:"onion-paratha.png",desc:"1 piece"},
-{id:7,name:"Mix Veg",price:120,img:"mix-veg.png",desc:"Single bowl"},
-{id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png",desc:"1 piece"},
-{id:9,name:"Butter Roti",price:10,img:"tawa-roti.png",desc:"1 piece"}
+  
+ {id:1,name:"Paneer Dosa",price:120,img:"dosa.png",
+  
+  desc:"1 dosa with sambhar & chutney — serves 1"},
+  
+ {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png",
+  
+  desc:"1 dosa with sambhar & chutney — serves 1"},
+  
+ {id:3,name:"Idli Sambhar",price:90,img:"idli-sambar.png",
+  
+  desc:"3 idlis + sambhar + chutney — serves 1"},
+  
+ {id:4,name:"Kadhi Chawal",price:80,img:"kadhi-chawal.png",
+  
+  desc:"Single-serve bowl (~400 g)"},
+  
+ {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png",
+  
+  desc:"1 large stuffed paratha"},
+  
+ {id:6,name:"Pyaj Paratha",price:70,img:"onion-paratha.png",
+  
+  desc:"1 large stuffed paratha"},
+  
+ {id:7,name:"Mix Veg",price:120,img:"mix-veg.png",
+  
+  desc:"Single-serve bowl (~400 g)"},
+  
+ {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png",
+  
+  desc:"1 piece — medium size"},
+  
+ {id:9,name:"Tawa Roti (Butter)",price:10,img:"tawa-roti.png",
+  
+  desc:"1 piece — with butter"}
+  
 ];
+  
 
+  
 let cart={},delivery=0;
+  
 
+  
 function loadMenu(){
-menuBox.innerHTML=menu.map(i=>{
-const q=cart[i.id]?.q||0;
-return `
-<div class="food-card">
-<img src="${i.img}">
-<div class="card-info">
-<h3>${i.name}</h3>
-<p style="font-size:0.8rem;color:#666">${i.desc}</p>
-<div class="price">₹${i.price}</div>
-${q===0
-? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
-: `<div class="qty">
-<button onclick="change(${i.id},-1)">−</button>
-<span>${q}</span>
-<button onclick="change(${i.id},1)">+</button>
-</div>`
+  
+  menuBox.innerHTML=menu.map(i=>{
+  
+    const q=cart[i.id]?.q||0;
+  
+    return `
+  
+    <div class="food-card">
+  
+      <img src="${i.img}">
+  
+      <div class="card-info">
+  
+        <h3>${i.name}</h3>
+  
+        <p style="font-size:0.8rem;color:#666">${i.desc}</p>
+  
+        <div class="price">₹${i.price}</div>
+  
+        ${q===0
+  
+          ? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
+  
+          : `<div class="qty">
+  
+              <button onclick="change(${i.id},-1)">−</button>
+  
+              <span>${q}</span>
+  
+              <button onclick="change(${i.id},1)">+</button>
+  
+            </div>`
+  
+        }
+  
+      </div>
+  
+    </div>`;
+  
+  }).join("");
+  
 }
-</div></div>`;
-}).join("");
-}
+  
 
+  
 function add(id){cart[id]?cart[id].q++:cart[id]={...menu.find(i=>i.id===id),q:1};render();}
+  
 function change(id,d){cart[id].q+=d;if(cart[id].q<=0)delete cart[id];render();}
+  
 
+  
 function updateDelivery(){
-addressBox.style.display="block";
-delivery=(societySelect.value==="Sanskriti Apartment")?0:10;
-render();
+  
+  addressBox.style.display="block";
+  
+  delivery=(societySelect.value==="Sanskriti Apartment")?0:10;
+  
+  render();
+  
 }
+  
 
+  
 function render(){
-let total=0,html="";
-for(let id in cart){
-const i=cart[id];
-total+=i.price*i.q;
-html+=`<div class="cart-row"><div>${i.name} × ${i.q}</div><div>₹${i.price*i.q}</div></div>`;
+  
+  let total=0,html="";
+  
+  for(let id in cart){
+  
+    const i=cart[id];
+  
+    total+=i.price*i.q;
+  
+    html+=`<div class="cart-row"><div>${i.name} × ${i.q}</div><div>₹${i.price*i.q}</div></div>`;
+  
+  }
+  
+  cartBox.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
+  
+  itemsTotal.innerText=total;
+  
+  deliveryCharge.innerText=delivery;
+  
+  grandTotal.innerText=total+delivery;
+  
+  loadMenu();
+  
 }
-cartBox.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
-itemsTotal.innerText=total;
-deliveryCharge.innerText=delivery;
-grandTotal.innerText=total+delivery;
-loadMenu();
-}
+  
 
+  
 function toggleOrderButton(){
-orderBtn.disabled=!agreeTerms.checked;
+  
+  orderBtn.disabled=!agreeTerms.checked;
+  
 }
+  
 
+  
 function copyUPI(){
-navigator.clipboard.writeText("9015489060@pthdfc").then(()=>{
-copyMsg.style.display="block";
-setTimeout(()=>copyMsg.style.display="none",2000);
-});
+  
+  navigator.clipboard.writeText("9015489060@pthdfc").then(()=>{
+  
+    copyMsg.style.display="block";
+  
+    setTimeout(()=>copyMsg.style.display="none",2000);
+  
+  });
+  
 }
+  
 
+  
 function placeOrder(e){
-e.preventDefault();
+  
+  e.preventDefault();
+  
 
-const society=societySelect.value;
-const itemsTotalVal=Number(itemsTotal.innerText);
-const min=(society==="Sanskriti Apartment")?149:299;
+  
+  const society=societySelect.value;
+  
+  const itemsTotalVal=Number(itemsTotal.innerText);
+  
+  const min=(society==="Sanskriti Apartment")?149:299;
+  
 
-if(itemsTotalVal<min){
-alert(`Minimum order for ${society} is ₹${min}`);
-return;
-}
+  
+  if(itemsTotalVal<min){
+  
+    alert(`Minimum order for ${society} is ₹${min}`);
+  
+    return;
+  
+  }
+  
 
-let items="";
-for(let id in cart){
-const i=cart[id];
-items+=`• ${i.name} x ${i.q}%0A`;
-}
+  
+  let items="";
+  
+  for(let id in cart){
+  
+    const i=cart[id];
+  
+    items+=`• ${i.name} x ${i.q}%0A`;
+  
+  }
+  
 
-const msg=`🍽️ *Pet Pooja Home Kitchen* 🍽️%0A
+  
+  const msg=
+  
+`🍽️ *Pet Pooja Home Kitchen* 🍽️%0A
+  
+------------------------%0A
+  
 👤 Name: ${custName.value}%0A
+  
 📞 Phone: ${custPhone.value}%0A
+  
 🏠 Society: ${society}%0A
+  
 📍 Address: ${addressBox.value}%0A
+  
+------------------------%0A
+  
 🧾 Order:%0A${items}
+  
+------------------------%0A
+  
 Items Total: ₹${itemsTotalVal}%0A
+  
 Delivery: ₹${delivery}%0A
+  
 Grand Total: ₹${itemsTotalVal+delivery}%0A
+  
 📝 Note: ${noteBox.value||"No special request"}%0A
+  
 💳 UPI: 9015489060@pthdfc%0A
-⚠️ Order confirmed after payment only`;
+  
+------------------------%0A
+  
+⚠️ Order confirmed after payment only.%0A
+  
+Thank you!`;
+  
 
-window.open(`https://wa.me/919217515551?text=${msg}`,"_blank");
+  
+  window.open(`https://wa.me/919217515551?text=${msg}`,"_blank");
+  
 }
+  
 
+  
 loadMenu();
-</script>
-
-</body>
-</html>
+  
+</script></body></html>
