@@ -754,75 +754,65 @@ function process(text){
 
 const q=clean(text);
 
-/* GREETING */
+/* -------- GREETING -------- */
 
 if(/hi|hello|hey|namaste|hlo|helo|hai|yo/.test(q))
 return reply("🙏 Namaste! What would you like to eat?");
 
-/* HUNGER */
+/* -------- ORDER FIRST (MOST IMPORTANT) -------- */
 
-if(/hungry|bhook|khana|food|eat|something|yummy|bhookh/.test(q))
+if(placeOrder(text)) return;
+
+/* -------- HUNGER -------- */
+
+if(/hungry|bhook|khana|food|eat|something|yummy/.test(q))
 return reply("😊 Tell me item name like dosa, thali, roti");
 
-/* MENU */
+/* -------- MENU -------- */
 
-if(/menu|items|available|list|what do you have/.test(q))
+if(/menu|items|available|list|what do you have|today menu/.test(q))
 return showMenu();
 
-/* PRICE */
+/* -------- PRICE -------- */
 
 if(/price|rate|cost|kitna|₹|rs|paisa/.test(q))
 return showMenu();
 
-/* DELIVERY */
+/* -------- DELIVERY -------- */
 
 if(/delivery|deliver|charge|home|ghar|society/.test(q))
 return reply("🚚 FREE — Sanskriti Apartment\n₹10 — Other societies");
 
-/* TIME */
+/* -------- TIME -------- */
 
 if(/time|timing|open|close|lunch|dinner|now/.test(q))
 return reply("⏰ Lunch: 12–3 PM\nDinner: 7–10 PM");
 
-/* PAYMENT */
+/* -------- PAYMENT -------- */
 
 if(/upi|payment|pay|cash|money/.test(q))
 return reply("💳 UPI Only\n9015489060@pthdfc");
 
-/* HELP */
+/* -------- HELP -------- */
 
 if(/help|guide|how|first time/.test(q))
 return reply("📝 Type like:\n• 1 Veg Thali\n• 2 Dosa\n• 5 Roti");
 
-/* SOUTH INDIAN */
+/* -------- CATEGORY (ONLY IF NO ORDER DETECTED) -------- */
 
-if(/dosa|dosaa|doosa|dose|idli|idlee|idle|sambar/.test(q))
+if(/dosa|dosaa|doosa|dose|idli|idlee|idle/.test(q))
 return listCategory("dosa");
 
-/* ROTI */
-
-if(/roti|chapati|rotiii|rotie|butter roti/.test(q))
+if(/roti|chapati|rotie|rotiii/.test(q))
 return listCategory("roti");
-
-/* THALI */
 
 if(/thali|thalli|thalee|thalii/.test(q))
 return listCategory("thali");
 
-/* HINGLISH ORDER */
-
-if(/bhej|chahiye|do |send|give|mujhe/.test(q))
-if(placeOrder(text)) return;
-
-/* DIRECT ORDER */
-
-if(placeOrder(text)) return;
-
-/* FALLBACK */
+/* -------- FALLBACK -------- */
 
 reply("😊 Please type item name to order");
 }
-
 /* SEND */
 
 function sendMsg(){
