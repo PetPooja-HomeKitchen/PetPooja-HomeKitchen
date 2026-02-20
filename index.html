@@ -1,649 +1,383 @@
-
 <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pet Pooja Home Kitchen | Ghar Jaisa Khana</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet"><style>
-  
+<title>Pet Pooja Home Kitchen | Ghar Jaisa Khana</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
 :root{
-  
   --accent:#d35400;
-  
   --bg:#fff8f2;
-  
   --text:#2c3e50;
-  
 }
-  
 *{margin:0;padding:0;box-sizing:border-box;}
-  
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);}
-  
 
-  
 nav{
-  
   padding:20px 8%;
-  
   display:flex;
-  
   justify-content:space-between;
-  
   background:#fff;
-  
   border-bottom:1px solid #eee;
-  
   position:sticky;
-  
   top:0;
-  
+  z-index:5;
 }
-  
 .logo{font-family:Playfair Display,serif;font-size:1.7rem;}
-  
 .logo span{color:var(--accent);}
-  
 
-  
 header{text-align:center;padding:60px 8% 40px;}
-  
 header h1{font-family:Playfair Display,serif;font-size:clamp(2rem,5vw,3.5rem);}
-  
 header p{max-width:600px;margin:auto;color:#666;}
-  
 
-  
 .container{max-width:1200px;margin:auto;padding:0 8% 80px;}
-  
 
-  
-.menu-grid{
-  
-  display:grid;
-  
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  
-  gap:30px;
-  
-  margin-top:40px;
-  
-}
-  
-.food-card{
-  
-  background:#fff;
-  
-  border-radius:15px;
-  
-  overflow:hidden;
-  
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-  
-}
-  
-.food-card img{width:100%;height:200px;object-fit:cover;}
-  
-.card-info{text-align:center;padding:20px;}
-  
-.price{color:var(--accent);font-weight:600;margin:8px 0;}
-  
-
-  
-.add-btn{
-  
-  background:#2c3e50;
-  
-  color:#fff;
-  
-  border:none;
-  
-  padding:8px 22px;
-  
-  border-radius:20px;
-  
-  cursor:pointer;
-  
-}
-  
-
-  
-.qty{
-  
-  display:flex;
-  
-  justify-content:center;
-  
-  gap:10px;
-  
-}
-  
-.qty button{
-  
-  width:26px;height:26px;
-  
-  border-radius:50%;
-  
-  border:1px solid #ccc;
-  
-  background:none;
-  
-  font-weight:bold;
-  
-}
-  
-
-  
-.order-section{
-  
-  display:grid;
-  
-  grid-template-columns:1fr 380px;
-  
-  gap:40px;
-  
-  margin-top:80px;
-  
-}
-  
-@media(max-width:900px){
-  
-  .order-section{grid-template-columns:1fr;}
-  
-}
-  
-
-  
-.panel{
-  
-  background:#fff;
-  
-  padding:30px;
-  
-  border-radius:18px;
-  
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-  
-}
-  
-
-  
-.cart-row{
-  
-  display:flex;
-  
-  justify-content:space-between;
-  
-  padding:8px 0;
-  
-  border-bottom:1px solid #f5f5f5;
-  
-}
-  
-
-  
-.summary-row{
-  
-  display:flex;
-  
-  justify-content:space-between;
-  
-  margin-top:8px;
-  
-  font-weight:600;
-  
-}
-  
-
-  
-input,select,textarea{
-  
-  width:100%;
-  
-  padding:12px;
-  
-  margin-bottom:15px;
-  
-  border-radius:10px;
-  
-  border:1px solid #ddd;
-  
-}
-  
-
-  
-.whatsapp-btn{
-  
-  width:100%;
-  
-  background:#25D366;
-  
-  color:#fff;
-  
-  border:none;
-  
-  padding:14px;
-  
-  border-radius:12px;
-  
-  font-weight:600;
-  
-  cursor:pointer;
-  
-}
-  
-.whatsapp-btn:disabled{
-  
-  background:#9adbb0;
-  
-  cursor:not-allowed;
-  
-}
-  
-
-  
-/* TERMS */
-  
-.terms-row{
-  
-  display:flex;
-  
-  align-items:center;
-  
-  gap:8px;
-  
-  margin:12px 0;
-  
-}
-  
-.terms-row input{width:16px;height:16px;}
-  
-.terms-row label{font-size:0.85rem;line-height:1.4;}
-  
-.req{color:red;font-weight:600;}
-  
-
-  
-/* UPI */
-  
-.upi-box{text-align:center;margin-top:15px;}
-  
-.copy-btn{
-  
-  margin-top:6px;
-  
-  padding:6px 12px;
-  
-  border:1px solid #ccc;
-  
-  border-radius:6px;
-  
-  background:#f5f5f5;
-  
-  cursor:pointer;
-  
-}
-  
-.copy-msg{display:none;font-size:0.75rem;color:green;margin-top:4px;}
-  
-.upiqr{
-  
-  width:160px;
-  
-  margin:12px auto 0;
-  
-  display:block;
-  
-  border:1px solid #ddd;
-  
-  border-radius:10px;
-  
-}
-  
-
-  
-/* HIGHLIGHT BOX */
-  
 .highlight-box{
-  
   background:#fff3e8;
-  
   border:1px solid #ffd2b3;
-  
-  padding:12px 16px;
-  
+  padding:12px;
   border-radius:12px;
-  
-  margin:12px auto 20px;
-  
-  max-width:600px;
-  
+  margin:20px auto;
   text-align:center;
-  
-  font-size:0.95rem;
-  
 }
-  
 
-  
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+}
+
+.food-card{
+  background:#fff;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+.food-card img{width:100%;height:200px;object-fit:cover;}
+.card-info{text-align:center;padding:20px;}
+.price{color:var(--accent);font-weight:600;margin:8px 0;}
+
+.add-btn{
+  background:#2c3e50;
+  color:#fff;
+  border:none;
+  padding:8px 22px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.qty{display:flex;justify-content:center;gap:10px;}
+.qty button{
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid #ccc;background:none;font-weight:bold;
+}
+
+/* ===== ORDER SECTION (STICKY LEFT) ===== */
+
+.order-section{
+  display:grid;
+  grid-template-columns:380px 1fr;
+  gap:40px;
+  margin-top:60px;
+}
+
+.panel{
+  background:#fff;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Sticky order panel */
+.sticky-panel{
+  position:sticky;
+  top:100px;
+  height:fit-content;
+}
+
+.cart-row{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid #f5f5f5;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  font-weight:600;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+.whatsapp-btn{
+  width:100%;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  padding:14px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+.whatsapp-btn:disabled{background:#9adbb0;}
+
+.terms-row{display:flex;gap:8px;align-items:center;margin:10px 0;}
+.req{color:red;}
+
+.upi-box{text-align:center;margin-top:10px;}
+.upiqr{width:160px;margin-top:10px;border-radius:10px;}
+
 footer{
-  
   text-align:center;
-  
   padding:40px;
-  
   border-top:1px solid #eee;
-  
   color:#777;
-  
 }
-  
-.footer-links{
-  
-  margin-top:10px;
-  
-  font-size:0.8rem;
-  
-}
-  
-.footer-links a{
-  
-  color:#555;
-  
-  text-decoration:none;
-  
-  margin:0 8px;
-  
-}
-  
-.footer-links a:hover{text-decoration:underline;}
-  
-</style></head><body><nav>  <div class="logo">Pet <span>Pooja</span></div>  <div style="font-size:0.8rem;">Home Kitchen</div></nav><header><h1>Ghar Jaisa Khana,<br>Har Din Fresh.</h1><p>Homemade food prepared daily with hygiene and love.</p></header><div class="container"><h2 style="text-align:center;color:#d35400;">Today's Menu</h2><div class="highlight-box">📌 <strong>Minimum Order:</strong><br>
+</style>
+</head>
 
-Sanskriti Apartment — ₹149 | Other Societies — ₹299
+<body>
 
-</div><p style="text-align:center;color:#666;">All items are single-serve unless specified
+<nav>
+  <div class="logo">Pet <span>Pooja</span></div>
+  <div style="font-size:0.8rem;">Home Kitchen</div>
+</nav>
 
-</p><div class="menu-grid" id="menuBox"></div><div class="order-section"><!-- CART --><div class="panel"><h2>Your Order</h2><div id="cartBox"><p style="text-align:center;color:#aaa;">Add items to start</p></div><div class="summary-row"><span>Items Total</span>
+<header>
+<h1>Ghar Jaisa Khana,<br>Har Din Fresh.</h1>
+<p>Homemade food prepared daily with hygiene and love.</p>
+</header>
 
-<span>₹ <span id="itemsTotal">0</span></span>
+<div class="container">
 
-</div><div class="summary-row"><span>Delivery Charges</span>
+<h2 style="text-align:center;color:#d35400;">Today's Menu</h2>
 
-<span>₹ <span id="deliveryCharge">0</span></span>
+<div class="highlight-box">
+📌 Minimum Order: Sanskriti ₹149 | Other Societies ₹299
+</div>
 
-</div><hr style="margin:10px 0;"><div class="summary-row"><span>Grand Total</span>
+<div class="order-section">
 
-<span>₹ <span id="grandTotal">0</span></span>
+<!-- LEFT STICKY ORDER PANEL -->
+<div class="panel sticky-panel">
 
-</div></div><!-- FORM --><div class="panel"><h2>Delivery Details</h2><form onsubmit="placeOrder(event)"><input type="text" id="custName" placeholder="Your Name" required><input type="tel" id="custPhone" placeholder="10-digit Mobile Number"
+<h2>Your Order</h2>
 
-maxlength="10" pattern="[6-9][0-9]{9}" required>
+<div id="cartBox">
+<p style="text-align:center;color:#aaa;">Add items to start</p>
+</div>
 
-<select id="societySelect" onchange="updateDelivery()" required>  <option value="">Select Society</option>  <option value="Sanskriti Apartment">Sanskriti Apartment (₹0 delivery)</option>  <option value="Unity Enclave">Unity Enclave (+₹10 delivery)</option>  <option value="Baghban Apartment">Baghban Apartment (+₹10 delivery)</option>  <option value="SaiNath Apartment">SaiNath Apartment (+₹10 delivery)</option>  <option value="Upvan Apartment">Upvan Apartment (+₹10 delivery)</option></select><textarea id="addressBox" placeholder="Flat / Floor / Block" style="display:none;"></textarea><textarea id="noteBox" placeholder="Any special request (optional)"></textarea><div class="terms-row">  <input type="checkbox" id="agreeTerms" onchange="toggleOrderButton()" required>  <label for="agreeTerms">I agree to <a href="terms.html" target="_blank">Terms & Policies</a> and
+<div class="summary-row">
+  <span>Items Total</span>
+  <span>₹ <span id="itemsTotal">0</span></span>
+</div>
 
-<a href="privacy.html" target="_blank">Privacy Policy</a>
+<div class="summary-row">
+  <span>Delivery</span>
+  <span>₹ <span id="deliveryCharge">0</span></span>
+</div>
 
-<span class="req">*</span>
+<hr>
 
-  </label></div><button id="orderBtn" class="whatsapp-btn" disabled>Order on WhatsApp
+<div class="summary-row">
+  <span>Grand Total</span>
+  <span>₹ <span id="grandTotal">0</span></span>
+</div>
 
-</button><div class="upi-box">💳 UPI only — Order confirmed after payment<br>
+<hr>
 
+<h3>Delivery Details</h3>
+
+<form onsubmit="placeOrder(event)">
+
+<input id="custName" placeholder="Your Name" required>
+
+<input id="custPhone" placeholder="Mobile Number" required>
+
+<select id="societySelect" onchange="updateDelivery()" required>
+  <option value="">Select Society</option>
+  <option>Sanskriti Apartment</option>
+  <option>Unity Enclave</option>
+  <option>Baghban Apartment</option>
+  <option>SaiNath Apartment</option>
+  <option>Upvan Apartment</option>
+</select>
+
+<textarea id="addressBox" placeholder="Flat / Floor / Block"></textarea>
+
+<div class="terms-row">
+<input type="checkbox" id="agreeTerms" onchange="toggleOrderButton()" required>
+<label>I agree to Terms & Policies <span class="req">*</span></label>
+</div>
+
+<button id="orderBtn" class="whatsapp-btn" disabled>
+Order on WhatsApp
+</button>
+
+<div class="upi-box">
+💳 UPI only — Order confirmed after payment<br>
 <strong>9015489060@pthdfc</strong><br>
+<img src="upiqr.png" class="upiqr">
+</div>
 
-<button type="button" class="copy-btn" onclick="copyUPI()">Copy UPI ID</button>
+</form>
+</div>
 
-  <p id="copyMsg" class="copy-msg">UPI ID copied</p>  <img src="upiqr.png" alt="UPI QR Code" class="upiqr"></div></form></div></div></div><footer><p>📞 +91 9217515551</p><div class="footer-links"><a href="terms.html" target="_blank">Terms & Policies</a> |
+<!-- RIGHT MENU -->
+<div>
 
-<a href="privacy.html" target="_blank">Privacy Policy</a>
+<div class="menu-grid" id="menuBox"></div>
 
-</div><p>© 2026 Pet Pooja Home Kitchen</p></footer><script>
-  
+</div>
+
+</div>
+</div>
+
+<footer>
+<p>📞 +91 9217515551</p>
+<p>© 2026 Pet Pooja Home Kitchen</p>
+</footer>
+
+<script>
 const menu=[
-  
- {id:1,name:"Paneer Dosa",price:120,img:"dosa.png",
-  
-  desc:"1 dosa with sambhar & chutney — serves 1"},
-  
- {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png",
-  
-  desc:"1 dosa with sambhar & chutney — serves 1"},
-  
- {id:3,name:"Idli Sambhar",price:90,img:"idli-sambar.png",
-  
-  desc:"3 idlis + sambhar + chutney — serves 1"},
-  
- {id:4,name:"Kadhi Chawal",price:80,img:"kadhi-chawal.png",
-  
-  desc:"Single-serve bowl (~400 g)"},
-  
- {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png",
-  
-  desc:"1 large stuffed paratha"},
-  
- {id:6,name:"Pyaj Paratha",price:70,img:"onion-paratha.png",
-  
-  desc:"1 large stuffed paratha"},
-  
- {id:7,name:"Mix Veg",price:120,img:"mix-veg.png",
-  
-  desc:"Single-serve bowl (~400 g)"},
-  
- {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png",
-  
-  desc:"1 piece — medium size"},
-  
- {id:9,name:"Tawa Roti (Butter)",price:10,img:"tawa-roti.png",
-  
-  desc:"1 piece — with butter"},
-
- {id:10,name:"Veg Thali",price:150,img:"thali.png",
-  desc:"4 Roti • Rice • Dal • Sabji • Achar — serves 1"},
-
- {id:11,name:"Special Thali",price:249,img:"sthali.png",
-  desc:"4 Butter Roti • Shahi Paneer • Rice • Dry Sabji • Salad • Achar"}
-
-  
+ {id:1,name:"Paneer Dosa",price:120,img:"dosa.png"},
+ {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png"},
+ {id:3,name:"Idli Sambhar",price:90,img:"idli-sambar.png"},
+ {id:4,name:"Kadhi Chawal",price:80,img:"kadhi-chawal.png"},
+ {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png"},
+ {id:6,name:"Pyaj Paratha",price:70,img:"onion-paratha.png"},
+ {id:7,name:"Mix Veg",price:120,img:"mix-veg.png"},
+ {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png"},
+ {id:9,name:"Butter Roti",price:10,img:"tawa-roti.png"},
+ {id:10,name:"Veg Thali",price:150,img:"thali.png"},
+ {id:11,name:"Special Thali",price:249,img:"sthali.png"}
 ];
-  
 
-  
 let cart={},delivery=0;
-  
 
-  
 function loadMenu(){
-  
-  menuBox.innerHTML=menu.map(i=>{
-  
-    const q=cart[i.id]?.q||0;
-  
-    return `
-  
-    <div class="food-card">
-  
-      <img src="${i.img}">
-  
-      <div class="card-info">
-  
-        <h3>${i.name}</h3>
-  
-        <p style="font-size:0.8rem;color:#666">${i.desc}</p>
-  
-        <div class="price">₹${i.price}</div>
-  
-        ${q===0
-  
-          ? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
-  
-          : `<div class="qty">
-  
-              <button onclick="change(${i.id},-1)">−</button>
-  
-              <span>${q}</span>
-  
-              <button onclick="change(${i.id},1)">+</button>
-  
-            </div>`
-  
-        }
-  
-      </div>
-  
-    </div>`;
-  
-  }).join("");
-  
+menuBox.innerHTML=menu.map(i=>{
+const q=cart[i.id]?.q||0;
+return `
+<div class="food-card">
+<img src="${i.img}">
+<div class="card-info">
+<h3>${i.name}</h3>
+<div class="price">₹${i.price}</div>
+${q===0
+? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
+: `<div class="qty">
+<button onclick="change(${i.id},-1)">−</button>
+<span>${q}</span>
+<button onclick="change(${i.id},1)">+</button>
+</div>`
 }
-  
+</div>
+</div>`;
+}).join("");
+}
 
-  
 function add(id){cart[id]?cart[id].q++:cart[id]={...menu.find(i=>i.id===id),q:1};render();}
-  
 function change(id,d){cart[id].q+=d;if(cart[id].q<=0)delete cart[id];render();}
-  
 
-  
 function updateDelivery(){
-  
-  addressBox.style.display="block";
-  
-  delivery=(societySelect.value==="Sanskriti Apartment")?0:10;
-  
-  render();
-  
+delivery=(societySelect.value==="Sanskriti Apartment")?0:10;
+render();
 }
-  
 
-  
 function render(){
-  
-  let total=0,html="";
-  
-  for(let id in cart){
-  
-    const i=cart[id];
-  
-    total+=i.price*i.q;
-  
-    html+=`<div class="cart-row"><div>${i.name} × ${i.q}</div><div>₹${i.price*i.q}</div></div>`;
-  
-  }
-  
-  cartBox.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
-  
-  itemsTotal.innerText=total;
-  
-  deliveryCharge.innerText=delivery;
-  
-  grandTotal.innerText=total+delivery;
-  
-  loadMenu();
-  
+let total=0,html="";
+for(let id in cart){
+const i=cart[id];
+total+=i.price*i.q;
+html+=`<div class="cart-row"><div>${i.name} × ${i.q}</div><div>₹${i.price*i.q}</div></div>`;
 }
-  
-
-  
-function toggleOrderButton(){
-  
-  orderBtn.disabled=!agreeTerms.checked;
-  
-}
-  
-
-  
-function copyUPI(){
-  
-  navigator.clipboard.writeText("9015489060@pthdfc").then(()=>{
-  
-    copyMsg.style.display="block";
-  
-    setTimeout(()=>copyMsg.style.display="none",2000);
-  
-  });
-  
-}
-  
-
-  
-function placeOrder(e){
-  
-  e.preventDefault();
-  
-
-  
-  const society=societySelect.value;
-  
-  const itemsTotalVal=Number(itemsTotal.innerText);
-  
-  const min=(society==="Sanskriti Apartment")?149:299;
-  
-
-  
-  if(itemsTotalVal<min){
-  
-    alert(`Minimum order for ${society} is ₹${min}`);
-  
-    return;
-  
-  }
-  
-
-  
-  let items="";
-  
-  for(let id in cart){
-  
-    const i=cart[id];
-  
-    items+=`• ${i.name} x ${i.q}%0A`;
-  
-  }
-  
-
-  
-  const msg=
-  
-`🍽️ *Pet Pooja Home Kitchen* 🍽️%0A
-  
-------------------------%0A
-  
-👤 Name: ${custName.value}%0A
-  
-📞 Phone: ${custPhone.value}%0A
-  
-🏠 Society: ${society}%0A
-  
-📍 Address: ${addressBox.value}%0A
-  
-------------------------%0A
-  
-🧾 Order:%0A${items}
-  
-------------------------%0A
-  
-Items Total: ₹${itemsTotalVal}%0A
-  
-Delivery: ₹${delivery}%0A
-  
-Grand Total: ₹${itemsTotalVal+delivery}%0A
-  
-📝 Note: ${noteBox.value||"No special request"}%0A
-  
-💳 UPI: 9015489060@pthdfc%0A
-  
-------------------------%0A
-  
-⚠️ Order confirmed after payment only.%0A
-  
-Thank you!`;
-  
-
-  
-  window.open(`https://wa.me/919217515551?text=${msg}`,"_blank");
-  
-}
-  
-
-  
+cartBox.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
+itemsTotal.innerText=total;
+deliveryCharge.innerText=delivery;
+grandTotal.innerText=total+delivery;
 loadMenu();
-  
-</script></body></html>
+}
+
+function toggleOrderButton(){
+orderBtn.disabled=!agreeTerms.checked;
+}
+
+function placeOrder(e){
+e.preventDefault();
+
+const itemsTotalVal=Number(itemsTotal.innerText);
+if(itemsTotalVal===0){alert("Add items first");return;}
+
+let items="";
+for(let id in cart){
+const i=cart[id];
+items+=`• ${i.name} x ${i.q}%0A`;
+}
+
+const msg=
+`🍽️ Pet Pooja Home Kitchen 🍽️%0A
+👤 ${custName.value}%0A
+📞 ${custPhone.value}%0A
+🏠 ${societySelect.value}%0A
+📍 ${addressBox.value}%0A
+%0A🧾 Order:%0A${items}
+%0A💰 Total: ₹${itemsTotalVal+delivery}%0A
+💳 UPI: 9015489060@pthdfc`;
+
+window.open(`https://wa.me/919217515551?text=${msg}`,"_blank");
+}
+
+loadMenu();
+</script>
+
+<!-- ===== PRO AI ASSISTANT ===== -->
+
+<button id="pp-ai-btn" style="position:fixed;right:20px;bottom:20px;width:65px;height:65px;border-radius:50%;background:#d35400;color:#fff;border:none;font-size:26px;cursor:pointer;">🤖</button>
+
+<div id="pp-ai-box" style="display:none;position:fixed;right:20px;bottom:95px;width:320px;background:#fff;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,0.25);overflow:hidden;font-family:Inter;">
+<div style="background:#d35400;color:#fff;padding:12px;">Pet Pooja Assistant</div>
+<div id="pp-chat" style="padding:12px;height:300px;overflow-y:auto;">👋 Ask me anything about menu, delivery, price...</div>
+<div style="display:flex;border-top:1px solid #eee;">
+<input id="pp-text" style="flex:1;padding:10px;border:none;">
+<button onclick="ppAsk()" style="background:#d35400;color:#fff;border:none;padding:10px;">Send</button>
+</div>
+</div>
+
+<script>
+pp-ai-btn.onclick=()=>pp-ai-box.style.display=pp-ai-box.style.display==="block"?"none":"block";
+
+function ppReply(q){
+q=q.toLowerCase();
+if(q.includes("thali")) return "Veg Thali ₹150 | Special Thali ₹249";
+if(q.includes("delivery")) return "₹0 delivery for Sanskriti, ₹10 others.";
+if(q.includes("minimum")) return "₹149 Sanskriti | ₹299 Others";
+if(q.includes("time")) return "Lunch 12–3 PM | Dinner 7–10 PM";
+if(q.includes("payment")||q.includes("upi")) return "UPI ID: 9015489060@pthdfc";
+if(q.includes("order")) return "Order on WhatsApp: 9217515551";
+return "I can help with menu, price, delivery & ordering.";
+}
+
+function ppAsk(){
+const q=pp-text.value;
+if(!q) return;
+pp-chat.innerHTML+=`<div>🧑 ${q}</div><div>🤖 ${ppReply(q)}</div>`;
+pp-text.value="";
+pp-chat.scrollTop=pp-chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
