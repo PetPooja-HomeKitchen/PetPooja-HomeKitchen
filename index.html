@@ -648,4 +648,205 @@ Thank you!`;
   
 loadMenu();
   
-</script></body></html>
+</script>
+
+
+<!-- ===== GOD-LEVEL STATIC AI — PET POOJA ===== -->
+
+<button id="pp-ai-btn"
+style="position:fixed;right:20px;bottom:20px;width:65px;height:65px;border-radius:50%;background:#d35400;color:#fff;border:none;font-size:26px;z-index:1000;">
+🤖
+</button>
+
+<div id="pp-ai-box"
+style="display:none;position:fixed;right:20px;bottom:95px;width:340px;background:#fff;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,0.25);overflow:hidden;font-family:Inter;z-index:1000;">
+
+<div style="background:#d35400;color:#fff;padding:12px;text-align:center;font-weight:600;">
+Pet Pooja AI Assistant
+</div>
+
+<div id="pp-chat"
+style="padding:12px;height:340px;overflow-y:auto;background:#fdfaf7;font-size:14px;">
+🙏 Namaste! I can help you order food 😊
+</div>
+
+<div style="display:flex;border-top:1px solid #eee;">
+<input id="pp-text" placeholder="Type message..."
+style="flex:1;padding:12px;border:none;font-size:14px;">
+<button id="pp-send"
+style="background:#d35400;color:#fff;border:none;padding:0 18px;">Send</button>
+</div>
+
+</div>
+
+<script>
+(function(){
+
+const btn=document.getElementById("pp-ai-btn");
+const box=document.getElementById("pp-ai-box");
+const chat=document.getElementById("pp-chat");
+const input=document.getElementById("pp-text");
+const send=document.getElementById("pp-send");
+
+btn.onclick=()=>{box.style.display=box.style.display==="block"?"none":"block";input.focus();};
+
+/* UI */
+
+function say(t){
+chat.innerHTML+=`<div style="background:#d35400;color:#fff;margin:8px 0;padding:10px;border-radius:18px;margin-left:auto;max-width:80%;text-align:right;">${t}</div>`;
+chat.scrollTop=chat.scrollHeight;
+}
+
+function reply(t){
+chat.innerHTML+=`<div style="background:#e8f5e9;margin:8px 0;padding:10px;border-radius:18px;max-width:80%;">${t}</div>`;
+chat.scrollTop=chat.scrollHeight;
+}
+
+/* CLEAN */
+
+function clean(t){
+return t.toLowerCase()
+.replace(/[^\w\s₹]/g," ")
+.replace(/\s+/g," ")
+.trim();
+}
+
+/* FUZZY */
+
+function match(a,b){
+a=clean(a); b=clean(b);
+return a.includes(b) || b.includes(a);
+}
+
+/* FULL MENU */
+
+function showMenu(){
+const list=menu.map(i=>`• ${i.name} — ₹${i.price}`).join("\n");
+reply("📋 Full Menu:\n\n"+list+"\n\n🚚 FREE — Sanskriti Apartment\n₹10 — Other societies");
+}
+
+/* CATEGORY */
+
+function listCategory(key){
+const items=menu.filter(i=>match(i.name,key));
+if(!items.length) return;
+reply(items.map(i=>`• ${i.name} — ₹${i.price}`).join("\n"));
+}
+
+/* ORDER */
+
+function placeOrder(text){
+for(const i of menu){
+if(match(text,i.name)){
+const m=text.match(/\d+/);
+const qty=m?parseInt(m[0]):1;
+for(let k=0;k<qty;k++) add(i.id);
+render();
+reply(`✅ Added ${qty} × ${i.name}`);
+return true;
+}}
+return false;
+}
+
+/* INTENTS */
+
+function process(text){
+
+const q=clean(text);
+
+/* GREETING */
+
+if(/hi|hello|hey|namaste|hlo|helo|hai|yo/.test(q))
+return reply("🙏 Namaste! What would you like to eat?");
+
+/* HUNGER */
+
+if(/hungry|bhook|khana|food|eat|something|yummy|bhookh/.test(q))
+return reply("😊 Tell me item name like dosa, thali, roti");
+
+/* MENU */
+
+if(/menu|items|available|list|what do you have/.test(q))
+return showMenu();
+
+/* PRICE */
+
+if(/price|rate|cost|kitna|₹|rs|paisa/.test(q))
+return showMenu();
+
+/* DELIVERY */
+
+if(/delivery|deliver|charge|home|ghar|society/.test(q))
+return reply("🚚 FREE — Sanskriti Apartment\n₹10 — Other societies");
+
+/* TIME */
+
+if(/time|timing|open|close|lunch|dinner|now/.test(q))
+return reply("⏰ Lunch: 12–3 PM\nDinner: 7–10 PM");
+
+/* PAYMENT */
+
+if(/upi|payment|pay|cash|money/.test(q))
+return reply("💳 UPI Only\n9015489060@pthdfc");
+
+/* HELP */
+
+if(/help|guide|how|first time/.test(q))
+return reply("📝 Type like:\n• 1 Veg Thali\n• 2 Dosa\n• 5 Roti");
+
+/* SOUTH INDIAN */
+
+if(/dosa|dosaa|doosa|dose|idli|idlee|idle|sambar/.test(q))
+return listCategory("dosa");
+
+/* ROTI */
+
+if(/roti|chapati|rotiii|rotie|butter roti/.test(q))
+return listCategory("roti");
+
+/* THALI */
+
+if(/thali|thalli|thalee|thalii/.test(q))
+return listCategory("thali");
+
+/* HINGLISH ORDER */
+
+if(/bhej|chahiye|do |send|give|mujhe/.test(q))
+if(placeOrder(text)) return;
+
+/* DIRECT ORDER */
+
+if(placeOrder(text)) return;
+
+/* FALLBACK */
+
+reply("😊 Please type item name to order");
+}
+
+/* SEND */
+
+function sendMsg(){
+const t=input.value.trim();
+if(!t) return;
+say(t);
+input.value="";
+process(t);
+}
+
+send.onclick=sendMsg;
+
+input.addEventListener("keypress",e=>{
+if(e.key==="Enter"){e.preventDefault();sendMsg();}
+});
+
+})();
+</script>
+
+
+
+
+
+
+
+
+</body></html>
