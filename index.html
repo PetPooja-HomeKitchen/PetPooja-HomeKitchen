@@ -76,8 +76,7 @@ header p{max-width:600px;margin:auto;color:#666;}
   border:1px solid #ccc;background:none;font-weight:bold;
 }
 
-/* ===== ORDER SECTION (STICKY LEFT) ===== */
-
+/* ORDER SECTION */
 .order-section{
   display:grid;
   grid-template-columns:380px 1fr;
@@ -92,7 +91,6 @@ header p{max-width:600px;margin:auto;color:#666;}
   box-shadow:0 5px 15px rgba(0,0,0,0.05);
 }
 
-/* Sticky order panel */
 .sticky-panel{
   position:sticky;
   top:100px;
@@ -170,7 +168,7 @@ footer{
 
 <div class="order-section">
 
-<!-- LEFT STICKY ORDER PANEL -->
+<!-- LEFT ORDER PANEL -->
 <div class="panel sticky-panel">
 
 <h2>Your Order</h2>
@@ -203,181 +201,8 @@ footer{
 <form onsubmit="placeOrder(event)">
 
 <input id="custName" placeholder="Your Name" required>
-
 <input id="custPhone" placeholder="Mobile Number" required>
 
 <select id="societySelect" onchange="updateDelivery()" required>
   <option value="">Select Society</option>
-  <option>Sanskriti Apartment</option>
-  <option>Unity Enclave</option>
-  <option>Baghban Apartment</option>
-  <option>SaiNath Apartment</option>
-  <option>Upvan Apartment</option>
-</select>
-
-<textarea id="addressBox" placeholder="Flat / Floor / Block"></textarea>
-
-<div class="terms-row">
-<input type="checkbox" id="agreeTerms" onchange="toggleOrderButton()" required>
-<label>I agree to Terms & Policies <span class="req">*</span></label>
-</div>
-
-<button id="orderBtn" class="whatsapp-btn" disabled>
-Order on WhatsApp
-</button>
-
-<div class="upi-box">
-💳 UPI only — Order confirmed after payment<br>
-<strong>9015489060@pthdfc</strong><br>
-<img src="upiqr.png" class="upiqr">
-</div>
-
-</form>
-</div>
-
-<!-- RIGHT MENU -->
-<div>
-
-<div class="menu-grid" id="menuBox"></div>
-
-</div>
-
-</div>
-</div>
-
-<footer>
-<p>📞 +91 9217515551</p>
-<p>© 2026 Pet Pooja Home Kitchen</p>
-</footer>
-
-<script>
-const menu=[
- {id:1,name:"Paneer Dosa",price:120,img:"dosa.png"},
- {id:2,name:"Masala Dosa",price:100,img:"masala-dosa.png"},
- {id:3,name:"Idli Sambhar",price:90,img:"idli-sambar.png"},
- {id:4,name:"Kadhi Chawal",price:80,img:"kadhi-chawal.png"},
- {id:5,name:"Aloo Paratha",price:60,img:"aloo-paratha.png"},
- {id:6,name:"Pyaj Paratha",price:70,img:"onion-paratha.png"},
- {id:7,name:"Mix Veg",price:120,img:"mix-veg.png"},
- {id:8,name:"Tawa Roti",price:6,img:"tawa-roti.png"},
- {id:9,name:"Butter Roti",price:10,img:"tawa-roti.png"},
- {id:10,name:"Veg Thali",price:150,img:"thali.png"},
- {id:11,name:"Special Thali",price:249,img:"sthali.png"}
-];
-
-let cart={},delivery=0;
-
-function loadMenu(){
-menuBox.innerHTML=menu.map(i=>{
-const q=cart[i.id]?.q||0;
-return `
-<div class="food-card">
-<img src="${i.img}">
-<div class="card-info">
-<h3>${i.name}</h3>
-<div class="price">₹${i.price}</div>
-${q===0
-? `<button class="add-btn" onclick="add(${i.id})">Add</button>`
-: `<div class="qty">
-<button onclick="change(${i.id},-1)">−</button>
-<span>${q}</span>
-<button onclick="change(${i.id},1)">+</button>
-</div>`
-}
-</div>
-</div>`;
-}).join("");
-}
-
-function add(id){cart[id]?cart[id].q++:cart[id]={...menu.find(i=>i.id===id),q:1};render();}
-function change(id,d){cart[id].q+=d;if(cart[id].q<=0)delete cart[id];render();}
-
-function updateDelivery(){
-delivery=(societySelect.value==="Sanskriti Apartment")?0:10;
-render();
-}
-
-function render(){
-let total=0,html="";
-for(let id in cart){
-const i=cart[id];
-total+=i.price*i.q;
-html+=`<div class="cart-row"><div>${i.name} × ${i.q}</div><div>₹${i.price*i.q}</div></div>`;
-}
-cartBox.innerHTML=html||'<p style="text-align:center;color:#aaa;">Add items to start</p>';
-itemsTotal.innerText=total;
-deliveryCharge.innerText=delivery;
-grandTotal.innerText=total+delivery;
-loadMenu();
-}
-
-function toggleOrderButton(){
-orderBtn.disabled=!agreeTerms.checked;
-}
-
-function placeOrder(e){
-e.preventDefault();
-
-const itemsTotalVal=Number(itemsTotal.innerText);
-if(itemsTotalVal===0){alert("Add items first");return;}
-
-let items="";
-for(let id in cart){
-const i=cart[id];
-items+=`• ${i.name} x ${i.q}%0A`;
-}
-
-const msg=
-`🍽️ Pet Pooja Home Kitchen 🍽️%0A
-👤 ${custName.value}%0A
-📞 ${custPhone.value}%0A
-🏠 ${societySelect.value}%0A
-📍 ${addressBox.value}%0A
-%0A🧾 Order:%0A${items}
-%0A💰 Total: ₹${itemsTotalVal+delivery}%0A
-💳 UPI: 9015489060@pthdfc`;
-
-window.open(`https://wa.me/919217515551?text=${msg}`,"_blank");
-}
-
-loadMenu();
-</script>
-
-<!-- ===== PRO AI ASSISTANT ===== -->
-
-<button id="pp-ai-btn" style="position:fixed;right:20px;bottom:20px;width:65px;height:65px;border-radius:50%;background:#d35400;color:#fff;border:none;font-size:26px;cursor:pointer;">🤖</button>
-
-<div id="pp-ai-box" style="display:none;position:fixed;right:20px;bottom:95px;width:320px;background:#fff;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,0.25);overflow:hidden;font-family:Inter;">
-<div style="background:#d35400;color:#fff;padding:12px;">Pet Pooja Assistant</div>
-<div id="pp-chat" style="padding:12px;height:300px;overflow-y:auto;">👋 Ask me anything about menu, delivery, price...</div>
-<div style="display:flex;border-top:1px solid #eee;">
-<input id="pp-text" style="flex:1;padding:10px;border:none;">
-<button onclick="ppAsk()" style="background:#d35400;color:#fff;border:none;padding:10px;">Send</button>
-</div>
-</div>
-
-<script>
-pp-ai-btn.onclick=()=>pp-ai-box.style.display=pp-ai-box.style.display==="block"?"none":"block";
-
-function ppReply(q){
-q=q.toLowerCase();
-if(q.includes("thali")) return "Veg Thali ₹150 | Special Thali ₹249";
-if(q.includes("delivery")) return "₹0 delivery for Sanskriti, ₹10 others.";
-if(q.includes("minimum")) return "₹149 Sanskriti | ₹299 Others";
-if(q.includes("time")) return "Lunch 12–3 PM | Dinner 7–10 PM";
-if(q.includes("payment")||q.includes("upi")) return "UPI ID: 9015489060@pthdfc";
-if(q.includes("order")) return "Order on WhatsApp: 9217515551";
-return "I can help with menu, price, delivery & ordering.";
-}
-
-function ppAsk(){
-const q=pp-text.value;
-if(!q) return;
-pp-chat.innerHTML+=`<div>🧑 ${q}</div><div>🤖 ${ppReply(q)}</div>`;
-pp-text.value="";
-pp-chat.scrollTop=pp-chat.scrollHeight;
-}
-</script>
-
-</body>
-</html>
+  <
