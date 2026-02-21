@@ -651,186 +651,364 @@ loadMenu();
 </script>
 
 
-<!-- ===== GOD-LEVEL STATIC AI — PET POOJA ===== -->
 
-<button id="pp-ai-btn"
-style="position:fixed;right:20px;bottom:20px;width:65px;height:65px;border-radius:50%;background:#d35400;color:#fff;border:none;font-size:26px;z-index:1000;">
-🤖
-</button>
 
-<div id="pp-ai-box"
-style="display:none;position:fixed;right:20px;bottom:95px;width:340px;background:#fff;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,0.25);overflow:hidden;font-family:Inter;z-index:1000;">
 
-<div style="background:#d35400;color:#fff;padding:12px;text-align:center;font-weight:600;">
-Pet Pooja AI Assistant
+
+
+
+
+
+<!-- ===== PET POOJA AI ASSISTANT ===== -->
+
+<!-- Floating Button -->
+<button id="pp-ai-btn" title="Chat with Pet Pooja AI Assistant" style="position:fixed;right:20px;bottom:20px;width:65px;height:65px;border-radius:50%;background:#d35400;color:#fff;border:none;font-size:26px;z-index:9999;box-shadow:0 4px 20px rgba(211,84,0,0.4);cursor:pointer;transition:transform 0.2s;">🤖</button>
+
+<!-- Auto-popup hint bubble -->
+<div id="pp-hint-bubble" style="display:none;position:fixed;right:94px;bottom:30px;background:#fff;border:1px solid #ffe0cc;border-radius:14px 14px 2px 14px;padding:10px 14px;font-size:0.82rem;box-shadow:0 4px 16px rgba(211,84,0,0.15);max-width:200px;text-align:center;cursor:pointer;color:#2c3e50;line-height:1.5;z-index:9998;">
+  🍽️ <strong>Bhook lagi?</strong><br><span style="color:#d35400;font-weight:600;">Ask Pet Pooja AI!</span>
 </div>
 
-<div id="pp-chat"
-style="padding:12px;height:340px;overflow-y:auto;background:#fdfaf7;font-size:14px;">
-🙏 Namaste! I can help you order food 😊
+<!-- Chat Window -->
+<div id="pp-ai-box" style="display:none;position:fixed;right:20px;bottom:95px;width:340px;background:#fff;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,0.25);overflow:hidden;font-family:Inter,sans-serif;z-index:9999;flex-direction:column;">
+
+  <!-- Header -->
+  <div style="background:#d35400;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px;">
+    <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🍽️</div>
+    <div style="flex:1;">
+      <div style="font-weight:600;">Pet Pooja AI Assistant</div>
+      <div style="font-size:0.75rem;opacity:0.85;">Ask me anything about food & orders!</div>
+    </div>
+    <button onclick="togglePPChat()" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:0.8;">✕</button>
+  </div>
+
+  <!-- Messages -->
+  <div id="pp-chat" style="padding:12px;height:340px;overflow-y:auto;background:#fdfaf7;font-size:14px;display:flex;flex-direction:column;gap:8px;"></div>
+
+  <!-- Input -->
+  <div style="display:flex;border-top:1px solid #eee;background:#fff;">
+    <input id="pp-text" placeholder="Type message..." autocomplete="off"
+      style="flex:1;padding:12px;border:none;font-size:14px;outline:none;">
+    <button id="pp-send" style="background:#d35400;color:#fff;border:none;padding:0 18px;cursor:pointer;font-size:1rem;">➤</button>
+  </div>
+
 </div>
 
-<div style="display:flex;border-top:1px solid #eee;">
-<input id="pp-text" placeholder="Type message..."
-style="flex:1;padding:12px;border:none;font-size:14px;">
-<button id="pp-send"
-style="background:#d35400;color:#fff;border:none;padding:0 18px;">Send</button>
-</div>
-
-</div>
+<style>
+#pp-ai-btn:hover{transform:scale(1.08);}
+.pp-msg-user{background:#d35400;color:#fff;padding:10px 14px;border-radius:16px 16px 2px 16px;max-width:82%;align-self:flex-end;font-size:14px;line-height:1.5;word-break:break-word;}
+.pp-msg-bot{background:#fff;border:1px solid #ffe0cc;padding:10px 14px;border-radius:16px 16px 16px 2px;max-width:82%;align-self:flex-start;font-size:14px;line-height:1.5;white-space:pre-wrap;word-break:break-word;}
+.pp-msg-typing{background:#fff;border:1px solid #ffe0cc;padding:12px 16px;border-radius:16px 16px 16px 2px;align-self:flex-start;}
+.pp-dots{display:flex;gap:5px;align-items:center;}
+.pp-dots span{width:8px;height:8px;border-radius:50%;background:#d35400;opacity:0.4;animation:ppBounce 1.2s infinite ease-in-out;}
+.pp-dots span:nth-child(2){animation-delay:0.2s;}
+.pp-dots span:nth-child(3){animation-delay:0.4s;}
+@keyframes ppBounce{0%,80%,100%{transform:translateY(0);opacity:0.4;}40%{transform:translateY(-6px);opacity:1;}}
+.pp-chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;}
+.pp-chip{background:#fff3e8;border:1px solid #ffd2b3;border-radius:14px;padding:5px 12px;font-size:0.78rem;cursor:pointer;color:#d35400;font-weight:600;}
+.pp-chip:hover{background:#ffe0cc;}
+@keyframes ppFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+</style>
 
 <script>
 (function(){
 
-const btn=document.getElementById("pp-ai-btn");
-const box=document.getElementById("pp-ai-box");
-const chat=document.getElementById("pp-chat");
-const input=document.getElementById("pp-text");
-const send=document.getElementById("pp-send");
+// ── STATE ──────────────────────────────────────────────
+let ppOpen = false;
+let ppWelcomeDone = false;
 
-btn.onclick=()=>{box.style.display=box.style.display==="block"?"none":"block";input.focus();};
+// ── TOGGLE ─────────────────────────────────────────────
+window.togglePPChat = function(){
+  ppOpen = !ppOpen;
+  const box = document.getElementById('pp-ai-box');
+  box.style.display = ppOpen ? 'flex' : 'none';
+  document.getElementById('pp-ai-btn').textContent = ppOpen ? '✕' : '🤖';
+  hideBubble();
+  if(ppOpen && !ppWelcomeDone){
+    ppWelcomeDone = true;
+    showWelcomePP();
+  }
+  if(ppOpen){ scrollPP(); document.getElementById('pp-text').focus(); }
+};
 
-/* UI */
+document.getElementById('pp-ai-btn').onclick = togglePPChat;
 
-function say(t){
-chat.innerHTML+=`<div style="background:#d35400;color:#fff;margin:8px 0;padding:10px;border-radius:18px;margin-left:auto;max-width:80%;text-align:right;">${t}</div>`;
-chat.scrollTop=chat.scrollHeight;
+// ── AUTO POPUP (first visit, after 3.5s) ───────────────
+setTimeout(()=>{
+  if(!ppOpen && !ppWelcomeDone){
+    const bubble = document.getElementById('pp-hint-bubble');
+    bubble.style.display = 'block';
+    bubble.style.animation = 'ppFadeIn 0.4s ease';
+    bubble.onclick = () => { togglePPChat(); hideBubble(); };
+    setTimeout(()=>{
+      if(!ppOpen && !ppWelcomeDone) togglePPChat();
+    }, 5000);
+  }
+}, 3500);
+
+function hideBubble(){
+  document.getElementById('pp-hint-bubble').style.display = 'none';
 }
 
-function reply(t){
-chat.innerHTML+=`<div style="background:#e8f5e9;margin:8px 0;padding:10px;border-radius:18px;max-width:80%;">${t}</div>`;
-chat.scrollTop=chat.scrollHeight;
+// ── SCROLL ─────────────────────────────────────────────
+function scrollPP(){
+  const c = document.getElementById('pp-chat');
+  c.scrollTop = c.scrollHeight;
 }
 
-/* CLEAN */
-
-function clean(t){
-return t.toLowerCase()
-.replace(/[^\w\s₹]/g," ")
-.replace(/\s+/g," ")
-.trim();
+// ── ADD MESSAGES ───────────────────────────────────────
+function ppUserMsg(t){
+  const el = document.createElement('div');
+  el.className = 'pp-msg-user';
+  el.textContent = t;
+  document.getElementById('pp-chat').appendChild(el);
+  scrollPP();
 }
 
-/* FUZZY */
-
-function match(a,b){
-a=clean(a); b=clean(b);
-return a.includes(b) || b.includes(a);
+function ppBotMsgTypewriter(t){
+  const el = document.createElement('div');
+  el.className = 'pp-msg-bot';
+  el.style.animation = 'ppFadeIn 0.3s ease';
+  document.getElementById('pp-chat').appendChild(el);
+  let i = 0;
+  const interval = setInterval(()=>{
+    el.textContent = t.slice(0, i);
+    i += 2;
+    scrollPP();
+    if(i > t.length){ el.textContent = t; clearInterval(interval); scrollPP(); }
+  }, 12);
+  return el;
 }
 
-/* FULL MENU */
-
-function showMenu(){
-const list=menu.map(i=>`• ${i.name} — ₹${i.price}`).join("\n");
-reply("📋 Full Menu:\n\n"+list+"\n\n🚚 FREE — Sanskriti Apartment\n₹10 — Other societies");
+function ppTyping(){
+  const el = document.createElement('div');
+  el.className = 'pp-msg-typing';
+  el.innerHTML = '<div class="pp-dots"><span></span><span></span><span></span></div>';
+  document.getElementById('pp-chat').appendChild(el);
+  scrollPP();
+  return el;
 }
 
-/* CATEGORY */
-
-function listCategory(key){
-const items=menu.filter(i=>match(i.name,key));
-if(!items.length) return;
-reply(items.map(i=>`• ${i.name} — ₹${i.price}`).join("\n"));
+function ppChips(pairs){
+  const wrap = document.createElement('div');
+  wrap.className = 'pp-chips';
+  pairs.forEach(([label, q])=>{
+    const c = document.createElement('span');
+    c.className = 'pp-chip';
+    c.textContent = label;
+    c.onclick = ()=>{ wrap.remove(); sendPP(q); };
+    wrap.appendChild(c);
+  });
+  document.getElementById('pp-chat').appendChild(wrap);
+  scrollPP();
 }
 
-/* ORDER */
-
-function placeOrder(text){
-for(const i of menu){
-if(match(text,i.name)){
-const m=text.match(/\d+/);
-const qty=m?parseInt(m[0]):1;
-for(let k=0;k<qty;k++) add(i.id);
-render();
-reply(`✅ Added ${qty} × ${i.name}`);
-return true;
-}}
-return false;
+// ── WELCOME ────────────────────────────────────────────
+function showWelcomePP(){
+  const t = ppTyping();
+  setTimeout(()=>{
+    t.remove();
+    const el = document.createElement('div');
+    el.className = 'pp-msg-bot';
+    el.style.animation = 'ppFadeIn 0.3s ease';
+    el.textContent = "Namaste! 🙏 I'm Pet Pooja AI Assistant!\nAsk me in English, Hindi, or Hinglish — main samjhunga! 😊";
+    document.getElementById('pp-chat').appendChild(el);
+    scrollPP();
+    ppChips([
+      ["📋 Menu dekho",      "menu"],
+      ["🚚 Delivery kahan?", "delivery"],
+      ["📝 How to Order",    "how to order"],
+      ["💰 Prices",          "price"],
+      ["⏰ Timings",         "timing"],
+    ]);
+  }, 800);
 }
 
-/* INTENTS */
-
-function process(text){
-
-const q=clean(text);
-
-/* -------- GREETING -------- */
-
-if(/hi|hello|hey|namaste|hlo|helo|hai|yo/.test(q))
-return reply("🙏 Namaste! What would you like to eat?");
-
-/* -------- ORDER FIRST (MOST IMPORTANT) -------- */
-
-if(placeOrder(text)) return;
-
-/* -------- HUNGER -------- */
-
-if(/hungry|bhook|khana|food|eat|something|yummy/.test(q))
-return reply("😊 Tell me item name like dosa, thali, roti");
-
-/* -------- MENU -------- */
-
-if(/menu|items|available|list|what do you have|today menu/.test(q))
-return showMenu();
-
-/* -------- PRICE -------- */
-
-if(/price|rate|cost|kitna|₹|rs|paisa/.test(q))
-return showMenu();
-
-/* -------- DELIVERY -------- */
-
-if(/delivery|deliver|charge|home|ghar|society/.test(q))
-return reply("🚚 FREE — Sanskriti Apartment\n₹10 — Other societies");
-
-/* -------- TIME -------- */
-
-if(/time|timing|open|close|lunch|dinner|now/.test(q))
-return reply("⏰ Lunch: 12–3 PM\nDinner: 7–10 PM");
-
-/* -------- PAYMENT -------- */
-
-if(/upi|payment|pay|cash|money/.test(q))
-return reply("💳 UPI Only\n9015489060@pthdfc");
-
-/* -------- HELP -------- */
-
-if(/help|guide|how|first time/.test(q))
-return reply("📝 Type like:\n• 1 Veg Thali\n• 2 Dosa\n• 5 Roti");
-
-/* -------- CATEGORY (ONLY IF NO ORDER DETECTED) -------- */
-
-if(/dosa|dosaa|doosa|dose|idli|idlee|idle/.test(q))
-return listCategory("dosa");
-
-if(/roti|chapati|rotie|rotiii/.test(q))
-return listCategory("roti");
-
-if(/thali|thalli|thalee|thalii/.test(q))
-return listCategory("thali");
-
-/* -------- FALLBACK -------- */
-
-reply("😊 Please type item name to order");
-}
-/* SEND */
-
-function sendMsg(){
-const t=input.value.trim();
-if(!t) return;
-say(t);
-input.value="";
-process(t);
+// ── NORMALIZE ──────────────────────────────────────────
+function ppNorm(t){
+  return t.toLowerCase()
+    .replace(/dosaa|doosa|dose\b/g,'dosa')
+    .replace(/idlee|idle\b|italy sambar/g,'idli')
+    .replace(/rotiii|rotie|roji\b/g,'roti')
+    .replace(/thalli|veg tally|thalee|thalii/g,'thali')
+    .replace(/parota|parata\b/g,'paratha')
+    .replace(/mix wage/g,'mix veg')
+    .replace(/butter road tea/g,'butter roti')
+    .replace(/\bdo\b/g,'2')
+    .replace(/\bek\b/g,'1');
 }
 
-send.onclick=sendMsg;
+// ── PROCESS ────────────────────────────────────────────
+function ppProcess(raw){
+  const t = ppNorm(raw);
+  function has(...w){ return w.some(x => t.includes(x)); }
 
-input.addEventListener("keypress",e=>{
-if(e.key==="Enter"){e.preventDefault();sendMsg();}
+  // ORDER EXTRACTION
+  const orderMatch = t.match(/(\d+)\s*(dosa|roti|thali|idli|paratha|paneer|masala|aloo|pyaj|veg|butter)/i)
+                  || t.match(/(dosa|roti|thali|idli|paratha|paneer|masala|aloo|pyaj|veg|butter)\s*(\d+)/i)
+                  || t.match(/(dosa|roti|thali|idli|paratha|paneer|masala|aloo|pyaj|veg|butter)\s*x\s*(\d+)/i);
+  if(orderMatch){
+    const qty = parseInt(orderMatch[1]) || parseInt(orderMatch[2]) || 1;
+    const item = (orderMatch[2]||orderMatch[1]).toLowerCase();
+    const found = menu.find(m => m.name.toLowerCase().includes(item));
+    if(found){
+      const total = found.price * qty;
+      add(found.id);
+      for(let i=1;i<qty;i++) add(found.id);
+      render();
+      return "✅ Added "+qty+" × "+found.name+" to your cart!\nTotal: ₹"+total+"\n\nScroll up to see your cart 🛒";
+    }
+  }
+
+  // HOW TO ORDER
+  if(has('how to order','how order','kaise order','order karna','steps','guide','first time','process','kaise karu','help')){
+    return "📝 How to Order — 5 Easy Steps:\n\n1️⃣ Browse menu & tap 'Add'\n2️⃣ Enter Name & Phone\n3️⃣ Select your Society\n4️⃣ Enter Flat/Floor/Block\n5️⃣ Tap 'Order on WhatsApp'\n\n💳 Pay via UPI to confirm:\n9015489060@pthdfc\n\n⚠️ Order confirmed only after payment!";
+  }
+
+  // GREETING
+  if(has('hi','hello','hey','namaste','hlo','helo','yo','sup','namaskar')){
+    return "Namaste! 🙏\nKya khana chahiye aaj? Tell me what you'd like! 😊";
+  }
+
+  // MENU
+  if(has('menu','manu','aaj ka','dikhao','dikha','kya hai','kya milega','kya available','list','show','what do you have','today')){
+    return "📋 Today's Menu:\n\n🍴 Paneer Dosa — ₹120\n🍴 Masala Dosa — ₹100\n🍚 Idli Sambhar — ₹90\n🍛 Kadhi Chawal — ₹80\n🥔 Aloo Paratha — ₹60\n🧅 Pyaj Paratha — ₹70\n🥦 Mix Veg — ₹120\n🫓 Tawa Roti — ₹6\n🧈 Butter Roti — ₹10\n🍽️ Veg Thali — ₹150\n⭐ Special Thali — ₹249\n\n100% Homemade & Vegetarian! 🌿";
+  }
+
+  // HUNGRY
+  if(has('hungry','bhook','bhookh','starving','food now','send food','khana bhejo','can you send','jaldi','abhi')){
+    return "Bhook lagi hai? 😄 Jaldi order karo!\n\n⚡ Quick picks:\n• Idli Sambhar — ₹90 (light)\n• Aloo Paratha — ₹60 (filling)\n• Veg Thali — ₹150 (complete)\n\nJust type item name to add! 🚀";
+  }
+
+  // DOSA
+  if(has('dosa','dose','doosa')){
+    return "Dosa options:\n🌶️ Masala Dosa — ₹100\n🧀 Paneer Dosa — ₹120\n\nBoth with sambhar & chutney!\nType '2 dosa' to add to cart 😋";
+  }
+
+  // IDLI
+  if(has('idli','idly','sambhar','sambar')){
+    return "🍚 Idli Sambhar — ₹90\n3 idlis + sambhar + chutney\n\nLight, healthy & fresh!\nType 'idli' to add to cart 😊";
+  }
+
+  // ROTI
+  if(has('roti','chapati','chapatti','roti send','give roti','roti do')){
+    return "Roti options:\n🫓 Tawa Roti — ₹6/piece\n🧈 Butter Roti — ₹10/piece\n\nType '10 roti' to add to cart! 😊";
+  }
+
+  // PARATHA
+  if(has('paratha','parota','parantha')){
+    return "Paratha options:\n🥔 Aloo Paratha — ₹60\n🧅 Pyaj Paratha — ₹70\n\nFresh & crispy! Type 'aloo paratha' to add 😋";
+  }
+
+  // THALI
+  if(has('thali','thaali','full meal','complete meal')){
+    return "Thali options (best value!):\n🍽️ Veg Thali — ₹150\n   4 Roti + Rice + Dal + Sabji + Achar\n\n⭐ Special Thali — ₹249\n   Butter Roti + Shahi Paneer + Rice + Sabji + Salad\n\nType '1 thali' to add! 👑";
+  }
+
+  // LIGHT
+  if(has('light','healthy','diet','halka','something light','kam calories')){
+    return "Light options:\n🍚 Idli Sambhar — ₹90 (lightest!)\n🥔 Aloo Paratha — ₹60\n🍛 Kadhi Chawal — ₹80\n\nIdli sabse light hai! 😊";
+  }
+
+  // WHAT TO ORDER
+  if(has('dinner','lunch','breakfast','what to order','kya order','suggest','kya khau','recommend')){
+    return "Aaj ke liye suggestions:\n\n🌅 Light: Idli Sambhar ₹90\n☀️ Filling: Aloo Paratha ₹60\n🍽️ Complete: Veg Thali ₹150\n⭐ Premium: Special Thali ₹249\n\nKya pasand hai? 😋";
+  }
+
+  // VEG
+  if(has('veg','vegetarian','pure veg','veg food','only veg','is it veg')){
+    return "Haan ji! 🌿 Pet Pooja is 100% PURE VEGETARIAN\nKoi non-veg nahi, koi egg nahi.\nSab ghar mein fresh banta hai! 😊";
+  }
+
+  // MIX VEG
+  if(has('mix veg','sabji','sabzi','vegetables')){
+    return "🥦 Mix Veg — ₹120\nSingle-serve bowl (~400g)\nFresh seasonal vegetables, homemade gravy!\n\nType 'mix veg' to add 😋";
+  }
+
+  // KADHI
+  if(has('kadhi','chawal','rice')){
+    return "🍛 Kadhi Chawal — ₹80\nSingle-serve bowl (~400g)\nGhar jaisi kadhi with steamed rice! 😋";
+  }
+
+  // DELIVERY
+  if(has('deliver','delivery','ghar deliver','door','home deliver','society','area','kahan','can you come','aa sakte')){
+    return "🚚 Delivery Areas:\n\n🏠 Sanskriti Apartment\n   FREE delivery | Min ₹149\n\n🏠 Unity Enclave\n🏠 Baghban Apartment\n🏠 SaiNath Apartment\n🏠 Upvan Apartment\n   +₹10 delivery | Min ₹299\n\nSelect society in the order form!";
+  }
+
+  // TIMING
+  if(has('open','timing','time','kab','food time','lunch kab','dinner time','abhi open','kitne baje','available now')){
+    return "⏰ Available Daily:\n🌞 Lunch: 12 PM – 3 PM\n🌙 Dinner: 7 PM – 10 PM\n\nFor exact ETA WhatsApp:\n+91 9217515551 📞";
+  }
+
+  // PRICE
+  if(has('price','kitna','cost','cheap','sasta','budget','rate','how much','paisa','rupee')){
+    return "💰 Price List:\n\n🍴 Dosa ₹100–120\n🍚 Idli Sambhar ₹90\n🍛 Kadhi Chawal ₹80\n🥦 Mix Veg ₹120\n🥔 Paratha ₹60–70\n🫓 Roti ₹6 | Butter ₹10\n🍽️ Veg Thali ₹150\n⭐ Special Thali ₹249\n\nSabse sasta: Aloo Paratha ₹60! 🏆";
+  }
+
+  // PAYMENT
+  if(has('upi','pay','payment','gpay','phonepe','paytm','bhim','qr','scan')){
+    return "💳 Payment: UPI Only\n\nUPI ID: 9015489060@pthdfc\n(HDFC — GPay/PhonePe/Paytm all work!)\n\n⚠️ Order confirmed only after payment!";
+  }
+
+  // CONTACT
+  if(has('contact','phone','call','whatsapp','number','helpline')){
+    return "📞 Call / WhatsApp:\n+91 9217515551\n\nOr click 'Order on WhatsApp' on the website!";
+  }
+
+  // MINIMUM ORDER
+  if(has('minimum','min order','minimum order','minimum kitna')){
+    return "Minimum Order:\n🏠 Sanskriti Apartment — ₹149\n🏠 Other societies — ₹299\n\nTip: Veg Thali (₹150) alone meets Sanskriti minimum! 🍽️";
+  }
+
+  // HOMEMADE
+  if(has('ghar jaisa','homemade','home made','ghar ka','ghar wala','is homemade','home cooked')){
+    return "Bilkul ghar jaisa! 🏠❤️\nPet Pooja ek home kitchen hai —\nfresh, hygienic, made with love daily!\n\nGhar jaisa khana, har din fresh! 😊";
+  }
+
+  // YUMMY
+  if(has('yummy','tasty','delicious','yum','mast','badhiya','swadisht','nice food')){
+    return "Haan! Bilkul fresh aur ghar ka swad! 😋❤️\n\nTry karo:\n⭐ Special Thali — ₹249 (most popular!)\n🍚 Idli Sambhar — ₹90 (light & fresh)\n\nOrder karo abhi! 🍽️";
+  }
+
+  // FOOD (generic)
+  if(has('food','khana','khaana','eat','eating','kha','snack','nashta','tiffin','khana milega')){
+    return "Aaj ka menu:\n🍴 Dosa ₹100–120 | Idli ₹90\n🍛 Kadhi ₹80 | Mix Veg ₹120\n🥔 Paratha ₹60–70 | Roti ₹6\n🍽️ Veg Thali ₹150 | Special ₹249\n\nKya khana chahiye? 😊";
+  }
+
+  // DEFAULT
+  return "Samajh gaya! 😊\nKya main help kar sakta hun?\n\n• Menu → type 'menu'\n• Order → type item name\n• Delivery → type 'delivery'\n• Steps → type 'how to order'\n\nWhatsApp: +91 9217515551 📞";
+}
+
+// ── SEND ───────────────────────────────────────────────
+function sendPP(text){
+  if(!text) return;
+  ppUserMsg(text);
+  document.getElementById('pp-text').value = '';
+  const typing = ppTyping();
+  setTimeout(()=>{
+    typing.remove();
+    const reply = ppProcess(text);
+    ppBotMsgTypewriter(reply);
+  }, 320);
+}
+
+document.getElementById('pp-send').onclick = ()=>{
+  const t = document.getElementById('pp-text').value.trim();
+  if(t) sendPP(t);
+};
+
+document.getElementById('pp-text').addEventListener('keypress', e=>{
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    const t = document.getElementById('pp-text').value.trim();
+    if(t) sendPP(t);
+  }
 });
 
 })();
 </script>
+
+
 
 
 
